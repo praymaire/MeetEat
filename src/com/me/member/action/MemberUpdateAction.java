@@ -1,18 +1,11 @@
 package com.me.member.action;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.me.member.db.MemberDAO;
 import com.me.member.db.MemberDTO;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class MemberUpdateAction implements Action{
 
@@ -41,7 +34,7 @@ public class MemberUpdateAction implements Action{
 		MemberDTO mdto = new MemberDTO();
 		mdto = mdao.getMember(id);
 		
-		String profile_image = mdto.getProfile_image();
+		/*String profile_image = mdto.getProfile_image();
 		System.out.println("profile_image "+profile_image);
 		
 		OutputStream out = response.getOutputStream();
@@ -55,7 +48,7 @@ public class MemberUpdateAction implements Action{
 			out.write(buffer,0,count);
 		}
 		in.close();
-		out.close();
+		out.close();*/
 		
 		// 해당정보 request 영역에 저장
 		request.setAttribute("mdto", mdto);

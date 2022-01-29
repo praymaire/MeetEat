@@ -1,5 +1,6 @@
 package com.me.member.action;
 
+import java.io.File;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +61,7 @@ public class MemberUpdateProAction implements Action {
 			return null; 
 		}
 		
-		/*String fileName = "";
+		String fileName = "";
 		File file = multi.getFile("profile_image");
 		if(file != null) {
 			String ext = file.getName().substring(file.getName().lastIndexOf(".")+1);
@@ -85,7 +86,7 @@ public class MemberUpdateProAction implements Action {
 				
 				return null; 
 			}
-		}*/
+		}
 		
 		// 넘어오는 데이터 받기	
 		String profile_image = multi.getFilesystemName("profile_image");
@@ -102,7 +103,7 @@ public class MemberUpdateProAction implements Action {
 		if(id == null || id.equals("") || pw == null || pw.equals("")
 				|| nickname == null || nickname.equals("") || phone == null || phone.equals("") 
 				|| email1 == null || email1.equals("")|| email == null || email.equals("") 
-				|| address == null || address.equals("") || detailAddress == null || detailAddress.equals("")){
+				|| address == null || address.equals("")){
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
@@ -117,6 +118,7 @@ public class MemberUpdateProAction implements Action {
 			System.out.println(" M : profile_image : "+profile_image);
 		}
 		
+		
 		// 이전 페이지에서 전달된 정보 저장(DTO)
 		MemberDTO mdto = new MemberDTO();
 		mdto.setProfile_image(path+profile_image);
@@ -129,7 +131,7 @@ public class MemberUpdateProAction implements Action {
 		
 		System.out.println(" M : "+mdto.toString());
 		
-		// DAO 객체 생성 - 정보수정 메소드 호출
+		// DAO 객체 생성 
 		MemberDAO mdao = new MemberDAO();
 		int result = mdao.updateMember(mdto);
 		System.out.println(" M : 회원정보 수정 완료");
@@ -138,7 +140,7 @@ public class MemberUpdateProAction implements Action {
 			response.setContentType("text/html; charset=UTF-8"); 
 			PrintWriter out = response.getWriter();	
 			out.print("<script>");
-			out.print("alert('비밀번호가 다릅니다);");
+			out.print("alert('비밀번호가 다릅니다');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();

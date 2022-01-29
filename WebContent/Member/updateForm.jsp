@@ -150,6 +150,7 @@
       	<form action="./MemberUpdateProAction.me" method="post" name="update" enctype="multipart/form-data" onsubmit="return checkValue();"> 
       		<div>
       			<label>프로필 사진</label>
+				<input type="text" disabled placeholder="프로필을 업로드하세요">
 	      		<input type="file" name="profile_image">
 		    </div>
 		    <div>

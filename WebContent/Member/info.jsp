@@ -1,4 +1,5 @@
 <%@ page import="com.me.member.db.MemberDTO"%>
+<%@ page import="com.me.member.db.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -25,10 +26,10 @@
     MemberDTO mdto = (MemberDTO) request.getAttribute("mdto");
     // EL을 쓰면 속성을 불러와서 DTO 객체를 만들어서 굳이 다운캐스팅하여 쓰지 않아도 된다!
     
-  
+  	String profile = new MemberDAO().getProfile(id);
   %>
   <div>
-  	프로필 사진 : <img src="${ mdto.profile_image }" style="width: 100px; height: 100px;"> <br>
+  	프로필 사진 : <img alt="<%=profile %>" src="<%=profile %>" style="width: 100px; height: 100px;"> <br>
   	아이디 : ${ mdto.id } <br>
   	비밀번호 : ${ mdto.pw } <br>
   	닉네임 : ${ mdto.nickname }

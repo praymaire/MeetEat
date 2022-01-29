@@ -273,30 +273,32 @@ public class MemberDAO {
 	}
 	// updateMember(mdto) END
 
-	// 프로필 사진 업데이트
-	// updateProfile(id, profile_photo)
-	public int updateProfile(String id, String profile_photo) {
-		int result = -1;
+	// 프로필 사진 가져오기
+	// getProfile(id)
+	public String getProfile(String id) {
 		
 		try {
 			con = getCon();
-			sql = "update meeteat.member set profile_image=? where id=?";
+			sql = "select profile_image from meeteat.member where id=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, profile_photo);
-			pstmt.setString(2, id);
-			result = pstmt.executeUpdate();
-				// -> sql 구문이 실행했을 때 영향을 준 row수 리턴
-				// result = 1;
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getString("profile_image").equals("") || rs.getString("profile_image") == null) {
+					return "http://localhost:8088/MeetEat/upload/member/NoImage.png";
+				}
+				return "http://localhost:8088/MeetEat/"+rs.getString("profile_image");
+			}
+				
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			closeDB();
 		}
-		System.out.println(" M : MemberDAO_updateprofile() 실행완료");
-		System.out.println(" M : 실행결과 - "+result);
-		return result;
+		System.out.println(" M : MemberDAO_getprofile() 실행완료");
+		return "http://localhost:8088/MeetEat/upload/member/NoImage.png";
 	}
-	// updateProfile(id, profile_photo)
+	// getProfile(id)
 	
 	// deleteMember(id,pw)
 	public int deleteMember(String id, String pw) {
