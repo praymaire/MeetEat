@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>Model2</display-name>
+  <display-name>MeetEat</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -9,47 +9,18 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <servlet-name>myservlet</servlet-name>
-    <servlet-class>test.MyServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>myservlet</servlet-name>
-    <url-pattern>/myservlet.com</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>exServlet</servlet-name>
-    <servlet-class>test.ExServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>exServlet</servlet-name>
-    <url-pattern>/ex1</url-pattern>
-  </servlet-mapping>
   
-  <servlet>
-    <servlet-name>test1</servlet-name>
-    <servlet-class>itwill.servlet.TestServlet1</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>test1</servlet-name>
-    <url-pattern>/test1</url-pattern>
-  </servlet-mapping>
-  
-  
-   <servlet>
-    <servlet-name>test2</servlet-name>
-    <servlet-class>itwill.servlet.TestServlet2</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>test2</servlet-name>
-    <url-pattern>/test2</url-pattern>
-  </servlet-mapping>
-  
-  
+  <resource-ref>
+  	 <description>Connection</description>
+     <res-ref-name>jdbc/mysqldb</res-ref-name>
+     <res-type>javax.sql.DataSource</res-type>
+     <res-auth>Container</res-auth>
+  </resource-ref>
+    
  <!-- MemberFrontController -->
   <servlet>
      <servlet-name>MemberFrontController</servlet-name>
-     <servlet-class>com.itwillbs.member.action.MemberFrontController</servlet-class>
+     <servlet-class>com.me.member.action.MemberFrontController</servlet-class>
   </servlet>
   
   <servlet-mapping>

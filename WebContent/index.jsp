@@ -7,7 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-    수정합니다
+ <h1>index.jsp - 모든 프로젝트의 시작점</h1>
+ <b>model2 공부하면서 실행가능한 유일한 jsp 파일!</b>
+ 
+ <%
+ 	response.sendRedirect("./Main.me");
+ 	
+ %>
+ 
 </body>
 </html>
