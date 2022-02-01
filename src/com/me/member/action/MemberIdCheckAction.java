@@ -16,12 +16,12 @@ public class MemberIdCheckAction implements Action {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String id = request.getParameter("id");
+		String inputId = request.getParameter("inputId");
 		
-		System.out.println("아이디: " + id);
+		System.out.println("아이디: " + inputId);
 		
 		MemberDAO mdao = new MemberDAO();
-		int result = mdao.idCheck(id);
+		int result = mdao.idCheck(inputId);
 		System.out.println(" M : 아이디 조회 완료");
 		
 		PrintWriter out = response.getWriter();

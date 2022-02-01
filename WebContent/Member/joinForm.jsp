@@ -5,20 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src= "./JQuery/jquery-3.6.0.slim.js"></script>
+<script src="JQuery/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-
-	//id중복 검사
-	function idCheck(id) {
-		if (id == "") {
-			alert("아이디를 입력하세요");
-			document.join.id.focus();
-			return false; // function을 벗어난다.
-		}
-		else {
-			location.href='./MemberIdCheck.me?id=' + id;
-		}
-	}
 	
 	// pw 일치 검사
 	function pwCheckFunction() {
@@ -45,11 +33,17 @@
 	
 	// 유효성 검사
 	function checkValue() {
-		if(document.join.id.value == "") {
-			alert('아이디를 입력하세요');
+		
+		var id = $('#id').val();
+		var isIdChecked = $('#isIdChecked').val();
+		
+		if(id == "" || isIdChecked == 'F' || isIdChecked == "" ) {
+			alert('아이디를 확인하세요');
 			document.join.id.focus();
 			return false;
 		}
+		
+		
 		if(document.join.pw.value == "") {
 			alert('비밀번호를 입력하세요');
 			document.join.pw.focus();
@@ -173,7 +167,9 @@
     	<form action="./MemberJoinAction.me" method="post" name="join" id="join" onsubmit="return checkValue()">
      		<div>
       			<label>아이디</label>
-	  			<input type="text" name="id" id="id" class="input_id" placeholder="아이디를 입력하세요" onkeyup=" idCheck(); ">
+	  			<input type="text" name="id" id="id" class="input_id" placeholder="아이디를 입력하세요">
+	  			<input type="button" value="중복확인" onclick=" idCheck() ">
+	  			<input type="hidden" id="isIdChecked"> <!-- 중복체크했는지 여부 확인 -->
 	  			<font id="checkId" size="2"></font> <br>
 	 		</div>
 	 		<div>
@@ -223,24 +219,26 @@
 		</form>
 	</fieldset>
 	
-	<script src="JQuery/jquery-3.6.0.js"></script>
+	
 	<script>
 		function idCheck() {
-			var id = $('.input_id').val(); // input_id에 입력되는 값
-			var idReg = /^[a-z]+[a-z0-9]{5,19}$/g; // 영문자로 시작하는 영문자 또는 숫자 6~20자 
+			var inputId = $('.input_id').val(); // input_id에 입력되는 값
+			var idReg = /^[a-z]+[a-z0-9]{5,19}$/g; // 영소문자로 시작하는 영소문자 또는 숫자 6~20자 
 
 			$.ajax({
 				url: "./MemberIdCheck.me",
 				type: "POST",
-				data: {id: id},
+				data: {inputId: inputId},
 				dataType: 'JSON',
 				success: function(result){
-					if(result == 0 || !idReg.test(id) ){
+					if(result == 0 || !idReg.test(inputId) ){
 						$("#checkId").html('사용할 수 없는 아이디입니다.');
 						$("#checkId").attr('color', 'red');
+						$('#isIdChecked').val('F');
 					} else {
 						$("#checkId").html('사용할 수 있는 아이디입니다.');
 						$("#checkId").attr('color', 'green');
+						$('#isIdChecked').val('T');
 					}
 				},
 				error: function(request, error){
@@ -251,6 +249,10 @@
 					
 			});
 		}
+		
+		// 중복체크 안 했을때,
+		// 중복체크 했는데 조건에 안 맞을때
+		
 	</script>
 
    
