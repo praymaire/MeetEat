@@ -19,12 +19,17 @@
 	<a href="#"><%=id %>님 반갑습니다.</a> | <a href="./MemberInfo.me">회원정보 확인하기</a> <br>
 	<a href="./MemberLogout.me">로그아웃</a> | <a href="./MemberDelete.me">탈퇴하기</a>
   </div>
+  <div>
+	<a href="./MemberReport.me">신고하기</a>
+  </div>
   <%
 	} else {
   %>
   <div>
 	<a href="./MemberLogin.me">로그인</a> | <a href="./MemberJoin.me">회원가입</a>
   </div>
+  
+  
   <%	
 	}
   %>
@@ -42,6 +47,7 @@
    }
   
   %>
+  
   
 
 </body>

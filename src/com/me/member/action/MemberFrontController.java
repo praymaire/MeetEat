@@ -153,6 +153,25 @@ public class MemberFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		
+		else if (command.equals("/MemberReport.me")) {
+			action = new MemberReportAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if (command.equals("/MemberReportAction.me")) {
+			action = new MemberReportProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		System.out.println(" C : 2. 가상 주소 매칭(처리) 끝 (페이지 이동 아직 실행 전)");
 		
 		// ---------------------------2. 가상 주소 매핑 (처리)-------------------------------------------------------

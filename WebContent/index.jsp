@@ -12,7 +12,6 @@
  
  <%
  	response.sendRedirect("./Main.me");
- 	
  %>
  
 </body>

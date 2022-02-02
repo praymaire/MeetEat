@@ -374,6 +374,27 @@ public class MemberDAO {
 		return memberList;
 	}
 	// getMemberList()
+	
+	public void insertReport(String report_user, String reported_user, String report_content) {
+		
+		try {
+			con = getCon();
+			sql = "insert into report_manage values(?, ?, ?, now())";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, report_user);
+			pstmt.setString(2, reported_user);
+			pstmt.setString(3, report_content);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+	}
 
 
 	
