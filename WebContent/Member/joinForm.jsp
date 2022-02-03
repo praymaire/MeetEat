@@ -27,7 +27,7 @@
 		if(pw != checkPw) {
 			$('#pwCheckMessage').html('비밀번호가 서로 일치하지 않습니다.');
 		} else {
-			$('#pwCheckMessage').html('');
+			$('#pwCheckMessage').html('비밀번호가 서로 일치합니다.');
 		}
 	}
 	
@@ -183,7 +183,7 @@
 		    <div>
 			    <label>비밀번호 재확인</label> 
 			    <input type="password" name="checkPw" id="checkPw" placeholder="비밀번호를 재입력하세요" onkeyup="pwCheckFunction();">
-			    <h5 id="pwCheckMessage">안녕</h5>
+			    <h5 id="pwCheckMessage"></h5>
 	   	    </div>
 			<div>
 				<label>닉네임</label>

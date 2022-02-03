@@ -62,7 +62,7 @@ public class MemberDAO {
 			closeDB();
 		}
 		System.out.println(" M : MemberDAO_idCheck() 실행 ");
-		System.out.println(" M : 실행결과 - "+result);
+		System.out.println(" M : 실행결과 : "+result);
 		return result;
 	}
 	// idCheck(id)
@@ -91,7 +91,7 @@ public class MemberDAO {
 			closeDB();
 		}
 		System.out.println(" M : MemberDAO_nicknameCheck() 실행 ");
-		System.out.println(" M : 실행결과 - "+result);
+		System.out.println(" M : 실행결과 : "+result);
 		return result;
 	}
 	// nicknameCheck(nickname)
@@ -121,7 +121,7 @@ public class MemberDAO {
 			closeDB();
 		}
 		System.out.println(" M : MemberDAO_insertMember() 실행");
-		System.out.println(" M : result - "+result);
+		System.out.println(" M : result : "+result);
 		return result;
 	}
 	// insertMember(mdto)
@@ -164,34 +164,36 @@ public class MemberDAO {
 	}
 	// loginCheck(id,pw)	
 	
-	// 이메일 중복 검사
-	// checkEmail(email)
-	public boolean checkEmail(String email) {
+	// 아이디 찾기
+	// findId(email)
+	public String findId(String email) {
 			
-		boolean emailCheck = false; // 초기화
+		String findId = ""; // 초기화
 			
 		try {
 			con = getCon();
 			
-			sql = "select email from meeteat.member where email=?";
+			sql = "select id, email from meeteat.member where email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				emailCheck = true;
+				findId = rs.getString("id");
 			} else {
-					emailCheck = false;
+				findId = "-1";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			closeDB();
 		}
+		System.out.println(" M : MemberDAO_findId() 실행 ");
+		System.out.println(" M : 실행결과 : "+findId);
 		
-		return emailCheck;
+		return findId;
 	}
-	// checkEmail(email)
+	// findId(email)
 	
 	// getMember(id)
 	public MemberDTO getMember(String id){
@@ -268,7 +270,7 @@ public class MemberDAO {
 			closeDB();
 		}
 		System.out.println(" M : MemberDAO_updateMember() 실행완료");
-		System.out.println(" M : 실행결과 - "+result);
+		System.out.println(" M : 실행결과 : "+result);
 		return result;
 	}
 	// updateMember(mdto) END
@@ -284,7 +286,7 @@ public class MemberDAO {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				if(rs.getString("profile_image").equals("") || rs.getString("profile_image") == null) {
+				if(rs.getString("profile_image").equals("") || rs.getString("profile_image")==null) {
 					return "http://localhost:8088/MeetEat/upload/member/NoImage.png";
 				}
 				return "http://localhost:8088/MeetEat/"+rs.getString("profile_image");
@@ -334,7 +336,7 @@ public class MemberDAO {
 			closeDB();
 		}
 		System.out.println(" M : MemberDAO_deleteMember() 실행완료");
-		System.out.println(" M : 실행결과 - "+result);
+		System.out.println(" M : 실행결과 : "+result);
 		return result;
 	}
 	// deleteMember(id,pw)
@@ -375,6 +377,115 @@ public class MemberDAO {
 	}
 	// getMemberList()
 
+	// 회원 비밀번호 찾기
+	// findPw(id, email)
+	public int findPw(String id, String email) {
+		
+		int result = 0;
+		
+		try {
+			con = getCon();
+			
+			sql = "select id, email from meeteat.member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(email.equals(rs.getString("email"))) {
+					result = 1;
+				} else {
+					// 이메일 오류
+					result = 0;
+				} 
+			} else {
+				// 계정 X
+				result = -1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(" M : MemberDAO_findPw() 실행 완료");
+		System.out.println(" M : 실행 결과 : "+result);
+		return result;
+	}
+	// findPw(id, email)
+
+	// 임시 비번 저장
+	// updatePw(id, pw, email)
+	public int updatePw(String id, String pw, String email) {
+		
+		int result = 0; 
+		
+		try {
+			con = getCon();
+			
+			sql = "select id,email from meeteat.member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(email.equals(rs.getString("email"))) {
+					
+					sql = "update meeteat.member set pw=? where id=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, pw);
+					pstmt.setString(2, id);
+					result = pstmt.executeUpdate();
+				} else {
+					// 이메일이 다름
+					result = 0;
+				} 
+			} else {
+				// 계정 X
+				result = -1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(" M : Member_updatePw() 실행 완료");
+		System.out.println(" M : 실행 결과 : "+result);
+		return result;
+		
+	}
+	// updatePw(id, pw, email)
+
+	// 패스워드 변경
+	// modifyPw(id, oldPw, pw)
+	public int modifyPw(String id, String oldPw, String pw) {
+		
+		int  result = 0;
+		
+		try {
+			con = getCon();
+			
+			sql = "select id, pw from meeteat.member where pw=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, oldPw);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(id.equals(rs.getString("id"))) {
+					sql = "update meeteat.member set pw=? where id=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, pw);
+					pstmt.setString(2, id);
+					result = pstmt.executeUpdate();
+				} else {
+					// 계정 X
+					result = 0;
+				} 
+			} else {
+				// 임시 패드워드 미발급/현재 패스워드 오류
+				result = -1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(" M : Member_modifyPw() 실행 완료");
+		System.out.println(" M : 실행 결과  : "+result);
+		return result;
+	}
 
 	
 	

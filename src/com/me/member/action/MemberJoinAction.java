@@ -67,6 +67,7 @@ public class MemberJoinAction implements Action{
 		mdto.setPhone(phone);
 		mdto.setEmail(email1+"@"+email);
 		mdto.setAddress(address+" "+detailAddress+extraAddress);
+		mdto.setProfile_image(profile_image);
 		
 		System.out.println(" M : "+mdto.toString());
 		

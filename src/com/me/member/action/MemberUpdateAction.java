@@ -34,22 +34,6 @@ public class MemberUpdateAction implements Action{
 		MemberDTO mdto = new MemberDTO();
 		mdto = mdao.getMember(id);
 		
-		/*String profile_image = mdto.getProfile_image();
-		System.out.println("profile_image "+profile_image);
-		
-		OutputStream out = response.getOutputStream();
-		File file = new File(profile_image);
-		FileInputStream in = new FileInputStream(file);
-		byte[] buffer = new byte[1024 * 8];
-		while(true) {
-			int count = in.read(buffer);
-			if(count == -1)
-				break;
-			out.write(buffer,0,count);
-		}
-		in.close();
-		out.close();*/
-		
 		// 해당정보 request 영역에 저장
 		request.setAttribute("mdto", mdto);
 		
