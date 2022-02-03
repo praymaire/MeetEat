@@ -10,8 +10,8 @@
 <title>회원정보 관리 페이지</title>
 </head>
 <body>
-   <h1>WebContent/admin/member.jsp</h1>
-   
+<h1>WebContent/admin/memberlist.jsp</h1>
+<%--    
    <%
      // 세션제어 (로그인X,관리자X)
      String id = (String)session.getAttribute("id");
@@ -21,18 +21,17 @@
     }
      
     // request.setAttribute("memberList", dao.getMemberList());
-   %>
+   %> --%>
    ${memberList }
    
    <table border="1">
      <tr>
        <td>아이디</td>
        <td>비밀번호</td>
-       <td>이름</td>
-       <td>나이</td>
-       <td>성별</td>
+       <td>닉네임</td>
+       <td>전화번호</td>
        <td>이메일</td>
-       <td>회원가입일</td>
+       <td>주소</td>
      </tr>
      
      
@@ -45,12 +44,11 @@
      <c:forEach var="dto" items="${memberList }">
          <tr>
 	       <td>${dto.id }</td>
-	       <td>${dto.pass }</td>
-	       <td>${dto.name }</td>
-	       <td>${dto.age }</td>
-	       <td>${dto.gender }</td>
+	       <td>${dto.pw }</td>
+	       <td>${dto.nickname }</td>
+	       <td>${dto.phone }</td>
 	       <td>${dto.email }</td>
-	       <td>${dto.reg_date }</td>
+	       <td>${dto.address }</td>
 	     </tr>
      </c:forEach>    
      

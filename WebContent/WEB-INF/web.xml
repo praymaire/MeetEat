@@ -59,6 +59,16 @@
  <!-- MemberFrontController -->
   
   
+ <!-- 관리자용 회원리스트-->
+	<servlet>
+	  <servlet-name>AdminFrontController</servlet-name>
+	  <servlet-class>com.me.admin.action.AdminFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>AdminFrontController</servlet-name>
+	  <url-pattern>*.me</url-pattern>
+	</servlet-mapping>
+ <!-- 관리자용 회원리스트-->  
   
   
 </web-app>
