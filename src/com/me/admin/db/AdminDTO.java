@@ -8,6 +8,10 @@ public class AdminDTO {
 	private String phone;
 	private String email;
 	private String address;
+	private int user_point;
+	private int user_level;
+	private int reported_count;
+	
 	public String getId() {
 		return id;
 	}
@@ -44,10 +48,33 @@ public class AdminDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
+	
+	
+	
+	public int getUser_point() {
+		return user_point;
+	}
+	public void setUser_point(int user_point) {
+		this.user_point = user_point;
+	}
+	public int getUser_level() {
+		return user_level;
+	}
+	public void setUser_level(int user_level) {
+		this.user_level = user_level;
+	}
+	public int getReported_count() {
+		return reported_count;
+	}
+	public void setReported_count(int reported_count) {
+		this.reported_count = reported_count;
+	}
 	@Override
 	public String toString() {
 		return "AdminDTO [id=" + id + ", pw=" + pw + ", nickname=" + nickname + ", phone=" + phone + ", email=" + email
-				+ ", address=" + address + "]";
+				+ ", address=" + address + ", user_point=" + user_point + ", user_level=" + user_level
+				+ ", reported_count=" + reported_count + "]";
 	}
 	
 	

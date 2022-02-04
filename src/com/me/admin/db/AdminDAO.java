@@ -55,7 +55,10 @@ public class AdminDAO {
 
 		try{
 			con = getCon();
-			sql = "select * from member where id != 'admin'";
+			sql = "select a.id, a.pw, a.nickname, a.phone, a.email, a.address, b.user_point, b.user_level, b.reported_count " + 
+					"from itwill_member a join member_manage b " + 
+					"on a.id=b.id " + 
+					"where a.id != 'admin'";
 			pstmt = con.prepareStatement(sql);
 			//8-3. 실행 -> rs저장
 			rs = pstmt.executeQuery();
@@ -67,6 +70,9 @@ public class AdminDAO {
 				adto.setPw(rs.getString("pw"));
 				adto.setAddress(rs.getString("address"));
 				adto.setPhone(rs.getString("phone"));
+				adto.setUser_point(rs.getInt("user_point"));
+				adto.setUser_level(rs.getInt("user_level"));
+				adto.setReported_count(rs.getInt("reported_count"));
 				
 				//리스트 한 칸에 회원 1명의 정보 저장 
 				memberList.add(adto);

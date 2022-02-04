@@ -32,12 +32,16 @@
        <td>전화번호</td>
        <td>이메일</td>
        <td>주소</td>
+       <td>회원포인트</td>
+       <td>회원등급</td>
+       <td>누적신고횟수</td>
+       <td>관리</td>
      </tr>
      
      
      <%
-    // ArrayList memberList =
-    // (ArrayList)request.getAttribute("memberList");
+     	ArrayList memberList =
+    	(ArrayList)request.getAttribute("memberList");
      %>
      
      
@@ -49,6 +53,10 @@
 	       <td>${dto.phone }</td>
 	       <td>${dto.email }</td>
 	       <td>${dto.address }</td>
+	       <td>${dto.user_point }</td>
+	       <td>${dto.user_level }</td>
+	       <td>${dto.reported_count }</td>
+	       <td><input type="button" value="정지"><input type="button" value="삭제"></td>
 	     </tr>
      </c:forEach>    
      
