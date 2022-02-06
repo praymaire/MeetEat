@@ -86,5 +86,52 @@ public class AdminDAO {
 		return memberList;
 	}//end of getMemberList method
 	
+	
+	// deleteMember(id, pass)
+	public int deleteMember(String id, String pass) {
+		int result = -1;
+				
+		try {
+			// 1.2. 디비연결
+			con = getCon();
+			// 3. sql 작성(select) & pstmt 객체 생성
+			sql = "select pass from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			// 4. sql 실행
+			rs = pstmt.executeQuery();
+					
+			// 5. 데이터 처리
+			if(rs.next()) { //데이터 있을때
+						
+				if(pass.equals(rs.getString("pass"))) { // 본인
+					// 3. sql 생성 & pstmt 객체 생성
+					sql = "delete from member where id=?";
+					pstmt = con.prepareStatement(sql);
+							
+					pstmt.setString(1, id);						
+					// 4. sql 실행 
+					result = pstmt.executeUpdate();
+					System.out.println("회원삭제 완료");
+							
+				}else {
+					// 아이디는 맞는데 비밀번호가 잘못됨
+					result = 0;
+				}				
+					
+			}else {
+				//데이터 없을때
+				result = -1;
+			}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				CloseDB();
+			}
+				
+		return result;
+	}			
+	// deleteMember(id, pass) 끝
+	
 
 }
