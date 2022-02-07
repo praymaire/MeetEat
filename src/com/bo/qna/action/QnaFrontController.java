@@ -90,6 +90,21 @@ public class QnaFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/QnaReply.bo")) {
+			System.out.println(" C : /QnaReply.bo 호출 ");
+			
+			forward = new ActionForward();
+			forward.setPath("./qna/qnaReply.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/QnaReplyProAction.bo")) {
+			System.out.println("C : /QnaReplyProAction.bo 호출");
+			
+			action = new QnaReplyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		

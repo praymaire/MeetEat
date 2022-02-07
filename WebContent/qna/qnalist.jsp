@@ -34,7 +34,12 @@ QnaDTO qdto = new QnaDTO();
      <c:forEach var="qdto" items="${qnaList }">
          <tr>
 	       <td>${qdto.qno }</td>
-	       <td><a href="./QnaContent.bo?qno=${qdto.qno}">${qdto.title }</td></a>
+	       <td>
+	       	<%if(qdto.getRe_lev()>0){ %>
+				<img src="level.gif" height="10" width="<%=qdto.getRe_lev()*10%>">
+				<img src="re.gif">
+	 		<%} %>
+	       <a href="./QnaContent.bo?qno=${qdto.qno}">${qdto.title }</a></td>
 	       <td>${qdto.id }</td>
 	       <td>${qdto.reg_date }</td>
 	       <td>${qdto.readcount }</td>

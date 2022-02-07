@@ -19,18 +19,18 @@
 <table>
     
 	<tr>
-		<td colspan="2"> 작성자 : </td>
-		<td class="left" colspan="3"><input type="text" name="name" value="<%=qdto.getId()%>"> </td>
+		<td colspan="2"> 작성자  </td>
+		<td colspan="3"><input type="text" name="name" value="<%=qdto.getId()%>"> </td>
 	</tr>
 	
 	<tr>
-		<td colspan="2"> 글 제목 : </td>
-		<td class="left" colspan="3"><input type="text" name="title" value="<%=qdto.getTitle()%>"> </td>
+		<td colspan="2"> 글 제목  </td>
+		<td colspan="3"><input type="text" name="title" value="<%=qdto.getTitle()%>"> </td>
 	</tr>
 	
 	<tr>
-		<td colspan="2"> 글 내용 : </td>
-		<td class="left" colspan="3">
+		<td colspan="2"> 글 내용  </td>
+		<td colspan="3">
 		   <textarea rows="10" cols="40" name="content"><%=qdto.getContent() %></textarea>
 		</td>
 	</tr>
@@ -41,11 +41,11 @@
 <%if(id!=null && id.equals(qdto.getId())){ %>
 	<input type="button" value="수정" onclick="location.href='./QnaUpdate.bo?qno=<%=qdto.getQno()%>'">
 	<input type="button" value="삭제" onclick="location.href='./QnaDelete.bo?qno=<%=qdto.getQno()%>'">	
+<%} %>	
+<%if(id!=null && id.equals("admin")){ %>	
+	<input type="button" value="답글" onclick="location.href='QnaReply.bo?qno=<%=qdto.getQno()%>&re_ref=<%=qdto.getRe_ref()%>&re_lev=<%=qdto.getRe_lev()%>&re_seq=<%=qdto.getRe_seq()%>';">
 <%} %>
 	<input type="button" value="목록" onclick=" location.href='./QnaList.bo'" >
-<%if(id!=null && id.equals("admin")){ %>	
-	<input type="button" value="답글" onclick="location.href='reWrite.jsp?qno=<%=qdto.getQno()%>&re_ref=<%=qdto.getRe_ref()%>&re_lev=<%=qdto.getRe_lev()%>&re_seq=<%=qdto.getRe_seq()%>';">
-<%} %>
 	
 </div>
 

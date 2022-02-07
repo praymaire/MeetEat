@@ -145,7 +145,7 @@ public class QnaDAO {
 			// 1,2 디비연결
 			con = getCon();
 			// 3 sql 작성 & pstmt 객체 생성
-			sql = "select * from qna order by qno desc";
+			sql = "select * from qna order by re_ref desc, re_seq asc";
 			pstmt = con.prepareStatement(sql);
 			// 4 sql 실행
 			rs = pstmt.executeQuery();
@@ -299,7 +299,7 @@ public class QnaDAO {
 	
 
 	// replyQna(qdto)
-	public void replyBoard(QnaDTO qdto) {
+	public void replyQna(QnaDTO qdto) {
 		int qno = 0;
 		
 		

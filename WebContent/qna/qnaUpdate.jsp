@@ -19,18 +19,18 @@
 <table>
     
 	<tr>
-		<td colspan="2"> 작성자 : </td>
-		<td class="left" colspan="3"><input type="text" name="name" value="<%=qdto.getId()%>" readonly="readonly"> </td>
+		<td colspan="2"> 작성자 </td>
+		<td colspan="3"><input type="text" name="name" value="<%=qdto.getId()%>" readonly="readonly"> </td>
 	</tr>
 	
 	<tr>
-		<td colspan="2"> 글 제목 : </td>
-		<td class="left" colspan="3"><input type="text" name="title" value="<%=qdto.getTitle()%>" required="required"> </td>
+		<td colspan="2"> 글 제목 </td>
+		<td colspan="3"><input type="text" name="title" value="<%=qdto.getTitle()%>" required="required"> </td>
 	</tr>
 	
 	<tr>
-		<td colspan="2"> 글 내용 : </td>
-		<td class="left" colspan="3">
+		<td colspan="2"> 글 내용 </td>
+		<td colspan="3">
 		   <textarea rows="10" cols="40" name="content" required="required"><%=qdto.getContent() %></textarea>
 		</td>
 	</tr>
@@ -39,7 +39,7 @@
 
 <div>
 <%if(id!=null && id.equals(qdto.getId())){ %>
-	<input type="submit" value="등록">
+	<input type="submit" value="수정등록">
 	<input type="reset" value="초기화">	
 <%} %>
 	<input type="button" value="목록" onclick=" location.href='./QnaList.bo'" >
