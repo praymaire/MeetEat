@@ -12,7 +12,7 @@ public class AdminFrontController extends HttpServlet{
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("MemberFrontController_doProcess() 호출");
+		System.out.println("AdminFrontController_doProcess() 호출");
 		// 페이지가 GET/POST 방식 상관없이 호출될 때 실행되는 메서드
 		// *.me - 회원정보 처리 동작
 		
