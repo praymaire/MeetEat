@@ -8,12 +8,13 @@
 </head>
 <body>
 <%
-String id = (String) session.getAttribute("id");
+String id = (String)session.getAttribute("id");
 %>
 
 <fieldset>
 <legend>QnA 등록</legend>
 	<form action="./QnaAddAction.bo" method="post" name="fr">
+	<input type="hidden" name="id" value="<%=id%>">
 	 <table border="1">
 		<tr>
 			<td>제목</td>

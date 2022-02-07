@@ -72,14 +72,14 @@ public class AdminFrontController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("AdminFrontController_doGet() 호출");
 		// 페이지가 GET 방식으로 호출될 때 실행되는 메서드
-		super.doGet(request, response);
+		doProcess(request, response);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("AdminFrontController_doPost() 호출");
 		// 페이지가 POST 방식으로 호출될 때 실행되는 메서드
-		super.doPost(request, response);
+		doProcess(request, response);
 	}
 
 }

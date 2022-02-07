@@ -18,6 +18,10 @@ public class ActionForward {
 	public void setRedirect(boolean isRedirect) {
 		this.isRedirect = isRedirect;
 	}
+	@Override
+	public String toString() {
+		return "ActionForward [path=" + path + ", isRedirect=" + isRedirect + "]";
+	}
 	
 	
 	

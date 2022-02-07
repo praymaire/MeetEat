@@ -15,7 +15,6 @@ public class QnaFrontController extends HttpServlet{
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("QnaFrontController_doProcess() 호출 ");
 		// 페이지가 GET/POST방식 상관없이 호출될때 실행되는 메서드
-		// *.me - 회원정보 처리 동작
 		
 		// -----------------------1. 가상 주소 계산 --------------------------		
 		String requestURI = request.getRequestURI();
@@ -33,15 +32,59 @@ public class QnaFrontController extends HttpServlet{
 		
 		if(command.equals("/QnaList.bo")){
 			System.out.println(" C : /QnaList.bo 호출");
-			// 회원 가입 페이지 보여줘야함. (DBx -> 화면(View-jsp) 출력) 
+			action = new QnaListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/QnaWrite.bo")) {
+			System.out.println(" C : /QnaWrite.bo 호출! ");
 			
 			forward = new ActionForward();
-			forward.setPath("./qna/qnalist.jsp");
-			forward.setRedirect(false);			
-		}else if(command.equals("/QnaAdd.bo")) {
-			System.out.println( "C : /QnaAdd.bo 호출");
+			forward.setPath("./qna/qnaWrite.jsp");
+			forward.setRedirect(false);
+			
+		}else if(command.equals("/QnaAddAction.bo")) {
+			System.out.println( "C : /QnaAddAction.bo 호출");
 			
 			action = new QnaAddAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/QnaContent.bo")) {
+			System.out.println( "C : /QnaContent.bo 호출");
+			
+			action = new QnaContentAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/QnaUpdate.bo")) {
+			System.out.println("C : /QnaUpdate.bo 호출");
+			
+			action = new QnaUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/QnaUpdateProAction.bo")) {
+			System.out.println("C : /QnaUpdateProAction.bo 호출");
+			
+			action = new QnaUpdateProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/QnaDelete.bo")) {
+			System.out.println("C : /QnaDelete.bo 호출");
+			
+			action = new QnaDeleteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -77,14 +120,14 @@ public class QnaFrontController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("QnaFrontController_doGet() 호출");
 		// 페이지가 GET 방식으로 호출될 때 실행되는 메서드
-		super.doGet(request, response);
+		doProcess(request, response);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("QnaFrontController_doPost() 호출");
 		// 페이지가 POST 방식으로 호출될 때 실행되는 메서드
-		super.doPost(request, response);
+		doProcess(request, response);
 	}
 
 }
