@@ -24,7 +24,7 @@ public class QnaDAO {
 	private Connection getCon() throws Exception{
 		
 		Context initCTX = new InitialContext();
-		DataSource ds = (DataSource)initCTX.lookup("java:comp/env/jdbc/meeteat");
+		DataSource ds = (DataSource)initCTX.lookup("java:comp/env/jdbc/itwillbs7");
 		con = ds.getConnection();
 		
 		return con;

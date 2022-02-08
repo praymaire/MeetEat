@@ -1,10 +1,10 @@
-package com.me.admin.action;
+package com.ad.admin.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.me.admin.db.AdminDAO;
+import com.ad.admin.db.AdminDAO;
 
 public class AdminListAction implements Action {
 

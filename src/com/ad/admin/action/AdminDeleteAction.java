@@ -1,11 +1,11 @@
-package com.me.admin.action;
+package com.ad.admin.action;
 
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.me.admin.db.AdminDAO;
+import com.ad.admin.db.AdminDAO;
 
 
 

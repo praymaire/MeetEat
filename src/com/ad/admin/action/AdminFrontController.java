@@ -1,4 +1,4 @@
-package com.me.admin.action;
+package com.ad.admin.action;
 
 import java.io.IOException;
 
@@ -37,7 +37,7 @@ public class AdminFrontController extends HttpServlet{
 		Action action = null;
 		ActionForward forward = null;
 		
-		if(command.equals("/MemberList.me")){
+		if(command.equals("/MemberList.ad")){
 			// DB사용해서 정보를 화면에 바로 출력
 			// MemberListAction() 객체 생성
 			action = new AdminListAction();

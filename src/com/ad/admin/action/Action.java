@@ -1,4 +1,4 @@
-package com.me.admin.action;
+package com.ad.admin.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

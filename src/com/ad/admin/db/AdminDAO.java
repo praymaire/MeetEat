@@ -1,4 +1,4 @@
-package com.me.admin.db;
+package com.ad.admin.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +23,7 @@ public class AdminDAO {
 	private Connection getCon() throws Exception{
 		
 		Context initCTX = new InitialContext();
-		DataSource ds = (DataSource)initCTX.lookup("java:comp/env/jdbc/meeteat");
+		DataSource ds = (DataSource)initCTX.lookup("java:comp/env/jdbc/itwillbs7");
 		con = ds.getConnection();
 		
 		return con;
