@@ -1,0 +1,14 @@
+
+로컬
+<Context>
+  <Resource 
+   name="jdbc/meeteat" 
+   auth="Container" 
+   type="javax.sql.DataSource"
+   driverClassName="com.mysql.cj.jdbc.Driver" 
+   url="jdbc:mysql://localhost:3306/meeteat" 
+   username="root" 
+   password="1234"
+  />
+
+</Context>

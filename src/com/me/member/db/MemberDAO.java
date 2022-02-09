@@ -21,7 +21,7 @@ public class MemberDAO {
 	// 디비 연결
 	private Connection getCon() throws Exception{
 		Context initCTX = new InitialContext();
-		DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/meeteat");
+		DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/itwillbs7");
 		con = ds.getConnection();
 		
 		return con;
@@ -115,6 +115,12 @@ public class MemberDAO {
 			pstmt.setString(6, mdto.getAddress());
 			pstmt.setString(7, mdto.getProfile_image());
 			result = pstmt.executeUpdate();	// 1 
+			
+			sql = "insert into member_manage(id) values(?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getId());
+			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -133,7 +139,7 @@ public class MemberDAO {
 		
 		try {
 			con = getCon();				
-			sql = "select pw from meeteat.member where id=?";
+			sql = "select pw from member where id=?";
 			pstmt = con.prepareStatement(sql);				
 			pstmt.setString(1, id);
 			
@@ -173,7 +179,7 @@ public class MemberDAO {
 		try {
 			con = getCon();
 			
-			sql = "select email from meeteat.member where email=?";
+			sql = "select email from member where email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
@@ -200,7 +206,7 @@ public class MemberDAO {
 		
 		try {
 			con = getCon();
-			sql = "select * from meeteat.member where id=?";
+			sql = "select * from member_view where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -215,6 +221,10 @@ public class MemberDAO {
 				mdto.setProfile_image(rs.getString("profile_image"));
 				mdto.setAddress(rs.getString("address"));
 				mdto.setNickname(rs.getString("nickname"));
+				mdto.setUser_level(rs.getInt("user_level"));
+				mdto.setUser_point(rs.getInt("user_point"));
+				mdto.setBan_date(rs.getDate("ban_date"));
+				mdto.setReported_count(rs.getInt("reported_count"));
 			}
 			
 		} catch (Exception e) {
@@ -234,7 +244,7 @@ public class MemberDAO {
 	
 		try {
 			con = getCon();
-			sql = "select pw from meeteat.member where id=?";
+			sql = "select pw from member where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, mdto.getId());
 			rs = pstmt.executeQuery();
@@ -242,7 +252,7 @@ public class MemberDAO {
 			if(rs.next()) { 
 				if(mdto.getPw().equals(rs.getString("pw"))) { 
 					// 본인
-					sql = "update meeteat.member set phone=?, email=?, address=?, nickname=?, profile_image=? where id=?";
+					sql = "update member set phone=?, email=?, address=?, nickname=?, profile_image=? where id=?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, mdto.getPhone());
 					pstmt.setString(2, mdto.getEmail());
@@ -279,7 +289,7 @@ public class MemberDAO {
 		
 		try {
 			con = getCon();
-			sql = "select profile_image from meeteat.member where id=?";
+			sql = "select profile_image from member where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -308,7 +318,7 @@ public class MemberDAO {
 		try {
 			con = getCon();
 			
-			sql = "select pw from meeteat.member where id=?";
+			sql = "select pw from member where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -316,7 +326,7 @@ public class MemberDAO {
 			if(rs.next()) {
 				if(pw.equals(rs.getString("pw"))) {
 					// 본인
-					sql = "delete from meateat.member where id=?";
+					sql = "delete from member where id=?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, id);
 					result = pstmt.executeUpdate();
@@ -347,7 +357,7 @@ public class MemberDAO {
 		try {
 			con = getCon();
 			
-			sql = "select * from meeteat.member";
+			sql = "select * from member_view";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -361,6 +371,10 @@ public class MemberDAO {
 				mdto.setProfile_image(rs.getString("profile_image"));
 				mdto.setAddress(rs.getString("address"));
 				mdto.setNickname(rs.getString("nickname"));
+				mdto.setUser_level(rs.getInt("user_level"));
+				mdto.setUser_point(rs.getInt("user_point"));
+				mdto.setBan_date(rs.getDate("ban_date"));
+				mdto.setReported_count(rs.getInt("reported_count"));
 				
 				// MemberDTO의 정보를 ArrayList 1칸에 저장
 				memberList.add(mdto);
@@ -378,8 +392,9 @@ public class MemberDAO {
 	public void insertReport(String report_user, String reported_user, String report_content) {
 		
 		try {
+			// 신고내용 접수
 			con = getCon();
-			sql = "insert into report_manage values(?, ?, ?, now())";
+			sql = "insert into report_manage(report_user, reported_user, report_content, report_date) values(?, ?, ?, now())";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, report_user);
@@ -388,6 +403,42 @@ public class MemberDAO {
 			
 			pstmt.executeUpdate();
 			
+			// 누적신고횟수 업데이트
+			sql = "update member_manage "
+					+ "set reported_count = (SELECT count(reported_user) FROM report_manage WHERE reported_user = ?) "
+					+ "where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, reported_user);
+			pstmt.setString(2, reported_user);
+			
+			pstmt.executeUpdate();
+			
+			// 정지날짜 업데이트
+			sql = "select reported_count from member_manage where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, reported_user);
+			
+			rs = pstmt.executeQuery();
+			
+			String banSql = "";
+			
+			if(rs.next()) {
+				if(rs.getInt(1) == 3) {
+					banSql="update member_manage set ban_date=DATE_ADD(now(), INTERVAL 30 DAY) where id=?";
+				} else if(rs.getInt(1) == 5) {
+					banSql="update member_manage set ban_date=DATE_ADD(now(), INTERVAL 100 DAY) where id=?";
+				} else if(rs.getInt(1) == 7) {
+					banSql="update member_manage set ban_date=DATE_ADD(now(), INTERVAL 100 YEAR) where id=?";
+				}
+				
+				pstmt = con.prepareStatement(banSql);
+				pstmt.setString(1, reported_user);
+				pstmt.executeUpdate();
+				
+			} else {
+				System.out.println("정지날짜 업데이트 실패");
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -395,8 +446,6 @@ public class MemberDAO {
 		}
 		
 	}
-
-
 	
 	
 }

@@ -16,12 +16,15 @@
 	if(id != null) { 
   %>
   <div>	
-	<a href="#"><%=id %>님 반갑습니다.</a> | <a href="./MemberInfo.me">회원정보 확인하기</a> <br>
-	<a href="./MemberLogout.me">로그아웃</a> | <a href="./MemberDelete.me">탈퇴하기</a>
+	<a href="#"><%=id %>님 반갑습니다.</a> | <a href="./MemberLogout.me">로그아웃</a> |
+	<a href="./MemberInfo.me">회원정보 확인하기</a> | <a href="./MemberDelete.me">탈퇴하기</a> 
   </div>
+  <hr>
   <div>
-	<a href="./MemberReport.me">신고하기</a>
+	<a href="./MemberReport.me">신고하기(DB테스트용)</a> <br>
+	<a href="./QnaList.bo">Q&A 게시판</a>
   </div>
+  <br> <br> <br>
   <%
 	} else {
   %>
@@ -38,14 +41,17 @@
    if(id != null){
    	if(id.equals("admin")){
   %>
-  
+  <b>관리자용</b>
+  <hr>
   <div>
-  	<a href='./MemberList.me'> 회원전체 목록보기</a>
+  	<a href='./MemberList.ad'> 회원전체 목록보기</a>
+  </div>
+  <div>
+  	<a href='./AdminReportManage.ad'> 신고관리 </a>
   </div>
   <%
      }
    }
-  
   %>
   
   

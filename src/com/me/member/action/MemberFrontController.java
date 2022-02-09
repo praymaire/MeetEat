@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -154,6 +153,7 @@ public class MemberFrontController extends HttpServlet{
 			}
 		}
 		
+		///// 멤버
 		else if (command.equals("/MemberReport.me")) {
 			action = new MemberReportAction();
 			try {
@@ -172,6 +172,8 @@ public class MemberFrontController extends HttpServlet{
 			}
 		}
 		
+		//// 멤버
+
 		System.out.println(" C : 2. 가상 주소 매칭(처리) 끝 (페이지 이동 아직 실행 전)");
 		
 		// ---------------------------2. 가상 주소 매핑 (처리)-------------------------------------------------------

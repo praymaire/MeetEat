@@ -2,14 +2,13 @@
 
 <Context>
   <Resource 
-   name="jdbc/meeteat" 
+   name="jdbc/itwillbs7" 
    auth="Container" 
    type="javax.sql.DataSource"
    driverClassName="com.mysql.cj.jdbc.Driver" 
-   url="jdbc:mysql://localhost:3306/meeteat" 
-   username="root" 
-   password="1234"
+   url="jdbc:mysql://itwillbs7.cafe24.com:3306/itwillbs7" 
+   username="itwillbs7" 
+   password="itwillbs8030909"
   />
 
 </Context>
-

@@ -1,33 +1,20 @@
-package com.me.member.db;
+package com.ad.admin.db;
 
 import java.sql.Date;
 
-public class MemberDTO {
-
+public class AdminDTO {
+	
 	private String id;
 	private String pw;
 	private String nickname;
 	private String phone;
 	private String email;
 	private String address;
-	private String profile_image;
-	private int reported_count;
+	private Date ban_date;
 	private int user_point;
 	private int user_level;
-	private Date ban_date;
+	private int reported_count;
 	
-	public int getReported_count() {
-		return reported_count;
-	}
-	public void setReported_count(int reported_count) {
-		this.reported_count = reported_count;
-	}
-	public Date getBan_date() {
-		return ban_date;
-	}
-	public void setBan_date(Date ban_date) {
-		this.ban_date = ban_date;
-	}
 	public String getId() {
 		return id;
 	}
@@ -64,11 +51,11 @@ public class MemberDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getProfile_image() {
-		return profile_image;
+	public Date getBan_date() {
+		return ban_date;
 	}
-	public void setProfile_image(String profile_image) {
-		this.profile_image = profile_image;
+	public void setBan_date(Date ban_date) {
+		this.ban_date = ban_date;
 	}
 	public int getUser_point() {
 		return user_point;
@@ -82,13 +69,18 @@ public class MemberDTO {
 	public void setUser_level(int user_level) {
 		this.user_level = user_level;
 	}
+	public int getReported_count() {
+		return reported_count;
+	}
+	public void setReported_count(int reported_count) {
+		this.reported_count = reported_count;
+	}
 	
 	@Override
 	public String toString() {
-		return "MemberDTO [id=" + id + ", pw=" + pw + ", nickname=" + nickname + ", phone=" + phone + ", email=" + email
-				+ ", address=" + address + ", profile_image=" + profile_image + ", reported_count=" + reported_count
-				+ ", user_point=" + user_point + ", user_level=" + user_level + ", ban_date=" + ban_date + "]";
+		return "AdminDTO [id=" + id + ", pw=" + pw + ", nickname=" + nickname + ", phone=" + phone + ", email=" + email
+				+ ", address=" + address + ", ban_date=" + ban_date + ", user_point=" + user_point + ", user_level="
+				+ user_level + ", reported_count=" + reported_count + "]";
 	}
-	
-	
+
 }

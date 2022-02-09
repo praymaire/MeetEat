@@ -24,18 +24,28 @@
    <table border="1">
      <tr>
        <td>아이디</td>
+       <td>닉네임</td>
        <td>비밀번호</td>
-       <td>이름</td>
        <td>전화번호</td>
        <td>이메일</td>
+       <td>주소</td>
+       <td>레벨</td>
+       <td>포인트</td>
+       <td>누적신고횟수</td>
+       <td>정지날짜</td>
      </tr>
     <c:forEach var="list" items="${ memberList }">
      <tr>
        <td>${ list.id }</td>
+       <td>${ list.nickname }</td>
        <td>${ list.pw }</td>
-       <td>${ list.name }</td>
-       <td>${ list.ph } <br>
+       <td>${ list.phone } <br>
        <td>${ list.email }</td>
+       <td>${ list.address }</td>
+       <td>${ list.user_level }</td>
+       <td>${ list.user_point }</td>
+       <td>${ list.reported_count }</td>
+       <td>${ list.ban_date }</td>
      </tr>
     </c:forEach> 
    </table>
