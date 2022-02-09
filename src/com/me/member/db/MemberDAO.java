@@ -47,7 +47,7 @@ public class MemberDAO {
 		try {
 			con = getCon();
 			
-			sql = "select * from meeteat.member where id=?";
+			sql = "select * from member where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -76,7 +76,7 @@ public class MemberDAO {
 		try {
 			con = getCon();
 			
-			sql = "select * from meeteat.member where nickname=?";
+			sql = "select * from member where nickname=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, nickname);
 			rs = pstmt.executeQuery();
@@ -105,7 +105,7 @@ public class MemberDAO {
 		try {
 			con = getCon();
 			
-			sql = "insert into meeteat.member values(?,?,?,?,?,?,?)";
+			sql = "insert into member values(?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, mdto.getId());
 			pstmt.setString(2, mdto.getPw());
