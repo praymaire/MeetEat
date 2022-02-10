@@ -20,7 +20,7 @@
  <!-- MemberFrontController -->
   <servlet>
      <servlet-name>MemberFrontController</servlet-name>
-     <servlet-class>com.itwillbs.member.action.MemberFrontController</servlet-class>
+     <servlet-class>com.me.member.action.MemberFrontController</servlet-class>
   </servlet>
   
   <servlet-mapping>

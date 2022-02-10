@@ -12,8 +12,8 @@
  <b>model2 공부하면서 실행가능한 유일한 jsp 파일!</b>
  
  <%
- 	//response.sendRedirect("./Main.me");
- 	response.sendRedirect("./QnaList.bo");
+ 	response.sendRedirect("./Main.me");
+ 	//response.sendRedirect("./QnaList.bo");
  	
  %>
  

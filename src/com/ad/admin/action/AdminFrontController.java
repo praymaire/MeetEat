@@ -48,7 +48,68 @@ public class AdminFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		else if (command.equals("/AdminReportManage.ad")) {
+			action = new AdminReportManageAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
+		else if (command.equals("/AdminReportPopup.ad")) {
+			action = new AdminReportPopupAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if (command.equals("/AdminBanManagePopup.ad")) {
+			action = new AdminBanManageAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if (command.equals("/AdminBanProAction.ad")) {
+			action = new AdminBanManageAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if (command.equals("/AdminReportSort.ad")) {
+			action = new AdminReportSortAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if (command.equals("/AdminBanManageProAction.ad")) {
+			action = new AdminBanManageProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if (command.equals("/AdminBanCancelProAction.ad")) {
+			action = new AdminBanCancelProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 		// -------------------- 3. 페이지 이동 ----------------------------------

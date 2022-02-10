@@ -2,7 +2,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,11 +20,11 @@ QnaDTO qdto = new QnaDTO();
 
   <table border="1">
     <tr>
-       <td>글번호</td>
-       <td>제목</td>
-       <td>작성자</td>
-       <td>작성날짜</td>
-       <td>조회수</td>
+       <th>글번호</th>
+       <th>제목</th>
+       <th>작성자</th>
+       <th>작성날짜</th>
+       <th>조회수</th>
      </tr>
      
      <%
@@ -35,20 +36,37 @@ QnaDTO qdto = new QnaDTO();
          <tr>
 	       <td>${qdto.qno }</td>
 	       <td>
-	       	<%if(qdto.getRe_lev()>0){ %>
-				<img src="level.gif" height="10" width="<%=qdto.getRe_lev()*10%>">
+	       	<c:if test="${(qdto.getRe_lev)>0}">
+				<img src="level.gif" height="10" width="${(qdto.getRe_lev)*10">
 				<img src="re.gif">
-	 		<%} %>
+	 		</c:if> 
 	       <a href="./QnaContent.bo?qno=${qdto.qno}">${qdto.title }</a></td>
 	       <td>${qdto.id }</td>
-	       <td>${qdto.reg_date }</td>
+	       <td><fmt:formatDate value="${qdto.reg_date }"/></td>
 	       <td>${qdto.readcount }</td>
 	     </tr>
      </c:forEach>   
   
   </table>
   
+  <!-- 페이징  처리 -->
+	<div id="page_control">
+		<c:if test="${requestScope.cnt != 0 }">
+			<c:if test="${requestScope.startPage > requestScope.pageBlock }">
+				<a href="./QnaListAction.bo?pageNum=${requestScope.startPage - requestScope.pageBlock }">이전</a>
+			</c:if>
+			<c:forEach var="i" begin="${requestScope.startPage }" end="${requestScope.endPage }" step="1">
+				<a href="./QnaListAction.bo?pageNum=${i }">${i }</a>
+			</c:forEach>
+			<c:if test="${requestScope.endPage < requestScope.pageCount }">
+				<a href="./QnaListAction.bo?pageNum=${ requestScope.startPage +  requestScope.pageBlock}">다음</a>
+			</c:if>
+		</c:if>
+	</div>
+  <!-- 페이징  처리 -->
+  
 
+<hr>
 
 <input type="button" value="글쓰러가기" onclick="location.href='./QnaWrite.bo'">
 <input type="button" value="메인페이지" onclick="location.href='./Main.me'">

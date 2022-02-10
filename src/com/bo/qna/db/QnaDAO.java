@@ -106,8 +106,8 @@ public class QnaDAO {
 	}	
 	// insertQna() 끝
 	
-	// getBoardCount()
-	public int getBoardCount(){
+	// getQnaCount()
+	public int getQnaCount(){
 		int cnt = 0;
 		
 		try {
@@ -134,7 +134,7 @@ public class QnaDAO {
 		
 		return cnt;
 	}
-	// getBoardCount() 끝
+	// getQnaCount() 끝
 	
 	
 	// getQnaList()
@@ -181,6 +181,56 @@ public class QnaDAO {
 	}
 	// getQnaList() 끝
 	
+	// getQnaList(startRow,pageSize)
+	public List getQnaList(int startRow,int pageSize){
+		List qnaList = new ArrayList();
+			
+		try {
+			// 1,2 디비연결
+			con = getCon();
+			// 3 sql 작성 & pstmt 객체 생성
+			// 글 re_ref 최신글 위쪽(내림차순), re_seq (오름차순)
+			// DB데이터를 원하는만큼씩 짤라내기 : limit 시작행-1,페이지크기 
+			sql = "select * from qna order by re_ref desc, re_seq asc limit ?,?";
+			pstmt = con.prepareStatement(sql);
+				
+			//?
+			pstmt.setInt(1, startRow-1); // 시작행-1  (시작 ROW인덱스 번호)
+			pstmt.setInt(2, pageSize); // 페이지크기  (한번에 출력되는 수)
+				
+			// 4 sql 실행
+			rs = pstmt.executeQuery();
+			// 5 데이터처리 (글 1개의 정보 -> DTO 1개 -> ArrayList 1칸)
+			while(rs.next()){
+				//데이터 있을때 마다 글 1개의 정보를 저장하는 객체 생성
+				QnaDTO qdto = new QnaDTO();
+					
+				qdto.setId(rs.getString("id"));
+				qdto.setContent(rs.getString("content"));
+				qdto.setReg_date(rs.getTimestamp("reg_date"));
+				qdto.setQno(rs.getInt("qno"));
+				qdto.setRe_lev(rs.getInt("re_lev"));
+				qdto.setRe_ref(rs.getInt("re_ref"));
+				qdto.setRe_seq(rs.getInt("re_seq"));
+				qdto.setReadcount(rs.getInt("readcount"));
+				qdto.setTitle(rs.getString("title"));				
+
+				qnaList.add(qdto);				
+				
+			}//while
+				
+			System.out.println(" DAO : 글 정보 저장완료! "+qnaList.size());
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseDB();
+		}
+			
+		return qnaList;
+	}
+	// getQnaList(startRow,pageSize)
+	
 	// updateReadcount(qno)
 	public void updateReadcount(int qno){
 		try {
@@ -206,7 +256,7 @@ public class QnaDAO {
 	// updateReadcount(qno) 끝
 	
 	
-	// getBoard(qno)
+	// getQna(qno)
 	public QnaDTO getQna(int qno){
 		QnaDTO qdto = null;
 		
