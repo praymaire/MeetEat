@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>WebContent/admin/memberlist.jsp</h1>
-<%--    
+ 
    <%
      // 세션제어 (로그인X,관리자X)
      String id = (String)session.getAttribute("id");
@@ -21,8 +21,7 @@
     }
      
     // request.setAttribute("memberList", dao.getMemberList());
-   %> --%>
-   ${memberList }
+   %>
    
    <table border="1">
      <tr>
