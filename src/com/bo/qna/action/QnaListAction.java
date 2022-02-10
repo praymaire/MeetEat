@@ -38,7 +38,7 @@ public class QnaListAction implements Action{
 		int startRow = (currentPage - 1) * pageSize + 1;
 		
 		// DB에서 리스트 받기, 전체 행 수 가져오기
-		//ArrayList qnaList = qdao.getQnaList(startRow,pageSize);
+		ArrayList qnaList = qdao.getQnaList(startRow, pageSize);
 		
 		int cnt = qdao.getQnaCount();
 		
@@ -57,6 +57,7 @@ public class QnaListAction implements Action{
 			endPage = pageCount;
 		}
 		
+		request.setAttribute("qnaList", qnaList);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("pageCount", pageCount);
@@ -69,8 +70,8 @@ public class QnaListAction implements Action{
 				
 		ActionForward forward = new ActionForward();			
 		
-		request.setAttribute("qnaList", qdao.getQnaList(startRow,pageSize));
-		
+		//request.setAttribute("qnaList", qdao.getQnaList(startRow,pageSize));
+		forward = new ActionForward();
 		forward.setPath("./qna/qnalist.jsp");
 		forward.setRedirect(false);
 		return forward;

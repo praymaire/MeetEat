@@ -55,8 +55,8 @@ public class AdminDAO {
 
 		try{
 			con = getCon();
-			sql = "select a.id, a.pw, a.nickname, a.phone, a.email, a.address, b.user_point, b.user_level, b.reported_count " + 
-					"from itwill_member a join member_manage b " + 
+			sql = "select a.id, a.pw, a.nickname, a.phone, a.email, a.address, b.user_point, b.user_level, b.reported_count, b.ban_date " + 
+					"from member a join member_manage b " + 
 					"on a.id=b.id " + 
 					"where a.id != 'admin'";
 			pstmt = con.prepareStatement(sql);
@@ -73,6 +73,7 @@ public class AdminDAO {
 				adto.setUser_point(rs.getInt("user_point"));
 				adto.setUser_level(rs.getInt("user_level"));
 				adto.setReported_count(rs.getInt("reported_count"));
+				adto.setBan_date(rs.getDate("ban_date"));
 				
 				//리스트 한 칸에 회원 1명의 정보 저장 
 				memberList.add(adto);
@@ -84,7 +85,89 @@ public class AdminDAO {
 			CloseDB();
 		}
 		return memberList;
-	}//end of getMemberList method
+	}//getMemberList 끝
+	
+	// getMemberList(startRow,pageSize)
+	public ArrayList getMemberList(int startRow,int pageSize){
+		ArrayList memberList = new ArrayList();
+			
+		try {
+			// 1,2 디비연결
+			con = getCon();
+			// 3 sql 작성 & pstmt 객체 생성
+			sql = "select a.id, a.pw, a.nickname, a.phone, a.email, a.address, b.user_point, b.user_level, b.reported_count, b.ban_date " +
+					"from member a join member_manage b " + 
+					"on a.id=b.id " + 
+					"where a.id != 'admin' " +
+					"order by id asc limit ?,?";
+			pstmt = con.prepareStatement(sql);
+				
+			//?
+			pstmt.setInt(1, startRow-1); // 시작행-1  (시작 ROW인덱스 번호)
+			pstmt.setInt(2, pageSize); // 페이지크기  (한번에 출력되는 수)
+				
+			// 4 sql 실행
+			rs = pstmt.executeQuery();
+			// 5 데이터처리 (글 1개의 정보 -> DTO 1개 -> ArrayList 1칸)
+			while(rs.next()){
+				//데이터 있을때 마다 글 1개의 정보를 저장하는 객체 생성
+				AdminDTO adto = new AdminDTO();
+				adto.setEmail(rs.getString("email"));
+				adto.setId(rs.getString("id"));
+				adto.setNickname(rs.getString("nickname"));
+				adto.setPw(rs.getString("pw"));
+				adto.setAddress(rs.getString("address"));
+				adto.setPhone(rs.getString("phone"));
+				adto.setUser_point(rs.getInt("user_point"));
+				adto.setUser_level(rs.getInt("user_level"));
+				adto.setReported_count(rs.getInt("reported_count"));
+				adto.setBan_date(rs.getDate("ban_date"));			
+
+				memberList.add(adto);				
+				
+			}//while
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseDB();
+		}
+			
+		return memberList;
+	}
+	// getMemberList(startRow,pageSize)끝
+	
+	
+	// getMemberCount()
+	public int getMemberCount(){
+		int cnt = 0;
+		
+		try {
+			// 1,2 디비연결
+			con = getCon();
+			// 3 sql 작성(select) & pstmt 객체
+			sql = "select count(*) from member where id != 'admin'";
+			pstmt = con.prepareStatement(sql);
+			// 4 sql 실행
+			rs = pstmt.executeQuery();
+			// 5 데이터 처리
+			if(rs.next()){
+				//데이터 있을때 (글개수)
+				cnt = rs.getInt(1);	
+			}			
+			System.out.println(" DAO : 회원수 ("+cnt+")");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseDB();
+		}
+		
+		return cnt;
+	}
+	// getMemberCount() 끝
+	
+	
 	
 	
 	// deleteMember(id, pass)

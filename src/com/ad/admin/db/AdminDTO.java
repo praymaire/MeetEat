@@ -1,5 +1,7 @@
 package com.ad.admin.db;
 
+import java.sql.Date;
+
 public class AdminDTO {
 	
 	private String id;
@@ -11,6 +13,7 @@ public class AdminDTO {
 	private int user_point;
 	private int user_level;
 	private int reported_count;
+	private Date ban_date;
 	
 	public String getId() {
 		return id;
@@ -70,12 +73,22 @@ public class AdminDTO {
 	public void setReported_count(int reported_count) {
 		this.reported_count = reported_count;
 	}
+	
+	
+	
+	public Date getBan_date() {
+		return ban_date;
+	}
+	public void setBan_date(Date ban_date) {
+		this.ban_date = ban_date;
+	}
 	@Override
 	public String toString() {
 		return "AdminDTO [id=" + id + ", pw=" + pw + ", nickname=" + nickname + ", phone=" + phone + ", email=" + email
 				+ ", address=" + address + ", user_point=" + user_point + ", user_level=" + user_level
-				+ ", reported_count=" + reported_count + "]";
+				+ ", reported_count=" + reported_count + ", ban_date=" + ban_date + "]";
 	}
+
 	
 	
 

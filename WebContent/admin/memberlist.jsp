@@ -19,10 +19,7 @@
     if(id == null || !id.equals("admin") ){
     	response.sendRedirect("./MemberLogin.me");
     }
-     
-    // request.setAttribute("memberList", dao.getMemberList());
    %>
-   
    <table border="1">
      <tr>
        <td>아이디</td>
@@ -34,16 +31,15 @@
        <td>회원포인트</td>
        <td>회원등급</td>
        <td>누적신고횟수</td>
+       <td>정지날짜</td>
        <td>관리</td>
      </tr>
-     
      
      <%
      	ArrayList memberList =
     	(ArrayList)request.getAttribute("memberList");
      %>
-     
-     
+     <c:if test="${requestScope.cnt != 0 }">
      <c:forEach var="dto" items="${memberList }">
          <tr>
 	       <td>${dto.id }</td>
@@ -55,12 +51,36 @@
 	       <td>${dto.user_point }</td>
 	       <td>${dto.user_level }</td>
 	       <td>${dto.reported_count }</td>
-	       <td><input type="button" value="정지"><input type="button" value="삭제"></td>
+	       <td>${dto.ban_date }</td>
+	       <td><input type="button" value="정지관리" onclick="banManagePopup('${dto.id}', '${dto.reported_count }');"> /
+	       <input type="button" value="정지해제" onclick="banCancel('${dto.id}');"> /
+	       <input type="button" value="계정삭제"></td>
 	     </tr>
-     </c:forEach>    
-     
+     </c:forEach>  
+     </c:if>
+       	<c:if test="${requestScope.cnt == 0 }">
+			<tr>
+				<td> 회원이 존재하지 않습니다. </td>
+			</tr>
+	 </c:if>
    </table>
    
+   
+   <!-- 페이징  처리 -->
+	<div id="page_control">
+		<c:if test="${requestScope.cnt != 0 }">
+			<c:if test="${requestScope.startPage > requestScope.pageBlock }">
+				<a href="./MemberList.ad?pageNum=${requestScope.startPage - requestScope.pageBlock }">이전</a>
+			</c:if>
+			<c:forEach var="i" begin="${requestScope.startPage }" end="${requestScope.endPage }" step="1">
+				<a href="./MemberList.ad?pageNum=${i }">${i }</a>
+			</c:forEach>
+			<c:if test="${requestScope.endPage < requestScope.pageCount }">
+				<a href="./MemberList.ad?pageNum=${ requestScope.startPage +  requestScope.pageBlock}">다음</a>
+			</c:if>
+		</c:if>
+	</div>
+  <!-- 페이징  처리 -->
    
    
    

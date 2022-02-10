@@ -182,8 +182,8 @@ public class QnaDAO {
 	// getQnaList() 끝
 	
 	// getQnaList(startRow,pageSize)
-	public List getQnaList(int startRow,int pageSize){
-		List qnaList = new ArrayList();
+	public ArrayList getQnaList(int startRow,int pageSize){
+		ArrayList qnaList = new ArrayList();
 			
 		try {
 			// 1,2 디비연결
@@ -191,7 +191,10 @@ public class QnaDAO {
 			// 3 sql 작성 & pstmt 객체 생성
 			// 글 re_ref 최신글 위쪽(내림차순), re_seq (오름차순)
 			// DB데이터를 원하는만큼씩 짤라내기 : limit 시작행-1,페이지크기 
-			sql = "select * from qna order by re_ref desc, re_seq asc limit ?,?";
+			sql = "select a.qno, a.id, a.title, a.content, a.readcount, a.re_ref, a.re_lev, a.re_seq, a.reg_date, b.nickname "
+					+ "from qna a join member b "
+					+ "on a.id=b.id "
+					+ "order by re_ref desc, re_seq asc limit ?,?";
 			pstmt = con.prepareStatement(sql);
 				
 			//?
@@ -213,13 +216,12 @@ public class QnaDAO {
 				qdto.setRe_ref(rs.getInt("re_ref"));
 				qdto.setRe_seq(rs.getInt("re_seq"));
 				qdto.setReadcount(rs.getInt("readcount"));
-				qdto.setTitle(rs.getString("title"));				
+				qdto.setTitle(rs.getString("title"));
+				qdto.setNickname(rs.getString("nickname"));
 
 				qnaList.add(qdto);				
 				
 			}//while
-				
-			System.out.println(" DAO : 글 정보 저장완료! "+qnaList.size());
 				
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -395,12 +397,12 @@ public class QnaDAO {
 			// ?
 			pstmt.setInt(1, qno);
 			pstmt.setString(2, qdto.getId());
-			pstmt.setString(4, qdto.getTitle());
-			pstmt.setString(5, qdto.getContent());
-			pstmt.setInt(6, 0);// 조회수 0으로 초기화
-			pstmt.setInt(7, qdto.getRe_ref()); // re_ref 그룹번호 = 부모글의 그룹번호
-			pstmt.setInt(8, qdto.getRe_lev()+1); // re_lev 레벨값 => 부모글 lev + 1
-			pstmt.setInt(9, qdto.getRe_seq()+1); // re_seq 순서 => 부모글 seq + 1
+			pstmt.setString(3, qdto.getTitle());
+			pstmt.setString(4, qdto.getContent());
+			pstmt.setInt(5, 0);// 조회수 0으로 초기화
+			pstmt.setInt(6, qdto.getRe_ref()); // re_ref 그룹번호 = 부모글의 그룹번호
+			pstmt.setInt(7, qdto.getRe_lev()+1); // re_lev 레벨값 => 부모글 lev + 1
+			pstmt.setInt(8, qdto.getRe_seq()+1); // re_seq 순서 => 부모글 seq + 1
 
 			// 4. sql 실행
 			pstmt.executeUpdate();
