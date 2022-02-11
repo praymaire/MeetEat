@@ -39,10 +39,11 @@ public class MemberModifytempPwAction implements Action {
 		
 		// 결과에 따른 이동
 		if(result == 1) {
+			session.invalidate();
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('비밀번호가 정상적으로 처리되었습니다.');");
+			out.print("alert('비밀번호가 정상적으로 처리되었습니다. 다시 로그인해주시기 바랍니다.');");
 			out.print("location.href='./MemberLogin.me';");
 			out.print("</script>");
 			out.close();
