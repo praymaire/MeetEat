@@ -45,7 +45,7 @@
      <c:forEach var="dto" items="${memberList }">
          <tr>
 	       <td>${dto.id }</td>
-	       <td>${dto.pw }</td>
+	       <td>${dto.pass }</td>
 	       <td>${dto.name }</td>
 	       <td>${dto.age }</td>
 	       <td>${dto.gender }</td>

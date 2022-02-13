@@ -1,21 +1,19 @@
-<%@page import="java.util.ArrayList"%>
+<%@ include file="../Main/top.jsp" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원정보 관리 페이지</title>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <script src="JQuery/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-
 	function banManagePopup(reported_user, reported_count) {
 		window.open("./AdminBanManagePopup.ad?reported_user=" + reported_user + 
 					"&reported_count=" + reported_count, 
 					"정지관리",
-					"width=500, height=600, top=10, left=10");
+					"width=300, height=300, top=50, left=50");
 	}
 	
 	function banCancel(reported_user) {
@@ -26,26 +24,26 @@
         }
     }
 </script>
-
-
-</head>
-<body>
-<h1>WebContent/admin/memberlist.jsp</h1>
-<%--    
-   <%
-     // 세션제어 (로그인X,관리자X)
-     String id = (String)session.getAttribute("id");
-   
+  <%
     if(id == null || !id.equals("admin") ){
     	response.sendRedirect("./MemberLogin.me");
     }
-     
-    // request.setAttribute("memberList", dao.getMemberList());
-   %> --%>
-   ${memberList }
-   
-   <table border="1">
-     <tr>
+   %>
+	<div class="container">
+	<ul class="nav nav-tabs h4">
+	  <li class="nav-item">
+	    <a class="nav-link" href="./MemberList.ad">회원정보</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link"  href="./AdminReportManage.ad">신고관리</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" href="#">Disabled</a>
+	  </li>
+	</ul>
+	<br>
+   <table class="table table-hover">
+     <tr class="table-info">
        <td>아이디</td>
        <td>비밀번호</td>
        <td>닉네임</td>
@@ -58,13 +56,12 @@
        <td>정지날짜</td>
        <td>관리</td>
      </tr>
-     
      <%
      	ArrayList memberList =
     	(ArrayList)request.getAttribute("memberList");
      %>
-     
-     <c:forEach var="dto" items="${memberList }">
+     <c:if test="${requestScope.cnt != 0 }">
+	 <c:forEach var="dto" items="${memberList }">
          <tr>
 	       <td>${dto.id }</td>
 	       <td>${dto.pw }</td>
@@ -76,12 +73,40 @@
 	       <td>${dto.user_level }</td>
 	       <td>${dto.reported_count }</td>
 	       <td>${dto.ban_date }</td>
-	       <td><input type="button" value="정지관리" onclick="banManagePopup('${dto.id}', '${dto.reported_count }');"> /
-	       <input type="button" value="정지해제" onclick="banCancel('${dto.id}');"> /
-	       <input type="button" value="삭제"></td>
+	       <td><input type="button" value="정지관리" onclick="banManagePopup('${dto.id}', '${dto.reported_count }');" class="btn btn-sm btn-danger"> /
+	       <input type="button" value="정지해제" onclick="banCancel('${dto.id}');" class="btn btn-sm btn-success"> /
+	       <input type="button" value="삭제" class="btn btn-sm btn-secondary"></td>
 	     </tr>
-     </c:forEach>    
-     
-   </table>
+     </c:forEach>  
+     </c:if>
+     <c:if test="${requestScope.cnt == 0 }">
+		<tr>
+			<td> 회원이 존재하지 않습니다. </td>
+		</tr>
+	 </c:if>
+     </table>
+     	  <!-- 페이징  처리 -->
+	<div id="page_control">
+	<ul class="pagination pagination-sm justify-content-center">
+
+		<c:if test="${requestScope.cnt != 0 }">
+			<c:if test="${requestScope.startPage > requestScope.pageBlock }">
+			  <li class="page-item">
+				<a href="./MemberList.ad?pageNum=${requestScope.startPage - requestScope.pageBlock }" class="page-link">&laquo;</a></li>
+			</c:if>
+			<c:forEach var="i" begin="${requestScope.startPage }" end="${requestScope.endPage }" step="1" >
+			  <li class="page-item">
+				<a href="./MemberList.ad?pageNum=${i }" class="page-link">${i }</a></li>
+			</c:forEach>
+			<c:if test="${requestScope.endPage < requestScope.pageCount }">
+			  <li class="page-item">
+				<a href="./MemberList.ad?pageNum=${ requestScope.startPage +  requestScope.pageBlock}" class="page-link">&raquo;</a></li>
+			</c:if>
+		</c:if>
+		</ul>
+	</div>
+  <!-- 페이징  처리 -->
+</div>
+<div class="offcanvas-header"></div><div class="offcanvas-header"></div>
 </body>
-</html>
+</html> 

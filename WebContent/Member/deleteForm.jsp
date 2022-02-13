@@ -1,34 +1,37 @@
+<%@ include file="../Main/top.jsp" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>./Member/deleteForm.jsp</h1>
-    <%
-    // 사용자의 비밀번호 한번 더 입력받아 처리
-    String id = (String)session.getAttribute("id");
-    
+<%   
     if(id == null) {
     	response.sendRedirect("./Memberlogin.me");
     }
-    %>
-    <div>
-   		<form action="./MemberDeleteAction.me" name="delete" method="post">
-        	<div>아이디</div>
-        	<div>
-        		<input type="text" name="id" value="<%=id%>" disabled="disabled">
-        	</div>
-        	<div>비밀번호</div>
-        		<input type="password" name="pw" placeholder="비밀번호를 입력해주세요"> 
-        	</div>
-        	<div>
-       			<input type="submit" value="탈퇴하기"> 
-       		</div>
+ %>
+
+   		<form action="./MemberDeleteAction.me" name="delete" method="post" class="container">
+   		  <div class="row">
+			<div class="col-4"></div>
+			<fieldset class="col-7">	
+   		 <!-- 아이디 -->
+			<div class="form-group mb-2 fs-4">
+				<label for="id" class="col-sm-2 col-form-label">아이디</label>
+				<input type="text" name="id" value="<%=id%>" disabled="disabled" class="col-sm-6 p-2">  
+			</div>
+			    
+		 	<!-- 비밀번호 -->
+		    <div class="form-group mb-2 fs-4">
+				<label for="pw" class="col-sm-2 col-form-label">비밀번호</label>
+				<input type="password" class="col-sm-6 p-2" id="pw" name="pw">
+		    </div>
+			
+			<!-- 제출버튼 -->
+			<div class="d-grid col-8">
+		  		<button class="btn btn-lg btn-info mb-2" type="submit">탈퇴하기</button>
+      		</div>
+      		</fieldset>
+      	  </div>
     	</form>
-    </div>
+ <div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div> 
+ <div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div>
 </body>
 </html>

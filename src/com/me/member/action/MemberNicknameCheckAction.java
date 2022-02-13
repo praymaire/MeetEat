@@ -14,31 +14,22 @@ public class MemberNicknameCheckAction implements Action {
 
 		System.out.println(" S : MemberNicknameCheckAction_execute() 호출");
 		
+		request.setCharacterEncoding("UTF-8");
+		
 		String nickname = request.getParameter("nickname");
+		
+		System.out.println("nickname: " + nickname);
 		
 		MemberDAO mdao = new MemberDAO();
 		int result = mdao.nicknameCheck(nickname);
 		System.out.println(" M : 닉네임 조회 완료");
 		
-		if(result == 1) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.print("<script>");
-			out.print("alert('사용할 수 있는 닉네임입니다.');");
-			out.print("history.back();");
-			out.print("</script>");
-			out.close();
-			return null;
-		} else {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.print("<script>");
-			out.print("alert('사용할 수 없는 닉네임입니다.');");
-			out.print("history.back();");
-			out.print("</script>");
-			out.close();
-			return null;
-		}
+		PrintWriter out = response.getWriter();
+
+		out.write(result + "");
+		out.close();
+		
+		return null;
 	}
 
 }
