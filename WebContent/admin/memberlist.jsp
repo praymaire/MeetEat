@@ -9,6 +9,15 @@
 
 <script src="JQuery/jquery-3.6.0.js"></script>
 <script type="text/javascript">
+
+	function saveColNameValue(){
+		localStorage.setItem("col_name", $('#col_name').val());
+	}
+	
+	function saveIdNickValue(){
+		localStorage.setItem("id_nick", $('#id_nick').val());
+	}
+
 	function banManagePopup(reported_user, reported_count) {
 		window.open("./AdminBanManagePopup.ad?reported_user=" + reported_user + 
 					"&reported_count=" + reported_count, 
@@ -23,6 +32,7 @@
             location.href="./AdminBanCancelProAction.ad?reported_user=" + reported_user;
         }
     }
+	
 </script>
   <%
     if(id == null || !id.equals("admin") ){
@@ -42,6 +52,20 @@
 	  </li>
 	</ul>
 	<br>
+	
+	<form action="./MemberList.ad" method="GET" class="ms-4 d-flex">
+		<div>
+		<h6>아이디 검색 / <span class="text-muted">전체검색시 빈칸</span></h6>
+			<select name="col_name" id="col_name" onchange=" " class="form-select-sm" >
+				<option value="nickname">닉네임</option>
+				<option value="a.id">아이디</option>
+			</select>
+			<input type="text" name="id_nick" id="id_nick" placeholder="검색" onkeyup=" "> 
+			<input type="submit" value="검색">
+		</div>
+	</form>
+	<hr>
+
    <table class="table table-hover">
      <tr class="table-info">
        <td>아이디</td>
@@ -75,7 +99,7 @@
 	       <td>${dto.ban_date }</td>
 	       <td><input type="button" value="정지관리" onclick="banManagePopup('${dto.id}', '${dto.reported_count }');" class="btn btn-sm btn-danger"> /
 	       <input type="button" value="정지해제" onclick="banCancel('${dto.id}');" class="btn btn-sm btn-success"> /
-	       <input type="button" value="삭제" class="btn btn-sm btn-secondary"></td>
+	       <input type="button" value="계정삭제" class="btn btn-sm btn-secondary"></td>
 	     </tr>
      </c:forEach>  
      </c:if>
@@ -92,15 +116,21 @@
 		<c:if test="${requestScope.cnt != 0 }">
 			<c:if test="${requestScope.startPage > requestScope.pageBlock }">
 			  <li class="page-item">
-				<a href="./MemberList.ad?pageNum=${requestScope.startPage - requestScope.pageBlock }" class="page-link">&laquo;</a></li>
+				<a href="./MemberList.ad?pageNum=${requestScope.startPage - requestScope.pageBlock }
+										&col_name=${requestScope.col_name }
+										&id_nick=${requestScope.id_nick }" class="page-link">&laquo;</a></li>
 			</c:if>
 			<c:forEach var="i" begin="${requestScope.startPage }" end="${requestScope.endPage }" step="1" >
 			  <li class="page-item">
-				<a href="./MemberList.ad?pageNum=${i }" class="page-link">${i }</a></li>
+				<a href="./MemberList.ad?pageNum=${i }
+										&col_name=${requestScope.col_name }
+										&id_nick=${requestScope.id_nick }" class="page-link">${i }</a></li>
 			</c:forEach>
 			<c:if test="${requestScope.endPage < requestScope.pageCount }">
 			  <li class="page-item">
-				<a href="./MemberList.ad?pageNum=${ requestScope.startPage +  requestScope.pageBlock}" class="page-link">&raquo;</a></li>
+				<a href="./MemberList.ad?pageNum=${ requestScope.startPage +  requestScope.pageBlock}
+										&col_name=${requestScope.col_name }
+										&id_nick=${requestScope.id_nick }" class="page-link">&raquo;</a></li>
 			</c:if>
 		</c:if>
 		</ul>

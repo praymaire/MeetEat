@@ -38,12 +38,14 @@
 </table>
 
 <div>
-<%if(id!=null && id.equals(qdto.getId())){ %>
-	<input type="button" value="수정" onclick="location.href='./QnaUpdate.bo?qno=<%=qdto.getQno()%>'">
-	<input type="button" value="삭제" onclick="location.href='./QnaDelete.bo?qno=<%=qdto.getQno()%>'">	
-<%} %>	
-<%if(id!=null && id.equals("admin")){ %>	
-	<input type="button" value="답글" onclick="location.href='QnaReply.bo?qno=<%=qdto.getQno()%>&re_ref=<%=qdto.getRe_ref()%>&re_lev=<%=qdto.getRe_lev()%>&re_seq=<%=qdto.getRe_seq()%>';">
+<%if(id!=null){ %>
+	<%if(id.equals(qdto.getId())||id.equals("admin")){ %>
+		<input type="button" value="수정" onclick="location.href='./QnaUpdate.bo?qno=<%=qdto.getQno()%>'">
+		<input type="button" value="삭제" onclick="location.href='./QnaDelete.bo?qno=<%=qdto.getQno()%>'">	
+	<%} %>	
+	<%if(id.equals("admin")){ %>	
+		<input type="button" value="답글" onclick="location.href='QnaReply.bo?qno=<%=qdto.getQno()%>&re_ref=<%=qdto.getRe_ref()%>&re_lev=<%=qdto.getRe_lev()%>&re_seq=<%=qdto.getRe_seq()%>';">
+	<%} %>
 <%} %>
 	<input type="button" value="목록" onclick=" location.href='./QnaList.bo'" >
 	
