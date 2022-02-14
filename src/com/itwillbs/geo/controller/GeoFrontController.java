@@ -105,35 +105,7 @@ public class GeoFrontController extends HttpServlet{
 		
 		
 		
-/*		else if(command.equals("/searchGeo.do")){
-			// 로그인 페이지 (view페이지로 이동)
-			
-			forward = new ActionForward();
-			forward.setPath("./GeoView/searchGeo.jsp");
-			forward.setRedirect(false);			
-		}else if(command.equals("/MemberLoginAction.me")){
-			// 로그인정보를 전달받아서 처리(DB)
-			// MemberLoginAction 객체
-			action = new MemberLoginAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		else if(command.equals("/GeoList.do")){
-			// DB사용해서 정보를 화면에 바로 출력
-			// MemberListAction() 객체 생성
-			action = new GeoListAction();
-			
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		*/
+
 
 		
 		
