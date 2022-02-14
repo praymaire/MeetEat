@@ -36,7 +36,7 @@ public class AdminReportSortAction implements Action {
 		/* 페이징 처리 */
 		
 		// 한 페이지에 출력될 글 개수
-		int pageSize = 5;
+		int pageSize = 10;
 	
 		// 현 페이지 정보 설정
 		String pageNum = request.getParameter("pageNum");
@@ -57,7 +57,7 @@ public class AdminReportSortAction implements Action {
 		int pageCount = cnt / pageSize + (cnt % pageSize == 0 ? 0 : 1);
 
 		// 한 페이지에 보여줄 페이지블럭
-		int pageBlock = 2;
+		int pageBlock = 5;
 
 		// 한 페이지에 보여줄 페이지 블럭 시작번호 계산
 		int startPage = ((currentPage - 1) / pageBlock) * pageBlock + 1;

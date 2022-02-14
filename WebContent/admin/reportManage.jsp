@@ -17,17 +17,14 @@
 		
 	function saveOptionValue(){
 		localStorage.setItem("option", $('#option').val());
-		location.reload();
 	}
 	
 	function saveUserValue(){
 		localStorage.setItem("userSelect", $('#userSelect').val());
-		location.reload();
 	}
 	
 	function saveSortValue() {
 		localStorage.setItem("sort", $('#sort').val());
-		location.reload();
 	}
 	
 	function saveIdValue(e) {
