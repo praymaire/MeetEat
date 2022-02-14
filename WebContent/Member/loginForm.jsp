@@ -87,6 +87,10 @@
 	                        $("#loginCheckMessage").html('아이디 또는 비밀번호가 존재하지 않습니다.');
 	                        $("#loginCheckMessage").attr('color', 'red');
 	                        $("#buttonClickCheck").val("1");
+	                    } else if (result == -2) {
+	                    	$("#loginCheckMessage").html('정지된 아이디입니다.');
+	                        $("#loginCheckMessage").attr('color', 'red');
+	                        $("#buttonClickCheck").val("1");
 	                    } else {
 	                    	$('#login').submit();
 	                    }

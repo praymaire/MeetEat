@@ -1,6 +1,7 @@
 package com.me.member.db;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -139,7 +140,7 @@ public class MemberDAO {
 		
 		try {
 			con = getCon();				
-			sql = "select pw from member where id=?";
+			sql = "select pw, ban_date, now() from member_view where id=?";
 			pstmt = con.prepareStatement(sql);				
 			pstmt.setString(1, id);
 			
@@ -148,8 +149,18 @@ public class MemberDAO {
 			if(rs.next()){
 				// 회원정보 있음
 				if(pw.equals(rs.getString("pw"))){
-					// 회원정보가 있으면서, 비밀번호 동일
-					result = 1;
+					// 정지여부 확인
+					Date ban_date = rs.getDate(2);
+					Date now = rs.getDate(3);
+					
+					if(ban_date == null || ban_date.equals("")) {
+						result = 1;
+					} else if(ban_date.compareTo(now) > 0) {
+						result = -2;						
+					} else {
+						result = 1;
+					}
+					
 				}else{
 				// 회원정보가 있음, 비밀번호 다름
 					result = 0;

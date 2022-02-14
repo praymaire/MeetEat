@@ -33,7 +33,6 @@ public class AdminBanManageProAction implements Action {
 		PrintWriter out = response.getWriter();
 		
 		out.print("<script>");
-		out.print("alert('정지처리 완료');");
 		out.print("opener.location.reload();");
 		out.print("window.close();");
 		out.print("</script>");
