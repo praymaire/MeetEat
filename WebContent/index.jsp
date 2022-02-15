@@ -8,6 +8,12 @@
 </head>
 <body>
 
-    수정합니다
+<%
+
+ response.sendRedirect("./Board_Write.me");
+
+%>
+
+
 </body>
 </html>
