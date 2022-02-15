@@ -326,7 +326,9 @@ public class QnaDAO {
 	// updateQna(qdto)
 	
 	// deleteQna(qno)
-	public void deleteQna(int qno){
+	public boolean deleteQna(int qno){
+		
+		boolean result = false;
 		
 		try {
 			// 1.2. 디비연결
@@ -337,15 +339,22 @@ public class QnaDAO {
 					
 			pstmt.setInt(1, qno);
 			// 4. sql 실행
-			pstmt.executeUpdate();				
+			int flag = pstmt.executeUpdate();				
 			
+			if(flag>0) {
+				result = true;
+			}
 			System.out.println(" DAO : QnA 글 삭제 완료");
+
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			CloseDB();
-		}		
+		}
+		
+		return result;
 	}
 	// deleteQna(qno) 끝
 	
@@ -417,38 +426,29 @@ public class QnaDAO {
 		}
 		
 	}
-	// replyBoard(bto) 끝
+	// replyQna(qdto) 끝
 	
 	
-	// redeleteBoard(bno,re_seq,pass)
-	public int redeleteBoard(int qno,int re_seq){
-		int result = -1;
+	// redeleteQna(qno,re_seq,pass)
+	public boolean redeleteQna(int qno,int re_seq){
+		boolean result = false;
 		
 		try {
 			// 1.2. 디비연결
 			con = getCon();
-			// 3. sql 작성 & pstmt 객체 생성
-			sql = "select pass from hj_board where qno=?";
+			// 3. sql
+			sql ="delete from qna where qno=? and re_seq=?";
 			pstmt = con.prepareStatement(sql);
+								
 			pstmt.setInt(1, qno);
-			
+			pstmt.setInt(2, re_seq);
 			// 4. sql 실행
-			rs = pstmt.executeQuery();
-			
-			// 5. 데이터 처리
-			if(rs.next()){
-				// 3. sql
-				sql ="delete from qna where qno=? and re_seq=?";
-				pstmt = con.prepareStatement(sql);
-					
-				pstmt.setInt(1, qno);
-				pstmt.setInt(2, re_seq);
-				// 4. sql 실행
-				pstmt.executeUpdate();
-				result = 1;
-			}else{
-				result = -1;
-			}			
+			int flag = pstmt.executeUpdate();				
+						
+			if(flag>0) {
+				result = true;
+			}
+						
 			System.out.println(" DAO : 답글 삭제 완료! "+result);
 			
 		} catch (Exception e) {
@@ -459,7 +459,7 @@ public class QnaDAO {
 		
 		return result;
 	}
-	// redeleteBoard(qno,re_seq) 끝
+	// redeleteQna(qno,re_seq) 끝
 	
 
 }

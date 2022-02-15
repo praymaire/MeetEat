@@ -105,6 +105,15 @@ public class QnaFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/QnaReDelete.bo")) {
+			System.out.println("C : /QnaReDelete.bo 호출");
+			
+			action = new QnaReDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
