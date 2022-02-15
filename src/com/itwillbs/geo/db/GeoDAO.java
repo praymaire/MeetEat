@@ -10,9 +10,7 @@ import java.util.HashMap;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
-
-
+                
 
 public class GeoDAO {
 	// 위치정보를 처리하는 DAO
@@ -25,7 +23,7 @@ public class GeoDAO {
 	// 디비연결
 	private Connection getCon() throws Exception {
 		Context initCTX = new InitialContext();
-		DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/model2");
+		DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/itwillbs7");
 		con = ds.getConnection();
 		return con;
 	}
@@ -63,7 +61,7 @@ public class GeoDAO {
 								con = getCon();
 								// 3. sql 작성 & pstmt 객체생성
 								// 일단 1키로 범위로 잡고 조회(위경도만 뽑아온다)
-								sql = "SELECT latitude, longitude FROM (SELECT latitude, longitude, ( 6371 * acos( cos( radians("+latitude+") ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians("+ longitude +") ) + sin( radians("+ latitude +") ) * sin( radians(latitude) ) ) ) AS distance FROM itwill_geo)DATA WHERE DATA.distance < 1";					
+								sql = "SELECT latitude, longitude FROM (SELECT latitude, longitude, ( 6371 * acos( cos( radians("+latitude+") ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians("+ longitude +") ) + sin( radians("+ latitude +") ) * sin( radians(latitude) ) ) ) AS distance FROM board)DATA WHERE DATA.distance < 1";					
 								
 								pstmt = con.prepareStatement(sql);					
 								
@@ -106,7 +104,7 @@ public class GeoDAO {
 				// 1.2. 디비연결
 				con = getCon();
 				// 3. sql 작성 & pstmt 객체생성
-				sql = "SELECT latitude, longitude FROM (SELECT latitude, longitude, ( 6371 * acos( cos( radians("+latitude+") ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians("+ longitude +") ) + sin( radians("+ latitude +") ) * sin( radians(latitude) ) ) ) AS distance FROM itwill_geo)DATA WHERE DATA.distance < 1";					
+				sql = "SELECT latitude, longitude FROM (SELECT latitude, longitude, ( 6371 * acos( cos( radians("+latitude+") ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians("+ longitude +") ) + sin( radians("+ latitude +") ) * sin( radians(latitude) ) ) ) AS distance FROM board)DATA WHERE DATA.distance < 1";					
 				
 				pstmt = con.prepareStatement(sql);
 				
