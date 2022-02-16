@@ -43,6 +43,7 @@
   
   %>
   
+  <button type="button" onclick="window.open('chatpage.chat','chatting','width=380,height=450,location=no,status=no,scrollbars=yes');">채팅</button>
 
 </body>
 </html>

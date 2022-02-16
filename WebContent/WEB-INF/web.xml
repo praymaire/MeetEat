@@ -29,7 +29,16 @@
   </servlet-mapping> 
  <!-- MemberFrontController -->
   
+ <!-- ChatController -->
+  <servlet>
+     <servlet-name>ChatController</servlet-name>
+     <servlet-class>com.me.chat.action.ChatController</servlet-class>
+  </servlet>
   
-  
+  <servlet-mapping>
+     <servlet-name>ChatController</servlet-name>
+     <url-pattern>*.chat</url-pattern>
+  </servlet-mapping> 
+ <!-- ChatController -->
   
 </web-app>
