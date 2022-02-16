@@ -87,24 +87,26 @@ public class AdminDAO {
 		return memberList;
 	}//getMemberList 끝
 	
-	// getMemberList(startRow,pageSize)
-	public ArrayList getMemberList(int startRow,int pageSize){
+	// getMemberList(col_name, id_nick, startRow, pageSize)
+	public ArrayList getMemberList(String col_name, String id_nick, int startRow, int pageSize){
 		ArrayList memberList = new ArrayList();
 			
 		try {
 			// 1,2 디비연결
 			con = getCon();
 			// 3 sql 작성 & pstmt 객체 생성
-			sql = "select a.id, a.pw, a.nickname, a.phone, a.email, a.address, b.user_point, b.user_level, b.reported_count, b.ban_date " +
+			sql = "select SQL_CALC_FOUND_ROWS a.id, a.pw, a.nickname, a.phone, a.email, a.address, b.user_point, b.user_level, b.reported_count, b.ban_date " +
 					"from member a join member_manage b " + 
 					"on a.id=b.id " + 
-					"where a.id != 'admin' " +
+					"where a.id != 'admin' " + 
+					"and "+col_name+" = ? " +
 					"order by id asc limit ?,?";
 			pstmt = con.prepareStatement(sql);
 				
 			//?
-			pstmt.setInt(1, startRow-1); // 시작행-1  (시작 ROW인덱스 번호)
-			pstmt.setInt(2, pageSize); // 페이지크기  (한번에 출력되는 수)
+			pstmt.setString(1, id_nick);
+			pstmt.setInt(2, startRow-1); // 시작행-1  (시작 ROW인덱스 번호)
+			pstmt.setInt(3, pageSize); // 페이지크기  (한번에 출력되는 수)
 				
 			// 4 sql 실행
 			rs = pstmt.executeQuery();
@@ -135,7 +137,7 @@ public class AdminDAO {
 			
 		return memberList;
 	}
-	// getMemberList(startRow,pageSize)끝
+	// getMemberList(col_name, id_nick, startRow, pageSize)끝
 	
 	
 	// getMemberCount()
@@ -170,35 +172,34 @@ public class AdminDAO {
 	
 	
 	
-	// deleteMember(id, pass)
-	public int deleteMember(String id, String pass) {
+	// deleteMember(id, pw)
+	public int deleteMember(String delid, String pw) {
 		int result = -1;
+		
+		System.out.println(delid+ " " +pw);
 				
 		try {
 			// 1.2. 디비연결
 			con = getCon();
 			// 3. sql 작성(select) & pstmt 객체 생성
-			sql = "select pass from member where id=?";
+			sql = "select pw from member where id=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			// 4. sql 실행
+			pstmt.setString(1, delid);
 			rs = pstmt.executeQuery();
-					
-			// 5. 데이터 처리
+
 			if(rs.next()) { //데이터 있을때
 						
-				if(pass.equals(rs.getString("pass"))) { // 본인
-					// 3. sql 생성 & pstmt 객체 생성
+				if(pw.equals(rs.getString("pw"))) { 
 					sql = "delete from member where id=?";
 					pstmt = con.prepareStatement(sql);
 							
-					pstmt.setString(1, id);						
-					// 4. sql 실행 
-					result = pstmt.executeUpdate();
+					pstmt.setString(1, delid);	
+					pstmt.executeUpdate();
+					result = 1;
 					System.out.println("회원삭제 완료");
 							
 				}else {
-					// 아이디는 맞는데 비밀번호가 잘못됨
+					//비밀번호가 잘못됨
 					result = 0;
 				}				
 					
@@ -214,7 +215,7 @@ public class AdminDAO {
 				
 		return result;
 	}			
-	// deleteMember(id, pass) 끝
+	// deleteMember(id, pw) 끝
 	
 
 }

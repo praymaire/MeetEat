@@ -66,15 +66,19 @@ QnaDTO qdto = new QnaDTO();
   
   <!-- 페이징  처리 -->
 	<div id="page_control">
+	<ul class="pagination pagination-sm justify-content-center">
 		<c:if test="${requestScope.cnt != 0 }">
 			<c:if test="${requestScope.startPage > requestScope.pageBlock }">
-				<a href="./QnaList.bo?pageNum=${requestScope.startPage - requestScope.pageBlock }">이전</a>
+			<li class="page-item">
+				<a href="./QnaList.bo?pageNum=${requestScope.startPage - requestScope.pageBlock }" class="page-link">&laquo;</a></li>
 			</c:if>
 			<c:forEach var="i" begin="${requestScope.startPage }" end="${requestScope.endPage }" step="1">
-				<a href="./QnaList.bo?pageNum=${i }">${i }</a>
+			<li class="page-item">
+				<a href="./QnaList.bo?pageNum=${i }">${i }</a></li>
 			</c:forEach>
 			<c:if test="${requestScope.endPage < requestScope.pageCount }">
-				<a href="./QnaList.bo?pageNum=${ requestScope.startPage +  requestScope.pageBlock}">다음</a>
+			<li class="page-item">
+				<a href="./QnaList.bo?pageNum=${ requestScope.startPage +  requestScope.pageBlock}" class="page-link">&raquo;</a></li>
 			</c:if>
 		</c:if>
 	</div>
@@ -82,10 +86,11 @@ QnaDTO qdto = new QnaDTO();
   
   
 
-<hr>
+<input type="button" value="글쓰기" onclick="location.href='./QnaWrite.bo'" class="btn btn-warning">
+<input type="button" value="메인으로" onclick="location.href='./Main.me'" class="btn btn-secondary">
 
-<input type="button" value="글쓰러가기" onclick="location.href='./QnaWrite.bo'">
-<input type="button" value="메인페이지" onclick="location.href='./Main.me'">
+ <div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div> 
+ <div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div>
 
 </body>
 </html>

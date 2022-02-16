@@ -109,6 +109,24 @@ public class AdminFrontController extends HttpServlet{
 			}
 		}
 		
+		else if (command.equals("/AdminDeletePopup.ad")) {
+			action = new AdminDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if (command.equals("/AdminDeletePro.ad")) {
+			action = new AdminDeleteProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		
 		// -------------------- 3. 페이지 이동 ----------------------------------
 		if(forward != null) {

@@ -26,6 +26,19 @@ public class AdminListAction implements Action {
 			return forward;
 		}
 		
+		// 파라미터, 초기값 세팅
+		String col_name = request.getParameter("col_name");
+		String id_nick = request.getParameter("id_nick");
+		
+		if(col_name == null || col_name == "") {
+			col_name = "1";
+		} 
+		
+		if(id_nick == null || id_nick == "") {
+			id_nick = "1";
+			col_name = "1";
+		}
+		
 		// DAO 객체 생성
 		AdminDAO adao = new AdminDAO();
 		
@@ -45,7 +58,7 @@ public class AdminListAction implements Action {
 		int startRow = (currentPage - 1) * pageSize + 1;
 		
 		// DB에서 리스트 받기, 전체 행 수 가져오기
-		ArrayList memberList = adao.getMemberList(startRow, pageSize);
+		ArrayList memberList = adao.getMemberList(col_name, id_nick, startRow, pageSize);
 		
 		int cnt = adao.getMemberCount();
 		

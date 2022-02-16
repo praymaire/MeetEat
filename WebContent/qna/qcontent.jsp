@@ -71,7 +71,7 @@
 		<%} %>
 	<%} %>	
 	<%if(id.equals("admin")){ %>	
-		<input type="button" value="답글" onclick="location.href='QnaReply.bo?qno=<%=qdto.getQno()%>&pageNum=<%=pageNum%>&re_ref=<%=qdto.getRe_ref()%>&re_lev=<%=qdto.getRe_lev()%>&re_seq=<%=qdto.getRe_seq()%>';">
+		<input type="button" value="답글" onclick="location.href='./QnaReply.bo?qno=<%=qdto.getQno()%>&pageNum=<%=pageNum%>&re_ref=<%=qdto.getRe_ref()%>&re_lev=<%=qdto.getRe_lev()%>&re_seq=<%=qdto.getRe_seq()%>';">
 		<%if(qdto.getRe_seq()>0){%>
 		<input type="button" value="삭제" onclick="delcheck2()">
 		<%} %>
