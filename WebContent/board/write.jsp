@@ -1,26 +1,7 @@
+<%@ include file="../Main/top.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>meeteat!</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="./css/bootstrap.css" rel="stylesheet" />
-    </head>
-<body>
-
-	<jsp:include page="../Main/top2.jsp"></jsp:include>
-
 <%
-
-	String id = (String)session.getAttribute("id");
-
 	if(id == null) { %>
 		<script>
 			alert('로그인 하세요');
@@ -30,22 +11,12 @@
 	}
 %>  
 
-
- 	
-	<div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div>
-	<!-- 상단 메뉴 -->
-       
-    <div class="container">   
-
-
-
-
-
+<div class="container">   
   <form action="BoardWriteAction.mb" method="post">
   <fieldset>
     <legend class="m-3"> 모집글쓰기</legend>
     <div class="form-group row">
-      <label for="staticEmail" class="col-sm-2 col-form-label">작성자</label>
+      <label for="id" class="col-sm-2 col-form-label">작성자</label>
       <div class="col-sm-10">
         <input type="text" readonly class="form-control-plaintext" id="id" name="id" value="<%=id%>">
       </div>
@@ -92,21 +63,13 @@
     
     <div class="my-3 float-sm-end">
     <button type="submit" class="btn btn-success">작성</button>
-    <button type="button" class="btn btn-warning">수정</button>
-    <button type="button" class="btn btn-danger" onclick="location.href='/Member/report.jsp'">신고</button>
-    <button type="button" class="btn btn-info">채팅</button>
     <button type="button" class="btn btn-secondary" onclick="history.back();">뒤로가기</button>
     </div>
   </fieldset>
 </form>
-	</div>
+</div>
 
-
-
-
-
-
-<!-- body~bottom 사이 공백 -->
-	 <div class="offcanvas-header">　</div>
+<div class="offcanvas-header">　</div>
+<div class="offcanvas-header">　</div>
 </body>
 </html>
