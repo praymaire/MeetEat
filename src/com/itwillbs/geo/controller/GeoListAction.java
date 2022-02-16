@@ -50,7 +50,7 @@ public class GeoListAction implements Action{
         listOpt2.put("longitude", longitude);
 
         GeoDAO dao = new GeoDAO();
-        ArrayList list =  dao.getMarkerList(listOpt2);
+        ArrayList list =  dao.getGeoList(listOpt2);
 
         request.setAttribute("geoList", list);
 		

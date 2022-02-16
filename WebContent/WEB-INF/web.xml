@@ -58,5 +58,14 @@
      <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>BoardFrontController</servlet-name>
+    <servlet-class>com.mb.board.action.BoardFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BoardFrontController</servlet-name>
+    <url-pattern>*.mb</url-pattern>
+  </servlet-mapping>
+  
   
 </web-app>

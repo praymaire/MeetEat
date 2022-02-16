@@ -1,4 +1,4 @@
-<%@page import="com.itwillbs.geo.db.GeoDTO"%> 
+<%@page import="com.itwillbs.geo.db.GeoDTO"%>
 <%@page import="com.itwillbs.geo.db.GeoDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

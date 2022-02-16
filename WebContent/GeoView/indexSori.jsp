@@ -14,7 +14,7 @@ index.jsp - 모든 프로젝트의 시작지점(BeforeMain 에서 버튼클릭�
    <%  
        //시작 전에 세션정리(아이디, 위치정보 세션 모두 날아감) 
        session.invalidate();
-   	   response.sendRedirect("/BeforeMain.do");   
+   	   response.sendRedirect("./BeforeMain.do");   
    %>
 
 

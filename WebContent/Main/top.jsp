@@ -75,7 +75,7 @@
 	          <a class="nav-link" href="./Main.me"><i class='fas fa-home me-1'></i>Home</a>
 	        </li>
 	        <li class="nav-item me-3">
-	          <a class="nav-link" href="#"><i class='fas fa-utensils me-1'></i>찾기</a>
+	          <a class="nav-link" href="./list.mb"><i class='fas fa-utensils me-1'></i>찾기</a>
 	        </li>
 	        <li class="nav-item me-3">
 	          <a class="nav-link" href="#"><i class='far fa-handshake me-1'></i>Not Yet</a>

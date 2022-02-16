@@ -9,7 +9,7 @@
 
 <script src="JQuery/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-
+		
 	function saveColNameValue(){
 		localStorage.setItem("col_name", $('#col_name').val());
 	}
@@ -17,12 +17,11 @@
 	function saveIdNickValue(){
 		localStorage.setItem("id_nick", $('#id_nick').val());
 	}
-
 	function banManagePopup(reported_user, reported_count) {
 		window.open("./AdminBanManagePopup.ad?reported_user=" + reported_user + 
 					"&reported_count=" + reported_count, 
 					"정지관리",
-					"width=300, height=300, top=50, left=50");
+					"width=500, height=300, top=50, left=50");
 	}
 	
 	function banCancel(reported_user) {
@@ -32,13 +31,14 @@
             location.href="./AdminBanCancelProAction.ad?reported_user=" + reported_user;
         }
     }
-	
 </script>
   <%
     if(id == null || !id.equals("admin") ){
     	response.sendRedirect("./MemberLogin.me");
     }
    %>
+
+
 	<div class="container">
 	<ul class="nav nav-tabs h4">
 	  <li class="nav-item">
@@ -51,9 +51,8 @@
 	    <a class="nav-link" href="#">Disabled</a>
 	  </li>
 	</ul>
-	<br>
-	
-	<form action="./MemberList.ad" method="GET" class="ms-4 d-flex">
+
+	   <form action="./MemberList.ad" method="GET" class="ms-4 d-flex mt-2">
 		<div>
 		<h6>아이디 검색 / <span class="text-muted">전체검색시 빈칸</span></h6>
 			<select name="col_name" id="col_name" onchange=" " class="form-select-sm" >
@@ -64,19 +63,17 @@
 			<input type="submit" value="검색">
 		</div>
 	</form>
-	<hr>
-
-   <table class="table table-hover">
-     <tr class="table-info">
+   <table class="table table-hover col-sm-12 align-middle">
+     <tr class="table-info ">
        <td>아이디</td>
-       <td>비밀번호</td>
+     <!--   <td>비밀번호</td> -->
        <td>닉네임</td>
        <td>전화번호</td>
        <td>이메일</td>
-       <td>주소</td>
-       <td>회원포인트</td>
-       <td>회원등급</td>
-       <td>누적신고횟수</td>
+       <td width="70%">주소</td>
+       <td>회원<br>포인트</td>
+       <td>회원<br>등급</td>
+       <td>누적<br>신고횟수</td>
        <td>정지날짜</td>
        <td>관리</td>
      </tr>
@@ -88,15 +85,15 @@
 	 <c:forEach var="dto" items="${memberList }">
          <tr>
 	       <td>${dto.id }</td>
-	       <td>${dto.pw }</td>
+	<%--        <td>${dto.pw }</td> --%>
 	       <td>${dto.nickname }</td>
 	       <td>${dto.phone }</td>
-	       <td>${dto.email }</td>
-	       <td>${dto.address }</td>
+	       <td class="small">${dto.email }</td>
+	       <td class="small">${dto.address }</td>
 	       <td>${dto.user_point }</td>
 	       <td>${dto.user_level }</td>
 	       <td>${dto.reported_count }</td>
-	       <td>${dto.ban_date }</td>
+	       <td class="small">${dto.ban_date }</td>
 	       <td><input type="button" value="정지관리" onclick="banManagePopup('${dto.id}', '${dto.reported_count }');" class="btn btn-sm btn-danger"> /
 	       <input type="button" value="정지해제" onclick="banCancel('${dto.id}');" class="btn btn-sm btn-success"> /
 	       <input type="button" value="계정삭제" class="btn btn-sm btn-secondary"></td>

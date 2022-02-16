@@ -17,36 +17,53 @@
 		<script src= "./JQuery/jquery-3.6.0.slim.js"></script>
 
 </head>
+<script type="text/javascript">
+
+	function reportCheck() {
+		var content = document.getElementById("report_content").value;
+		
+		if(content == null || content.length <= 20) {
+			alert('신고내용은 20자 이상 작성해주세요');
+			return false;
+		}
+	}
+	
+</script>
 <body>
 
-        <!-- Responsive navbar-->
-               <jsp:include page="../Main/top.jsp"></jsp:include>
-        	 <div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div>
-	<form action="./MemberReportAction.me" class="container">	
+<%
+	String writer = request.getParameter("writer");
+	String id = request.getParameter("id");
+%>
+
+<!-- Responsive navbar-->
+<%-- <jsp:include page="../Main/top.jsp"></jsp:include> --%>
+<div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div>
+	<form action="./MemberReportAction.me" class="container" onsubmit="return reportCheck();">	
 	 <div class="row">
-			<div class="col-4"></div>
-			<fieldset class="col-7">	
+		<div class="col-4"></div>
+		<fieldset class="col-7" style="position: relative; right: 80px">	
 			<!-- 게시글 신고, 채팅에서 신고 -->
 			<legend class="legend"> 신고하기 </legend> 
-			
+			<hr>
 			<div class="form-group row">
- 				<label class="form-label">신고할 유저</label>
-	     		<input type="text" name="reported_user" class="col-sm-6 ms-3 py-2 ps-3">  
+ 				<label class="form-label">신고유저</label> 
 			</div>
-		
+				     		<b>[<%=writer %>]</b> 
 
 		    <div class="form-group row mb-4">
 				<label for="report_content" class="col-sm-2 col-form-label">신고내용</label>
-				<textarea rows="10" cols="10" name="report_content" class="ms-3"></textarea> 
+				<textarea rows="10" cols="10" name="report_content" id="report_content" class="ms-3"></textarea> 
 		    </div>
-			
+			<input type="hidden" name="report_user" value="<%=id %>">
+			<input type="hidden" name="reported_user" value="<%=writer %>">
 			<!-- 제출버튼 -->
 			<div class="d-grid col-8">
 		  		<button class="btn btn-lg btn-info mb-2" type="submit">신고하기</button>
       		</div>
 	
-	</fieldset>
-	</div>
+		</fieldset>
+		</div>
 	</form>
 	
 

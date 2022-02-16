@@ -1,5 +1,7 @@
 package com.me.member.action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,10 +18,20 @@ public class MemberReportAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		if(id == null) {
-			forward.setPath("./MemberLogin.me");
-			forward.setRedirect(true);
-			return forward;
+			
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			
+			out.print("<script>");
+			out.print("alert('로그인하세요');");
+			out.print("window.close();");
+			out.print("</script>");
+			out.close();
+
+			return null;
 		}
+	
+		
 		
 		forward = new ActionForward();
 		forward.setPath("./Member/report.jsp");

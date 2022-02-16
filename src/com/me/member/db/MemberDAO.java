@@ -238,6 +238,8 @@ public class MemberDAO {
 				mdto.setUser_point(rs.getInt("user_point"));
 				mdto.setBan_date(rs.getDate("ban_date"));
 				mdto.setReported_count(rs.getInt("reported_count"));
+			} else {
+				mdto = null;
 			}
 			
 		} catch (Exception e) {

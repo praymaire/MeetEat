@@ -36,8 +36,8 @@ public class MemberReportProAction implements Action {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print("<script>");
-		out.print("alert('신고가 성공적으로 처리되었습니다. 메인화면으로 되돌아갑니다.');");
-		out.print("location.href='./Main.me';");
+		out.print("alert('신고가 성공적으로 처리되었습니다');");
+		out.print("window.close();");
 		out.print("</script>");
 		out.close();
 		

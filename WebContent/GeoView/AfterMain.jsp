@@ -15,9 +15,9 @@
 세션으로 받는 정보 : 주소(한글) /위,경도
   -->
 <% 
-   //hidden으로 설정하기
-    String latitude = request.getParameter("latitude");
-    String longitude = request.getParameter("longitude");
+   //세션제어
+     String latitude =(String)session.getAttribute("latitude");
+     String longitude =(String)session.getAttribute("longitude");
   
     //세션체크 console 
     if(latitude == null){
@@ -33,13 +33,17 @@
  
  
 <!-- 사용법 예시 -->
-${geoList }
+<%-- ${geoList } --%>
 <hr>
    
    <table border="1">
      <tr>
-       <td>위도</td>
-       <td>경도</td>
+        <td>아이디</td>
+        <td>시간</td>
+        <td>제목</td>
+        <td>내용</td>
+        <td>이미지</td>
+       
      </tr>
      
      <%
@@ -47,13 +51,19 @@ ${geoList }
      %>
      
      <c:forEach var="dto" items="${geoList }">
-         <tr>
-	       <td>${dto.latitude }</td>
-	       <td>${dto.longitude }</td>
+         <tr>   
+	       <td>${dto.id }</td>
+	       <td>${dto.when_name }</td>
+	       <td>${dto.where_name }</td>       
+	       <td>${dto.content }</td>
+	       <td>${dto.upload_image }</td>
+	       
+	 
 	     </tr>
      </c:forEach>    
      
    </table>
+
 
 
 

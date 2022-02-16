@@ -1,4 +1,4 @@
-package com.itwillbs.geo.controller;
+package com.mb.board.action;
 
 import java.io.IOException;
 
@@ -8,15 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
-public class GeoFrontController extends HttpServlet{
+public class BoardFrontController extends HttpServlet{
 
 	protected void doProcess(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("GeoFrontController_doProcess() 호출! ");
+		System.out.println("BoardFrontController_doProcess() 호출! ");
 		// 페이지가 GET/POST방식 상관없이 호출될때 실행되는 메서드
-		// *.do - 지오, 게시판 처리 동작
+		// *.me - 회원정보 처리 동작
 		
 		// -----------------------1. 가상 주소 계산 --------------------------
 		//가상주소 가져오기
@@ -42,103 +40,81 @@ public class GeoFrontController extends HttpServlet{
 		Action action = null;
 		ActionForward forward = null;
 		
-		
-		
-		
-		
-		
-		
-		
-		if(command.equals("/BeforeMain.do")){
-			System.out.println(" G : /BeforeMain.do 호출! ");
-			// 위치정보 입력 전 페이지 보여줘야함. (DBx -> 화면(View-jsp) 출력) 
+		if(command.equals("/write.mb")){
+			System.out.println(" C : write.mb 호출! ");
 			
 			forward = new ActionForward();
-			forward.setPath("./GeoView/BeforeMain.jsp");
-			forward.setRedirect(false);		
-			
-			
-		}else if(command.equals("/roadname.do")){
-			System.out.println(" G : /roadname.do 호출! ");
-			//수동 : 위치정보를 수동으로 검색 (roadname.do) -> 좌표를 디비로 보내서 1000미터 근방의 사람 좌표를 가져와 마커로 표시 -> Aftermain으로 이동해 사람 목록을 리스트로 보여준다.			
-		
-			forward = new ActionForward();
-			forward.setPath("./GeoView/roadname.jsp");
-			forward.setRedirect(false);	
+			forward.setPath("./board/write.jsp");
+			forward.setRedirect(false);			
 		}
-		else if(command.equals("/markerview.do")){
-			System.out.println(" G : /markerview.do 호출! ");
-			//수동 : 위치정보를 수동으로 검색 (roadname.do) -> 좌표를 디비로 보내서 1000미터 근방의 사람 좌표를 가져와 마커로 표시 -> Aftermain으로 이동해 사람 목록을 리스트로 보여준다.			
+		else if(command.equals("/BoardWriteAction.mb")){
+			System.out.println(" C : /BoardWriteAction.mb 호출! ");
 		
-			forward = new ActionForward();
-			forward.setPath("./GeoView/markerview.jsp");
-			forward.setRedirect(false);	
-		}
-		else if(command.equals("/GeoMarkerAction.do")){
-			System.out.println(" G : /GeoMarkerAction.do 호출! ");
-			// 수동 : 으로 받은 위치정보를 디비로 전달해서  저장된 사람의 좌표에 해당하는 마커를 표시한다
-			
-			action = new GeoMarkerAction();
+			action = new BoardWriteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/AfterMain.do")){
-			// 메인페이지로 이동해서 사람목록을 리스트로 보여준다 ( 디비 조회? / 세션? )
-			
-			forward = new ActionForward();
-			forward.setPath("./GeoView/AfterMain.jsp");
-			forward.setRedirect(false);			
 		}
-		else if(command.equals("/GeoListAction.do")){
-			// 메인페이지로 이동해서 사람목록을 리스트로 보여준다 ( 디비 조회? / 세션? )
+		else if(command.equals("/list.mb")){
+			System.out.println(" C : /BoardListActiom.mb 호출! ");
 			
-			action = new GeoListAction();
+			action = new BoardListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-				}	
+			}
+		}
+		else if(command.equals("/read.mb")){
+			System.out.println(" C : /BoardReadActiom.mb 호출! ");
+			
+			action = new BoardReadAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if(command.equals("/BoardSearch.mb")){
+			System.out.println(" C : /BoardSearch.mb 호출! ");
+			
+			action = new BoardSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
-		
-		
-
-
-		
-		
-		
-		
-		
-		
-		
-		System.out.println(" G : 2. 가상 주소 매핑(처리) 끝 (페이지이동X)");
+		System.out.println(" C : 2. 가상 주소 매핑(처리) 끝 (페이지이동X)");
 		// -----------------------2. 가상 주소 매핑(처리) --------------------
 		// -----------------------3. 페이지 이동 -----------------------------
 		// 페이지 이동정보가 있을때
 		if(forward != null){
 			if(forward.isRedirect()){ // true
 				response.sendRedirect(forward.getPath());
-				System.out.println(" G : 페이지 주소 - "+forward.getPath());
-				System.out.println(" G : 페이지 이동 (sendRedirect) ");
+				System.out.println(" C : 페이지 주소 - "+forward.getPath());
+				System.out.println(" C : 페이지 이동 (sendRedirect) ");
 			}else{ // false
 				RequestDispatcher dis =
 						request.getRequestDispatcher(forward.getPath());
 				dis.forward(request, response);
-				System.out.println(" G : 페이지 주소 - "+forward.getPath());
-				System.out.println(" G : 페이지 이동 (forward) ");
+				System.out.println(" C : 페이지 주소 - "+forward.getPath());
+				System.out.println(" C : 페이지 이동 (forward) ");
 			}
 		}
-		System.out.println(" G : 3. 페이지 이동끝 \n\n\n ");		
+		System.out.println(" C : 3. 페이지 이동끝 \n\n\n ");		
 		// -----------------------3. 페이지 이동 -----------------------------
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("GeoFrontController_doGet() 호출! ");
+		System.out.println("BoardFrontController_doGet() 호출! ");
 		// 페이지가 GET방식으로 호출될때 실행되는 메서드
 		doProcess(request, response);
 	}
@@ -146,7 +122,7 @@ public class GeoFrontController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("GeoFrontController_doPost() 호출! ");
+		System.out.println("BoardFrontController_doPost() 호출! ");
 		// 페이지가 POST방식으로 호출될때 실행되는 메서드
 		doProcess(request, response);
 	}
