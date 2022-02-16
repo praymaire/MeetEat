@@ -89,7 +89,7 @@
 			<div class="py-sm-2 float-sm-end">
 			
 			
-			<c:if test="${sessionScope.id == list[0].id}">
+			<c:if test="${sessionScope.id == list[0].id || sessionScope.id == 'admin'}">
 				<button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='modify.mb?bno=${ list[0].bno }'">수정</button>
 				<button type="button" class="btn btn-outline-danger btn-sm" onclick="location.href='delete.mb?bno=${ list[0].bno }'">삭제</button>
 			</c:if>

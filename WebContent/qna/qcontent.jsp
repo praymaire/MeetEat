@@ -42,11 +42,11 @@
 	<%} %>
  	<%} %>
 		<input type="button" value="목록" onclick=" location.href='./QnaList.bo'" class="btn btn-secondary">
-		
+
 	</div>
 	</form>
 
  <div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div> 
  <div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div>
 </body>
-</html>
+</html> 
