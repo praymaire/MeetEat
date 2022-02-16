@@ -1,40 +1,14 @@
+<%@ include file="../Main/top.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>meeteat!</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="./css/bootstrap.css" rel="stylesheet" />
-    </head>
-<body>
 
-	<jsp:include page="../Main/top2.jsp"></jsp:include>
-
-<% String id=" 테스트 관리자 ";
-%>
- 	
-	<div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div>
-	<!-- 상단 메뉴 -->
-       
-    <div class="container">   
-
-
-
-
-
-  <form action="modifyPro.mb?bno=${ dto[0].bno }" method="post">
+<div class="container">   
+<form action="modifyPro.mb?bno=${ dto[0].bno }" method="post">
   <fieldset>
     <legend class="m-3"> 글수정</legend>
     <div class="form-group row">
-      <label for="staticEmail" class="col-sm-2 col-form-label">작성자</label>
+      <label for="id" class="col-sm-2 col-form-label">작성자</label>
       <div class="col-sm-10">
         <input type="text" readonly class="form-control-plaintext" id="id" name="id" value="${ dto[0].id }">
       </div>
@@ -143,11 +117,6 @@
   </fieldset>
 </form>
 	</div>
-
-
-
-
-
 
 <!-- body~bottom 사이 공백 -->
 	 <div class="offcanvas-header">　</div>
