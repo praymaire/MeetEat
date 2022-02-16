@@ -89,6 +89,35 @@ public class BoardFrontController extends HttpServlet{
 			}
 		}
 		
+		else if(command.equals("/delete.mb")){
+			System.out.println(" C : /BoardDeleteAction.me 호출! ");
+			
+			action = new BoardDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/modify.mb")){
+			System.out.println(" C : /BoardModifyAction.me 호출! ");
+			
+			action = new BoardModifyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/modifyPro.mb")){
+			System.out.println(" C : /BoardModifyProAction.me 호출! ");
+			
+			action = new BoardModifyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		
 		System.out.println(" C : 2. 가상 주소 매핑(처리) 끝 (페이지이동X)");
 		// -----------------------2. 가상 주소 매핑(처리) --------------------

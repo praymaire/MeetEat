@@ -24,7 +24,6 @@ public class BoardListAction implements Action {
 	    
 		request.setAttribute("BoardList", BoardList);
 		
-		
 		ActionForward forward = new ActionForward();
 		
 		forward.setPath("./board/list.jsp");

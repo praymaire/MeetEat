@@ -287,5 +287,105 @@ public class BoardDAO { // BoardDAO 시작
 		return BoardList;
 	}
 	
+	public ArrayList getBoardDetail(int bno) {
+		
+		ArrayList BoardDetail = new ArrayList();
+		
+	try{
+		con = getCon();
+		sql = "select * from board where bno=?";
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setInt(1, bno);
+		
+		rs = pstmt.executeQuery();
+		
+		while(rs.next()){
+			
+			BoardDTO dto = new BoardDTO();	
+			
+			dto.setBno(rs.getInt("bno"));
+			dto.setId(rs.getString("id"));
+			dto.setWrite_time(rs.getTimestamp("write_time"));
+			dto.setWhen_name(rs.getString("when_name"));
+			dto.setWhere_name(rs.getString("where_name"));
+			dto.setfood_category(rs.getString("food_category"));
+			dto.setUpload_image(rs.getString("upload_image"));
+			dto.setContent(rs.getString("content"));
+			
+			BoardDetail.add(dto);
+		
+		}
+
+		System.out.println("BoardDetail : "+BoardDetail);
+		
+	}catch(Exception e){
+		e.printStackTrace();
+	}finally{
+			CloseDB();
+	}
+		
+	
+	
+	 return BoardDetail;
+	}
+
+	public void DeleteBoard(int bno) {
+			
+		try{
+			con = getCon();
+			sql = "delete from board where bno=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			pstmt.execute();
+			
+			System.out.println("글 번호 : "+bno+" 삭제 완료 ! ");
+			
+			
+	}catch(Exception e){
+		e.printStackTrace();
+	}finally{
+			CloseDB();
+	}
+		
+	}
+
+	public void ModifyBoard(BoardDTO dto) {
+		
+		try {
+			
+			con = getCon();
+						
+			sql = "update board set food_category=?,when_name=?,where_name=?,upload_image=?,content=? where bno=?";
+			pstmt = con.prepareStatement(sql);
+			
+			//food_category=?
+			pstmt.setString(1, dto.getfood_category());
+			//when_name=?
+			pstmt.setString(2, dto.getWhen_name());
+			//where_name=?
+			pstmt.setString(3, dto.getWhere_name());
+			//upload_image=?
+			pstmt.setString(4, dto.getUpload_image());
+			//content=? 
+			pstmt.setString(5, dto.getContent());
+			//where bno=?
+			pstmt.setInt(6, dto.getbno());
+			
+			pstmt.executeUpdate();
+
+			System.out.println(" DAO : 글정보 수정 완료! ");
+
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseDB();
+		}
+		
+	}
+	
 	
 } //BoardDAO 끝
