@@ -22,8 +22,8 @@
       <td class="text-end pe-4">${qdto.reg_date }</td>
     </tr>
     <tr>
-      <td scope="row" colspan="2" >
-  	  <p class="textpre">${qdto.content }</p>
+      <td scope="row" colspan="2" style="white-space: pre-wrap">
+  	  <p>${qdto.content }</p>
 	  </td>
     </tr>
     </tbody>
