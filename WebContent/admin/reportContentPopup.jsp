@@ -26,10 +26,10 @@
 		<tr><td>신고번호</td><td> ${list.num }</td></tr>
 		<tr><td>신고대상 </td><td>${list.reported_user } </td></tr>
 		<tr><td>신고날짜</td><td> ${list.report_date }</td></tr>
-		<tr><td>신고내용</td><td> ${list.report_content }</td></tr>
+		<tr><td>신고내용</td><td style="white-space: pre-wrap"> ${list.report_content }</td></tr>
 		<tr><td>신고자 </td><td>${list.report_user }</td></tr>
 	</c:forEach>
 	</table>
 
 </body>
-</html>  
+</html> 
