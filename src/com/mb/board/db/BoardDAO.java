@@ -11,22 +11,22 @@ import javax.sql.DataSource;
 
 import com.mb.board.db.BoardDTO;
 
-public class BoardDAO { // BoardDAO ½ÃÀÛ
+public class BoardDAO { // BoardDAO ì‹œì‘
 	
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	private String sql = "";
 
-	// µğºñ¿¬°á
+	// ë””ë¹„ì—°ê²°
 	private Connection getCon() throws Exception {
 		Context initCTX = new InitialContext();
 		DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/itwillbs7");
 		con = ds.getConnection();
 		return con;
-	} // µğºñ¿¬°á ³¡
+	} // ë””ë¹„ì—°ê²° ë
 
-	// ÀÚ¿øÇØÁ¦
+	// ìì›í•´ì œ
 	public void CloseDB() {
 		try {
 			if (rs != null) {
@@ -41,15 +41,15 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	} //ÀÚ¿øÇØÀç ³¡
+	} //ìì›í•´ì¬ ë
 	
-	// insertBoard ½ÃÀÛ    //Äõ¸®ºÎºĞ ¼öÁ¤ÇÊ¿ä
+	// insertBoard ì‹œì‘    //ì¿¼ë¦¬ë¶€ë¶„ ìˆ˜ì •í•„ìš”
 	public void insertBoard(BoardDTO dto) {
 			int tbno = 1;
 			
 		
 		try {
-			System.out.println("insertboard µ¿ÀÛ ½ÃÀÛ !");
+			System.out.println("insertboard ë™ì‘ ì‹œì‘ !");
 			con = getCon();
 						
 			sql = "select max(bno) from board";
@@ -60,7 +60,7 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 				tbno = rs.getInt(1)+1;
 			}
 			
-			System.out.println("±Û ¹øÈ£ :"+tbno);
+			System.out.println("ê¸€ ë²ˆí˜¸ :"+tbno);
 	
 			sql = "insert into board(bno,id,write_time,when_name,where_name,food_category,content,upload_image) " + "values(?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
@@ -81,13 +81,13 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 			pstmt.setString(7, dto.getContent());
 //			upload_image
 			pstmt.setString(8, dto.getUpload_image());
-			// sql ½ÇÇà
+			// sql ì‹¤í–‰
 			
 			pstmt.executeUpdate();
 
-			System.out.println(" DAO : ±ÛÀÛ¼º ¿Ï·á! ");
+			System.out.println(" DAO : ê¸€ì‘ì„± ì™„ë£Œ! ");
 			
-			// Æ÷ÀÎÆ® Ãß°¡
+			// í¬ì¸íŠ¸ ì¶”ê°€
 			
 			StringBuffer sb = new StringBuffer();
 			
@@ -112,21 +112,21 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 			pstmt.setString(1, dto.getId());
 			pstmt.executeUpdate();
 			
-			System.out.println("Æ÷ÀÎÆ® Ãß°¡ ¼º°ø");
+			System.out.println("í¬ì¸íŠ¸ ì¶”ê°€ ì„±ê³µ");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			CloseDB();
 		}
-	}  // insertBoard ³¡
+	}  // insertBoard ë
 
 	public int getBoardCount(){
 		int count = 0;
 		
 		try {
 			
-			System.out.println("getBoardCount µ¿ÀÛ ½ÃÀÛ !");
+			System.out.println("getBoardCount ë™ì‘ ì‹œì‘ !");
 			con = getCon();
 			
 			sql = " select found_rows();";
@@ -135,7 +135,7 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 			
 			if(rs.next()){
 				count = rs.getInt(1);
-				System.out.println("ÃÑ °Ô½Ã±Û : "+count);
+				System.out.println("ì´ ê²Œì‹œê¸€ : "+count);
 			}
 			
 			
@@ -155,7 +155,7 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 		
 		try{
 			
-			System.out.println("getboarlist ½ÃÀÛ");
+			System.out.println("getboarlist ì‹œì‘");
 			con = getCon();
 			sql = "select * from board where bno = ?";
 			pstmt = con.prepareStatement(sql);
@@ -178,7 +178,7 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 				BoardList.add(dto);
 			
 			}
-			System.out.println("±Û Á¤º¸ ÀúÀå ¿Ï·á : "+BoardList);
+			System.out.println("ê¸€ ì •ë³´ ì €ì¥ ì™„ë£Œ : "+BoardList);
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -195,7 +195,7 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 		
 		try{
 			
-			System.out.println("getboarlist ½ÃÀÛ");
+			System.out.println("getboarlist ì‹œì‘");
 			con = getCon();
 			sql = "select * from board";
 			pstmt = con.prepareStatement(sql);
@@ -219,7 +219,7 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 				BoardList.add(dto);
 			
 			}
-			System.out.println("±Û Á¤º¸ ÀúÀå ¿Ï·á : "+BoardList);
+			System.out.println("ê¸€ ì •ë³´ ì €ì¥ ì™„ë£Œ : "+BoardList);
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -243,7 +243,7 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 		
 		try{
 			
-			System.out.println("searchBoardList ½ÃÀÛ");
+			System.out.println("searchBoardList ì‹œì‘");
 			con = getCon();
 			sql = "select SQL_CALC_FOUND_ROWS * " + 
 					"from board " + 
@@ -251,7 +251,7 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 					"order by bno desc limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, startRow-1); // ½ÃÀÛÇà-1  (½ÃÀÛ ROWÀÎµ¦½º ¹øÈ£)
+			pstmt.setInt(1, startRow-1); // ì‹œì‘í–‰-1  (ì‹œì‘ ROWì¸ë±ìŠ¤ ë²ˆí˜¸)
 			pstmt.setInt(2, pageSize);
 			
 			rs = pstmt.executeQuery();
@@ -335,7 +335,7 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 			
 			pstmt.execute();
 			
-			System.out.println("±Û ¹øÈ£ : "+bno+" »èÁ¦ ¿Ï·á ! ");
+			System.out.println("ê¸€ ë²ˆí˜¸ : "+bno+" ì‚­ì œ ì™„ë£Œ ! ");
 			
 			
 	}catch(Exception e){
@@ -370,7 +370,7 @@ public class BoardDAO { // BoardDAO ½ÃÀÛ
 			
 			pstmt.executeUpdate();
 
-			System.out.println(" DAO : ±ÛÁ¤º¸ ¼öÁ¤ ¿Ï·á! ");
+			System.out.println(" DAO : ê¸€ì •ë³´ ìˆ˜ì • ì™„ë£Œ! ");
 
 			
 			
@@ -388,13 +388,13 @@ public ArrayList getMainList(){
 		
 		try{
 			
-			System.out.println("mainboarlist ½ÃÀÛ");
+			System.out.println("mainboarlist ì‹œì‘");
 			con = getCon();
 			sql = "select bno, id, write_time, when_name, where_name, food_category, upload_image "
 					+ "from board order by bno desc limit 8";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			if(rs.next()){
+			while(rs.next()){
 				
 				BoardDTO dto = new BoardDTO();	
 				
@@ -409,7 +409,7 @@ public ArrayList getMainList(){
 				BoardList.add(dto);
 			
 			}
-			System.out.println("±Û Á¤º¸ ÀúÀå ¿Ï·á : "+BoardList);
+			System.out.println("ê¸€ ì •ë³´ ì €ì¥ ì™„ë£Œ : "+BoardList);
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -422,4 +422,4 @@ public ArrayList getMainList(){
 	
 	
 	
-} //BoardDAO ³¡
+} //BoardDAO ë
