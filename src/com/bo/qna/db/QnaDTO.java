@@ -14,6 +14,7 @@ public class QnaDTO {
 	private int re_seq;
 	private Timestamp reg_date;
 	private String nickname;
+	private int rnum;
 	
 	
 	public int getQno() {
@@ -79,12 +80,22 @@ public class QnaDTO {
 		this.nickname = nickname;
 	}
 	
+	
+	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	
 	@Override
 	public String toString() {
 		return "QnaDTO [qno=" + qno + ", id=" + id + ", title=" + title + ", content=" + content + ", readcount="
 				+ readcount + ", re_ref=" + re_ref + ", re_lev=" + re_lev + ", re_seq=" + re_seq + ", reg_date="
-				+ reg_date + ", nickname=" + nickname + "]";
+				+ reg_date + ", nickname=" + nickname + ", rnum=" + rnum + "]";
 	}
+	
 
 	
 	

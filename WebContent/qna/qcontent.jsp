@@ -1,3 +1,5 @@
+<%@ include file="../Main/top.jsp" %>
+
 <%@page import="com.bo.qna.db.QnaDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -14,7 +16,7 @@
 <body>
 
 <%
-	String id = (String)session.getAttribute("id");
+	request.setCharacterEncoding("utf-8");
 	String pageNum = request.getParameter("pageNum");
 	QnaDTO qdto = (QnaDTO)request.getAttribute("qdto");
 %>
@@ -40,50 +42,51 @@
 		
 		</script>
 
-<form>
-<table>
-    
+<form class="container">
+<table class="table table-hover">
+    <tbody>
 	<tr>
 		<td colspan="2"> 작성자  </td>
-		<td colspan="3"><input type="text" name="name" value="<%=qdto.getId()%>"> </td>
+		<td scope="row" colspan="3"><%=qdto.getNickname()%></td>
 	</tr>
 	
 	<tr>
 		<td colspan="2"> 글 제목  </td>
-		<td colspan="3"><input type="text" name="title" value="<%=qdto.getTitle()%>"> </td>
+		<td scope="row" colspan="3"><%=qdto.getTitle()%> </td>
 	</tr>
 	
 	<tr>
 		<td colspan="2"> 글 내용  </td>
-		<td colspan="3">
-		   <textarea rows="10" cols="40" name="content"><%=qdto.getContent() %></textarea>
+		<td scope="row" colspan="2" style="white-space: pre-wrap">
+		   <p><%=qdto.getContent() %></p>
 		</td>
 	</tr>
-
+</tbody>
 </table>
 
-<div>
+<div class="py-sm-2 float-sm-end">
 <%if(id!=null){ %>
 	<%if(id.equals(qdto.getId())||id.equals("admin")){ %>
-		<input type="button" value="수정" onclick="location.href='./QnaUpdate.bo?qno=<%=qdto.getQno()%>&pageNum=<%=pageNum%>'">
+		<input type="button" value="수정" onclick="location.href='./QnaUpdate.bo?qno=<%=qdto.getQno()%>&pageNum=<%=pageNum%>'" class="btn btn-warning">
 		<%if(qdto.getRe_seq()==0){%>
-		<input type="button" value="삭제" onclick="delcheck()">
+		<input type="button" value="삭제" onclick="delcheck()" class="btn btn-danger">
 		<%} %>
 	<%} %>	
 	<%if(id.equals("admin")){ %>	
-		<input type="button" value="답글" onclick="location.href='./QnaReply.bo?qno=<%=qdto.getQno()%>&pageNum=<%=pageNum%>&re_ref=<%=qdto.getRe_ref()%>&re_lev=<%=qdto.getRe_lev()%>&re_seq=<%=qdto.getRe_seq()%>';">
+		<input type="button" value="답글" onclick="location.href='./QnaReply.bo?qno=<%=qdto.getQno()%>&pageNum=<%=pageNum%>&re_ref=<%=qdto.getRe_ref()%>&re_lev=<%=qdto.getRe_lev()%>&re_seq=<%=qdto.getRe_seq()%>';" class="btn btn-info">
 		<%if(qdto.getRe_seq()>0){%>
-		<input type="button" value="삭제" onclick="delcheck2()">
+		<input type="button" value="삭제" onclick="delcheck2()" class="btn btn-danger">
 		<%} %>
 	<%} %>
 <%} %>
-	<input type="button" value="목록" onclick=" location.href='./QnaList.bo?&pageNum=<%=pageNum%>'" >
+	<input type="button" value="목록" onclick=" location.href='./QnaList.bo?&pageNum=<%=pageNum%>'" class="btn btn-secondary" >
 	
 </div>
 
 </form>
 
-
+ <div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div> 
+ <div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div>
 
 </body>
 </html>

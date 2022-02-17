@@ -31,9 +31,8 @@
   <div>
   	프로필 사진 : <img alt="<%=profile %>" src="<%=profile %>" style="width: 100px; height: 100px;"> <br>
   	아이디 : ${ mdto.id } <br>
-  	비밀번호 : ${ mdto.pw } <br>
-  	레벨: ${ mdto.user_level } <br>
-  	포인트: ${ mdto.user_point } <br>
+  	비밀번호 : ******** 
+  	<input type="button" onclick="location.href='./MemberModifyoldPw.me';" value="비밀번호 변경하러 가기"> <br>
   	닉네임 : ${ mdto.nickname } <br>
   	전화번호 : ${ mdto.phone } <br>
   	이메일 : ${ mdto.email } <br>

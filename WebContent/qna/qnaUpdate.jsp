@@ -20,8 +20,8 @@
 <table class="table table-hover">
     
 	<tr>
-		<td colspan="2"> 작성자 </td>
-		<td colspan="3"><input type="text" name="name" value="<%=qdto.getId()%>" readonly="readonly"> </td>
+		<td class="form-label"> 작성자 </td>
+		<td><input type="text" name="name" value="<%=qdto.getId()%>" readonly="readonly" class="form-control-plaintext p-2"> </td>
 	</tr>
 	
 	<tr>
@@ -30,7 +30,7 @@
 	</tr>
 	
 	<tr>
-		<td colspan="2"> 본문 내용 </td>
+		<td> 본문 내용 </td>
 		<td>
 		   <textarea rows="10" class="form-control" name="content" required="required"><%=qdto.getContent() %></textarea>
 		</td>

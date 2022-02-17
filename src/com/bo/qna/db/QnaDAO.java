@@ -191,10 +191,14 @@ public class QnaDAO {
 			// 3 sql 작성 & pstmt 객체 생성
 			// 글 re_ref 최신글 위쪽(내림차순), re_seq (오름차순)
 			// DB데이터를 원하는만큼씩 짤라내기 : limit 시작행-1,페이지크기 
-			sql = "select a.qno, a.id, a.title, a.content, a.readcount, a.re_ref, a.re_lev, a.re_seq, a.reg_date, b.nickname "
-					+ "from qna a join member b "
-					+ "on a.id=b.id "
-					+ "order by re_ref desc, re_seq asc limit ?,?";
+			sql = "select * " + 
+					"from (select @ROWNUM := @ROWNUM + 1 as rnum, q.* " + 
+					"from (select a.qno, a.id, a.title, a.content, a.readcount, a.re_ref, a.re_lev, a.re_seq, a.reg_date, b.nickname " + 
+					"from qna a join member b " + 
+					"on a.id=b.id) q,(select @ROWNUM := 0 ) TMP " + 
+					"order by re_ref asc, re_seq desc) sub " + 
+					"order by sub.rnum desc limit ?,?";
+			
 			pstmt = con.prepareStatement(sql);
 				
 			//?
@@ -218,6 +222,7 @@ public class QnaDAO {
 				qdto.setReadcount(rs.getInt("readcount"));
 				qdto.setTitle(rs.getString("title"));
 				qdto.setNickname(rs.getString("nickname"));
+				qdto.setRnum(rs.getInt("rnum"));
 
 				qnaList.add(qdto);				
 				
@@ -265,7 +270,9 @@ public class QnaDAO {
 		try {
 			
 			con = getCon();
-			sql = "select * from qna where qno=?";
+			sql = "select a.qno, a.id, a.title, a.content, a.readcount, a.re_ref, a.re_lev, a.re_seq, a.reg_date, b.nickname " + 
+					"from qna a join member b "+ 
+					"on a.id=b.id where a.qno=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, qno);
 			
@@ -284,6 +291,7 @@ public class QnaDAO {
 				qdto.setRe_seq(rs.getInt("re_seq"));
 				qdto.setReadcount(rs.getInt("readcount"));
 				qdto.setTitle(rs.getString("title"));
+				qdto.setNickname(rs.getString("nickname"));
 				
 			}//if			
 			

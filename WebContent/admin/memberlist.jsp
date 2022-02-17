@@ -117,7 +117,7 @@
 	 </c:if>
      </table>
      	  <!-- 페이징  처리 -->
-	<div id="page_control">
+<%-- 	<div id="page_control">
 	<ul class="pagination pagination-sm justify-content-center">
 
 		<c:if test="${requestScope.cnt != 0 }">
@@ -141,7 +141,25 @@
 			</c:if>
 		</c:if>
 		</ul>
+	</div> --%>
+	
+	   <!-- 페이징  처리 -->
+	<div id="page_control">
+		<c:if test="${requestScope.cnt != 0 }">
+			<c:if test="${requestScope.startPage > requestScope.pageBlock }">
+				<a href="./MemberList.ad?pageNum=${requestScope.startPage - requestScope.pageBlock }">이전</a>
+			</c:if>
+			<c:forEach var="i" begin="${requestScope.startPage }" end="${requestScope.endPage }" step="1">
+				<a href="./MemberList.ad?pageNum=${i }">${i }</a>
+			</c:forEach>
+			<c:if test="${requestScope.endPage < requestScope.pageCount }">
+				<a href="./MemberList.ad?pageNum=${ requestScope.startPage +  requestScope.pageBlock}">다음</a>
+			</c:if>
+		</c:if>
 	</div>
+  <!-- 페이징  처리 -->
+	
+	
   <!-- 페이징  처리 -->
 </div>
 <div class="offcanvas-header"></div><div class="offcanvas-header"></div>

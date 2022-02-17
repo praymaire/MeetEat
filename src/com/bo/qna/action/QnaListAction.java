@@ -25,7 +25,7 @@ public class QnaListAction implements Action{
 		/* 페이징 처리 */
 		
 		// 한 페이지에 출력될 글 개수
-		int pageSize = 5;
+		int pageSize = 6;
 	
 		// 현 페이지 정보 설정
 		String pageNum = request.getParameter("pageNum");

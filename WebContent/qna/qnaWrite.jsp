@@ -16,7 +16,7 @@
 	 <table class="table table-hover">
 		<tr>
 			<td class="form-label">제목</td>
-			<td><input type="text" name="title" required="required" class="form-control-plaintext p-2"></td>
+			<td><input type="text" name="title" required="required" class="form-control p-2"></td>
 		</tr>
 		<tr>
 			<td>본문 내용</td>
