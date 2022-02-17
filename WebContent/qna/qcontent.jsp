@@ -9,9 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>QnA 글 본문 페이지</title>
 
-
-
-
 </head>
 <body>
 
