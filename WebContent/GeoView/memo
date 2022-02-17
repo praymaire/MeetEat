@@ -1,0 +1,17 @@
+위치정보 구현
+
+   (BeforeMain)최초 접속시 보이는 메인화면(위치정보 없는 그냥 게시판리스트)
+   ->자동 좌표 입력시 바로 (GeoMarkerAction.do) -> (markerview.do)로
+    
+   ->수동 도로명 주소입력(roadname.do) 
+   ->입력한 내 좌표값으로 db검색(내 주변 100미터 이내의 사람의 좌표를 검색-> 테스트를 위해 현재 1키로로 설정) (GeoMarkerAction.do)
+ 
+   ->해당하는 사람목록 가져와서 마커로 표시 markerview.do (내 위치, 그 사람과의 거리, 도보로 몇분)
+   ->GeoListAction.do : 위치정보를 적용한 게시판 리스트를 가져옴
+   
+   ->내 근처의 사람이 쓴 글을 리스트로 보여주는, 2번째 메인화면(AfterMain.do)
+
+
+
+
+

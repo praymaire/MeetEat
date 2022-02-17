@@ -38,7 +38,13 @@
 		}
 		
 		</script>
-
+<fieldset class="container">
+<%if(qdto.getRe_lev()==0){ //답글일때  %>
+<legend>QnA 본문</legend>
+<%} %>
+<%if(qdto.getRe_lev()>0){ //답글일때  %>
+<legend>QnA 답변</legend>
+<%} %>
 <form class="container">
 <table class="table table-hover">
     <tbody>
@@ -81,7 +87,7 @@
 </div>
 
 </form>
-
+</fieldset>
  <div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div> 
  <div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div>
 

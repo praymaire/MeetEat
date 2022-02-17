@@ -1,6 +1,7 @@
 package com.me.member.db;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -76,7 +77,7 @@ public class MemberDAO {
 		try {
 			con = getCon();
 			
-			sql = "select * from member where nickname=?";
+			sql = "select nickname from member where nickname=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, nickname);
 			rs = pstmt.executeQuery();
@@ -139,7 +140,7 @@ public class MemberDAO {
 		
 		try {
 			con = getCon();				
-			sql = "select pw from member where id=?";
+			sql = "select pw, ban_date, now() from member_view where id=?";
 			pstmt = con.prepareStatement(sql);				
 			pstmt.setString(1, id);
 			
@@ -148,8 +149,18 @@ public class MemberDAO {
 			if(rs.next()){
 				// 회원정보 있음
 				if(pw.equals(rs.getString("pw"))){
-					// 회원정보가 있으면서, 비밀번호 동일
-					result = 1;
+					// 정지여부 확인
+					Date ban_date = rs.getDate(2);
+					Date now = rs.getDate(3);
+					
+					if(ban_date == null || ban_date.equals("")) {
+						result = 1;
+					} else if(ban_date.compareTo(now) > 0) {
+						result = -2;						
+					} else {
+						result = 1;
+					}
+					
 				}else{
 				// 회원정보가 있음, 비밀번호 다름
 					result = 0;
@@ -170,34 +181,36 @@ public class MemberDAO {
 	}
 	// loginCheck(id,pw)	
 	
-	// 이메일 중복 검사
-	// checkEmail(email)
-	public boolean checkEmail(String email) {
+	// 아이디 찾기
+	// findId(email)
+	public String findId(String email) {
 			
-		boolean emailCheck = false; // 초기화
+		String findId = ""; // 초기화
 			
 		try {
 			con = getCon();
 			
-			sql = "select email from member where email=?";
+			sql = "select id, email from member where email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				emailCheck = true;
+				findId = rs.getString("id");
 			} else {
-					emailCheck = false;
+				findId = "-1";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			closeDB();
 		}
+		System.out.println(" M : MemberDAO_findId() 실행 ");
+		System.out.println(" M : 실행결과 : "+findId);
 		
-		return emailCheck;
+		return findId;
 	}
-	// checkEmail(email)
+	// findId(email)
 	
 	// getMember(id)
 	public MemberDTO getMember(String id){
@@ -225,6 +238,8 @@ public class MemberDAO {
 				mdto.setUser_point(rs.getInt("user_point"));
 				mdto.setBan_date(rs.getDate("ban_date"));
 				mdto.setReported_count(rs.getInt("reported_count"));
+			} else {
+				mdto = null;
 			}
 			
 		} catch (Exception e) {
@@ -388,6 +403,152 @@ public class MemberDAO {
 		return memberList;
 	}
 	// getMemberList()
+
+	// 회원 비밀번호 찾기
+	// findPw(id, email)
+	public int findPw(String id, String email) {
+		
+		int result = 0;
+		
+		try {
+			con = getCon();
+			
+			sql = "select id, email from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(email.equals(rs.getString("email"))) {
+					result = 1;
+				} else {
+					// 이메일 오류
+					result = 0;
+				} 
+			} else {
+				// 계정 X
+				result = -1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		System.out.println(" M : MemberDAO_findPw() 실행 완료");
+		System.out.println(" M : 실행 결과 : "+result);
+		return result;
+	}
+	
+	public String findPw(String id) {
+			
+		String result = "";
+		
+		try {
+			con = getCon();
+			
+			sql = "select pw from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getString("pw");
+			} else {
+				result = "";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		System.out.println(" M : MemberDAO_findPw() 실행 완료");
+		System.out.println(" M : 실행 결과 : "+result);
+		return result;
+	}
+	
+	
+	// findPw(id, email)
+
+	// 임시 비번 저장
+	// updatePw(id, pw, email)
+	public int updatePw(String id, String pw, String email) {
+		
+		int result = 0; 
+		
+		try {
+			con = getCon();
+			
+			sql = "select id,email from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(email.equals(rs.getString("email"))) {
+					
+					sql = "update member set pw=? where id=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, pw);
+					pstmt.setString(2, id);
+					result = pstmt.executeUpdate();
+				} else {
+					// 이메일이 다름
+					result = 0;
+				} 
+			} else {
+				// 계정 X
+				result = -1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		System.out.println(" M : Member_updatePw() 실행 완료");
+		System.out.println(" M : 실행 결과 : "+result);
+		return result;
+		
+	}
+	// updatePw(id, pw, email)
+
+	// 패스워드 변경
+	// modifyPw(id, oldPw, pw)
+	public int modifyPw(String id, String oldPw, String pw) {
+		
+		int  result = 0;
+		
+		try {
+			con = getCon();
+			
+			sql = "select id, pw from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(oldPw.equals(rs.getString("pw"))) {
+					sql = "update member set pw=? where id=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, pw);
+					pstmt.setString(2, id);
+					pstmt.executeUpdate();
+					
+					result = 1;
+				} else {
+					// 비밀번호 일치X
+					result = 0;
+				} 
+			} else {
+				result = -1;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		System.out.println(" M : Member_modifyPw() 실행 완료");
+		System.out.println(" M : 실행 결과  : "+result);
+		return result;
+	}
 	
 	public void insertReport(String report_user, String reported_user, String report_content) {
 		
@@ -446,6 +607,7 @@ public class MemberDAO {
 		}
 		
 	}
+
 	
 	
 }

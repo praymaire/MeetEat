@@ -1,18 +1,19 @@
 <%@ include file="../Main/top.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<c:if test="${requestScope.check != 1 }">
 		<c:redirect url="./Main.mb"/>
 	</c:if>
        <!-- Page content-->
-  
+
         <div class="container">
         <h3 class="text-center"> 최신글</h3>
         </div>
         <div class="container">
-         <div class="d-flex">
     	    <c:forEach var="list" items="${requestScope.BoardList}" varStatus="i">
+			<c:if test="${(i.index+1)%4==1 }"><div class="d-flex"></c:if>
 		     <div class="col-lg-3" onclick="location.href='./read.mb?bno=${list.bno}';">
 	            <div class="bs-component">
 	              <div class="card mb-2 me-sm-3">
@@ -30,13 +31,14 @@
 					       <fmt:formatDate value="${ list.write_time }" pattern="HH:mm"/></c:when> 
 			       		 <c:otherwise>${regdate }</c:otherwise> 
 			      		</c:choose></h6>
-			     
+
 	                </div>
 	               </div>
 				</div>
+				<c:if test="${(i.index+1)%4==0 }"></div></c:if> 
 			</div>
      	</c:forEach>
-        	
+
 
 		</div>
         </div>

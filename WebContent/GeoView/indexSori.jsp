@@ -6,15 +6,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-
 <body>
- <h1>index.jsp - 모든 프로젝트의 시작점</h1>
- <b>model2 공부하면서 실행가능한 유일한 jsp 파일!</b>
+
+index.jsp - 모든 프로젝트의 시작지점(BeforeMain 에서 버튼클릭하면 자동위치 정보 띄움 )
  
- <%
- 	response.sendRedirect("./Main.me");
- 	
- %>
- 
+   
+   <%  
+       //시작 전에 세션정리(아이디, 위치정보 세션 모두 날아감) 
+       session.invalidate();
+   	   response.sendRedirect("./BeforeMain.do");   
+   %>
+
+
+
 </body>
 </html>

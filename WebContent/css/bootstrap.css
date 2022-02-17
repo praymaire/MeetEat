@@ -11812,3 +11812,30 @@ pre {
 /* .img-thumbnail {
   border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
 } */
+
+.img-sec{
+	padding: 32px 0;
+    margin: 0 auto !important;
+    border-bottom: 1px solid #c0c0c0;
+}
+
+/* .imageblock { max-width: 100%; height: auto; border:1px solid #eaeaea; padding: 0px; } */
+
+.bo-img{
+	/* position: relative; */
+	display:block;
+	margin: 0 auto !important;
+	/* text-align:center; */
+	border-radius: 8px;
+	max-width: 100%; height: auto; border:1px solid #eaeaea; padding: 0px;
+}
+
+.bo-noneimg{
+	text-align:center;
+	display:block;
+	margin: 0 auto !important;
+	color : #5a5a5a;
+	
+}
+
+

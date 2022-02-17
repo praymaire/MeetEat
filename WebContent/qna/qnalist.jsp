@@ -65,14 +65,14 @@ QnaDTO qdto = new QnaDTO();
   	</c:if>
   	<c:if test="${requestScope.cnt == 0 }">
 			<tr>
-				<td> 작성 글이 없습니다. </td>
+				<td colspan="5"> 작성 글이 없습니다. </td>
 			</tr>
 	</c:if>
   </table>
   
   <!-- 페이징  처리 -->
 	<div id="page_control">
-	<ul class="pagination pagination-sm justify-content-center">
+	<ul class="pagination pagination-sm justify-content-center"">
 		<c:if test="${requestScope.cnt != 0 }">
 			<c:if test="${requestScope.startPage > requestScope.pageBlock }">
 			<li class="page-item">
@@ -87,6 +87,7 @@ QnaDTO qdto = new QnaDTO();
 				<a href="./QnaList.bo?pageNum=${ requestScope.startPage +  requestScope.pageBlock}" class="page-link">&raquo;</a></li>
 			</c:if>
 		</c:if>
+		</ul>
 	</div>
   <!-- 페이징  처리 -->
   

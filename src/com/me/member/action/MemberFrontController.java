@@ -172,6 +172,80 @@ public class MemberFrontController extends HttpServlet{
 			}
 		}
 		
+		
+		// 패스워드 찾는 페이지(view) .me -> .jsp (false)
+		else if(command.equals("/MemberFindPwAction.me")) {
+			forward = new ActionForward();
+			forward.setPath("./Member/findPwForm.jsp");
+			forward.setRedirect(false);
+		}
+		
+		// 패스워드 찾는Pro(DB O, view O) - 패스워드 변경 페이지(view) .me -> .jsp(false)
+		else if(command.equals("/MemberFindPwProAction.me")) {
+			action = new MemberFindPwProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 임시패스워드 변경페이지(view) - .me -> .jsp(false)
+		else if(command.equals("/MemberModifytempPw.me")) {
+			forward = new ActionForward();
+			forward.setPath("./Member/changePw.jsp");
+			forward.setRedirect(false);
+		}
+		// 임시패스워드 저장 Pro(DB O, view x) 
+		else if(command.equals("/MemberModifytempPwAction.me")) {
+			action = new MemberModifytempPwAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// id 찾는 페이지(view O) .me -> .jsp (false)
+		else if(command.equals("/MemberFindIdAction.me")) {
+			forward = new ActionForward();
+			forward.setPath("./Member/findIdForm.jsp");
+			forward.setRedirect(false);
+		}
+		// id Pro페이지(DB O, view O)
+		else  if(command.equals("/MemberFindIdProAction.me")) {
+	 		action = new MemberFindIdProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// pw 변경 페이지
+		else if(command.equals("/MemberModifyoldPw.me")) {
+			forward = new ActionForward();
+			forward.setPath("./Member/modifyoldPw.jsp");
+			forward.setRedirect(false);
+		}
+		
+		else if(command.equals("/MemberModifyoldPwAction.me")) {
+			action = new MemberModifyoldPwAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if(command.equals("/MemberLoginCheckAction.me")) {
+			action = new MemberLoginCheckAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
 		//// 멤버
 
 		System.out.println(" C : 2. 가상 주소 매칭(처리) 끝 (페이지 이동 아직 실행 전)");
