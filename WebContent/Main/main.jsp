@@ -11,8 +11,8 @@
         <h3 class="text-center"> 최신글</h3>
         </div>
         <div class="container">
-         <div class="d-flex">
     	    <c:forEach var="list" items="${requestScope.BoardList}" varStatus="i">
+			<c:if test="${(i.index+1)%4==1 }"><div class="d-flex"></c:if>
 		     <div class="col-lg-3" onclick="location.href='./read.mb?bno=${list.bno}';">
 	            <div class="bs-component">
 	              <div class="card mb-2 me-sm-3">
@@ -34,6 +34,7 @@
 	                </div>
 	               </div>
 				</div>
+				<c:if test="${(i.index+1)%4==0 }"></div></c:if> 
 			</div>
      	</c:forEach>
         	
