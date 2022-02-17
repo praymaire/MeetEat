@@ -1,96 +1,42 @@
+<%@ include file="../Main/top.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        
-        <title>meeteat!</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/bootstrap.css" rel="stylesheet" />
-        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-		<script src= "./JQuery/jquery-3.6.0.slim.js"></script>
-
-</head>
-<body>
-
-        <!-- Responsive navbar-->
-               <jsp:include page="../Main/top.jsp"></jsp:include>
-        	 <div class="offcanvas-header"> <!-- top~body 사이 공백 -->　</div>
-  
-  <%
-	// 로그인한 id값을 들고다닌다
-	String id = (String)session.getAttribute("id");%>
-
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	<c:if test="${requestScope.check != 1 }">
+		<c:redirect url="./Main.mb"/>
+	</c:if>
        <!-- Page content-->
-
-        
+  
         <div class="container">
         <h3 class="text-center"> 최신글</h3>
         </div>
         <div class="container">
          <div class="d-flex">
-		     <div class="col-lg-3">
+    	    <c:forEach var="list" items="${requestScope.BoardList}" varStatus="i">
+		     <div class="col-lg-3" onclick="location.href='./read.mb?bno=${list.bno}';">
 	            <div class="bs-component">
 	              <div class="card mb-2 me-sm-3">
 	                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
 	                  <rect width="100%" height="100%" fill="#868e96"></rect>
-	                  <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+	                  <img src="${upload_image }">
 	                </svg>
 	                <div class="card-body text-center">
-	                  <h5 class="card-title ">서면/치킨드실분/1시간뒤</h5>
-	                  <h6 class="card-subtitle text-muted">반반무마니/16:23</h6>
+	                  <h5 class="card-title ">${ list.where_name }/${ list.food_category }/${ list.when_name }</h5>
+	                  <h6 class="card-subtitle text-muted">${ list.id }/
+	                  <fmt:formatDate value="<%=new java.util.Date() %>" pattern="yy.MM.dd" var="today" />
+				       <fmt:formatDate value="${ list.write_time }" pattern="yy.MM.dd" var="regdate"/>
+				       <c:choose>
+					     <c:when test="${regdate eq today }"> 
+					       <fmt:formatDate value="${ list.write_time }" pattern="HH:mm"/></c:when> 
+			       		 <c:otherwise>${regdate }</c:otherwise> 
+			      		</c:choose></h6>
+			     
 	                </div>
 	               </div>
 				</div>
 			</div>
-    
-        	<div class="col-lg-3">
-	            <div class="bs-component">
-	              <div class="card mb-2 me-sm-3">
-	                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-	                  <rect width="100%" height="100%" fill="#868e96"></rect>
-	                  <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-	                </svg>
-	                <div class="card-body text-center">
-	                  <h5 class="card-title ">서면/치킨드실분/1시간뒤</h5>
-	                  <h6 class="card-subtitle text-muted">반반무마니/16:23</h6>
-	                </div>
-	               </div>
-				</div>
-			</div>
-		     <div class="col-lg-3">
-	            <div class="bs-component">
-	              <div class="card mb-2 me-sm-3">
-	                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-	                  <rect width="100%" height="100%" fill="#868e96"></rect>
-	                  <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-	                </svg>
-	                <div class="card-body text-center">
-	                  <h5 class="card-title ">서면/치킨드실분/1시간뒤</h5>
-	                  <h6 class="card-subtitle text-muted">반반무마니/16:23</h6>
-	                </div>
-	               </div>
-				</div>
-			</div>
-		     <div class="col-lg-3">
-	            <div class="bs-component">
-	              <div class="card mb-2 me-sm-3">
-	                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-	                  <rect width="100%" height="100%" fill="#868e96"></rect>
-	                  <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-	                </svg>
-	                <div class="card-body text-center">
-	                  <h5 class="card-title ">서면/치킨드실분/1시간뒤</h5>
-	                  <h6 class="card-subtitle text-muted">반반무마니/16:23</h6>
-	                </div>
-	               </div>
-				</div>
-			</div>
-
+     	</c:forEach>
+        	
 
 		</div>
         </div>

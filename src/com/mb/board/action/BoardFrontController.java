@@ -12,18 +12,18 @@ public class BoardFrontController extends HttpServlet{
 
 	protected void doProcess(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("BoardFrontController_doProcess() í˜¸ì¶œ! ");
-		// í˜ì´ì§€ê°€ GET/POSTë°©ì‹ ìƒê´€ì—†ì´ í˜¸ì¶œë ë•Œ ì‹¤í–‰ë˜ëŠ” ë©”ì„œë“œ
-		// *.me - íšŒì›ì •ë³´ ì²˜ë¦¬ ë™ì‘
+		System.out.println("BoardFrontController_doProcess() È£Ãâ! ");
+		// ÆäÀÌÁö°¡ GET/POST¹æ½Ä »ó°ü¾øÀÌ È£ÃâµÉ¶§ ½ÇÇàµÇ´Â ¸Ş¼­µå
+		// *.me - È¸¿øÁ¤º¸ Ã³¸® µ¿ÀÛ
 		
-		// -----------------------1. ê°€ìƒ ì£¼ì†Œ ê³„ì‚° --------------------------
-		//ê°€ìƒì£¼ì†Œ ê°€ì ¸ì˜¤ê¸°
+		// -----------------------1. °¡»ó ÁÖ¼Ò °è»ê --------------------------
+		//°¡»óÁÖ¼Ò °¡Á®¿À±â
 		//String url = request.getRequestURL()+"";
 		// http://localhost:8088/Model2/test1234.me
-		// í”„ë¡œí† ì½œ:// ì•„ì´í”¼ : í¬íŠ¸ë²ˆí˜¸ / í”„ë¡œì íŠ¸ëª… / ê°€ìƒì£¼ì†Œ
+		// ÇÁ·ÎÅäÄİ:// ¾ÆÀÌÇÇ : Æ÷Æ®¹øÈ£ / ÇÁ·ÎÁ§Æ®¸í / °¡»óÁÖ¼Ò
 		//String uri = request.getRequestURI(); 
 		// /Model2/test1234.me
-		// í”„ë¡œì íŠ¸ëª…/ ê°€ìƒì£¼ì†Œ
+		// ÇÁ·ÎÁ§Æ®¸í/ °¡»óÁÖ¼Ò
 		//System.out.println("url : "+url);
 		//System.out.println("uri : "+uri);
 		
@@ -33,22 +33,22 @@ public class BoardFrontController extends HttpServlet{
 		System.out.println(" C : ctxPath - "+ctxPath);
 		String command = requestURI.substring(ctxPath.length());
 		System.out.println(" C : command - "+command);
-		System.out.println(" C : 1. ê°€ìƒ ì£¼ì†Œ ê³„ì‚° ë! ");
-		// -----------------------1. ê°€ìƒ ì£¼ì†Œ ê³„ì‚° --------------------------
-		// -----------------------2. ê°€ìƒ ì£¼ì†Œ ë§¤í•‘(ì²˜ë¦¬) --------------------
+		System.out.println(" C : 1. °¡»ó ÁÖ¼Ò °è»ê ³¡! ");
+		// -----------------------1. °¡»ó ÁÖ¼Ò °è»ê --------------------------
+		// -----------------------2. °¡»ó ÁÖ¼Ò ¸ÅÇÎ(Ã³¸®) --------------------
 		
 		Action action = null;
 		ActionForward forward = null;
 		
 		if(command.equals("/write.mb")){
-			System.out.println(" C : write.mb í˜¸ì¶œ! ");
+			System.out.println(" C : write.mb È£Ãâ! ");
 			
 			forward = new ActionForward();
 			forward.setPath("./board/write.jsp");
 			forward.setRedirect(false);			
 		}
 		else if(command.equals("/BoardWriteAction.mb")){
-			System.out.println(" C : /BoardWriteAction.mb í˜¸ì¶œ! ");
+			System.out.println(" C : /BoardWriteAction.mb È£Ãâ! ");
 		
 			action = new BoardWriteAction();
 			try {
@@ -58,7 +58,7 @@ public class BoardFrontController extends HttpServlet{
 			}
 		}
 		else if(command.equals("/list.mb")){
-			System.out.println(" C : /BoardListActiom.mb í˜¸ì¶œ! ");
+			System.out.println(" C : /BoardListActiom.mb È£Ãâ! ");
 			
 			action = new BoardListAction();
 			try {
@@ -68,7 +68,7 @@ public class BoardFrontController extends HttpServlet{
 			}
 		}
 		else if(command.equals("/read.mb")){
-			System.out.println(" C : /BoardReadActiom.mb í˜¸ì¶œ! ");
+			System.out.println(" C : /BoardReadActiom.mb È£Ãâ! ");
 			
 			action = new BoardReadAction();
 			try {
@@ -79,7 +79,7 @@ public class BoardFrontController extends HttpServlet{
 		}
 		
 		else if(command.equals("/BoardSearch.mb")){
-			System.out.println(" C : /BoardSearch.mb í˜¸ì¶œ! ");
+			System.out.println(" C : /BoardSearch.mb È£Ãâ! ");
 			
 			action = new BoardSearchAction();
 			try {
@@ -90,7 +90,7 @@ public class BoardFrontController extends HttpServlet{
 		}
 		
 		else if(command.equals("/delete.mb")){
-			System.out.println(" C : /BoardDeleteAction.me í˜¸ì¶œ! ");
+			System.out.println(" C : /BoardDeleteAction.me È£Ãâ! ");
 			
 			action = new BoardDeleteAction();
 			try {
@@ -99,7 +99,7 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}else if(command.equals("/modify.mb")){
-			System.out.println(" C : /BoardModifyAction.me í˜¸ì¶œ! ");
+			System.out.println(" C : /BoardModifyAction.me È£Ãâ! ");
 			
 			action = new BoardModifyAction();
 			try {
@@ -108,9 +108,18 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}else if(command.equals("/modifyPro.mb")){
-			System.out.println(" C : /BoardModifyProAction.me í˜¸ì¶œ! ");
+			System.out.println(" C : /BoardModifyProAction.me È£Ãâ! ");
 			
 			action = new BoardModifyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/Main.mb")){
+			System.out.println(" C : /main.mb È£Ãâ! ");
+			
+			action = new MainListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -119,40 +128,41 @@ public class BoardFrontController extends HttpServlet{
 		}
 		
 		
-		System.out.println(" C : 2. ê°€ìƒ ì£¼ì†Œ ë§¤í•‘(ì²˜ë¦¬) ë (í˜ì´ì§€ì´ë™X)");
-		// -----------------------2. ê°€ìƒ ì£¼ì†Œ ë§¤í•‘(ì²˜ë¦¬) --------------------
-		// -----------------------3. í˜ì´ì§€ ì´ë™ -----------------------------
-		// í˜ì´ì§€ ì´ë™ì •ë³´ê°€ ìˆì„ë•Œ
+		
+		System.out.println(" C : 2. °¡»ó ÁÖ¼Ò ¸ÅÇÎ(Ã³¸®) ³¡ (ÆäÀÌÁöÀÌµ¿X)");
+		// -----------------------2. °¡»ó ÁÖ¼Ò ¸ÅÇÎ(Ã³¸®) --------------------
+		// -----------------------3. ÆäÀÌÁö ÀÌµ¿ -----------------------------
+		// ÆäÀÌÁö ÀÌµ¿Á¤º¸°¡ ÀÖÀ»¶§
 		if(forward != null){
 			if(forward.isRedirect()){ // true
 				response.sendRedirect(forward.getPath());
-				System.out.println(" C : í˜ì´ì§€ ì£¼ì†Œ - "+forward.getPath());
-				System.out.println(" C : í˜ì´ì§€ ì´ë™ (sendRedirect) ");
+				System.out.println(" C : ÆäÀÌÁö ÁÖ¼Ò - "+forward.getPath());
+				System.out.println(" C : ÆäÀÌÁö ÀÌµ¿ (sendRedirect) ");
 			}else{ // false
 				RequestDispatcher dis =
 						request.getRequestDispatcher(forward.getPath());
 				dis.forward(request, response);
-				System.out.println(" C : í˜ì´ì§€ ì£¼ì†Œ - "+forward.getPath());
-				System.out.println(" C : í˜ì´ì§€ ì´ë™ (forward) ");
+				System.out.println(" C : ÆäÀÌÁö ÁÖ¼Ò - "+forward.getPath());
+				System.out.println(" C : ÆäÀÌÁö ÀÌµ¿ (forward) ");
 			}
 		}
-		System.out.println(" C : 3. í˜ì´ì§€ ì´ë™ë \n\n\n ");		
-		// -----------------------3. í˜ì´ì§€ ì´ë™ -----------------------------
+		System.out.println(" C : 3. ÆäÀÌÁö ÀÌµ¿³¡ \n\n\n ");		
+		// -----------------------3. ÆäÀÌÁö ÀÌµ¿ -----------------------------
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("BoardFrontController_doGet() í˜¸ì¶œ! ");
-		// í˜ì´ì§€ê°€ GETë°©ì‹ìœ¼ë¡œ í˜¸ì¶œë ë•Œ ì‹¤í–‰ë˜ëŠ” ë©”ì„œë“œ
+		System.out.println("BoardFrontController_doGet() È£Ãâ! ");
+		// ÆäÀÌÁö°¡ GET¹æ½ÄÀ¸·Î È£ÃâµÉ¶§ ½ÇÇàµÇ´Â ¸Ş¼­µå
 		doProcess(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("BoardFrontController_doPost() í˜¸ì¶œ! ");
-		// í˜ì´ì§€ê°€ POSTë°©ì‹ìœ¼ë¡œ í˜¸ì¶œë ë•Œ ì‹¤í–‰ë˜ëŠ” ë©”ì„œë“œ
+		System.out.println("BoardFrontController_doPost() È£Ãâ! ");
+		// ÆäÀÌÁö°¡ POST¹æ½ÄÀ¸·Î È£ÃâµÉ¶§ ½ÇÇàµÇ´Â ¸Ş¼­µå
 		doProcess(request, response);
 	}
 
