@@ -107,7 +107,7 @@ ArrayList geomList = (ArrayList)request.getAttribute("geomList");
 
 var me = new Array();
 <c:forEach var="dto" items="${geomList }" varStatus="status">
-me[${status.index}] = ["테스트", ${dto.latitude }, ${dto.longitude }];
+me[${status.index}] = ["사용자", ${dto.latitude }, ${dto.longitude }];
 </c:forEach> 
 
 

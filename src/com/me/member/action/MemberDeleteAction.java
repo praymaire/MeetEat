@@ -15,7 +15,7 @@ public class MemberDeleteAction implements Action {
 	public ActionForward execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 	
-		System.out.println(" M : MemberDeleteAction_execute() È£Ãâ");
+		System.out.println(" M : MemberDeleteAction_execute() í˜¸ì¶œ");
 		
 		request.setCharacterEncoding("UTF-8");
 		
@@ -31,30 +31,30 @@ public class MemberDeleteAction implements Action {
 			response.setContentType("text/html; charset=UTF-8"); 
 			PrintWriter out = response.getWriter();	
 			out.print("<script>");
-			out.print("alert('ºñ¹Ğ¹øÈ£°¡ Æ²¸³´Ï´Ù');");
+			out.print("alert('ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦½ë‹ˆë‹¤');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();
 			
 			return null; 
 		} 
-		else if(result == -1) { // °èÁ¤ X
+		else if(result == -1) { // ê³„ì • X
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('°èÁ¤ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù');");
+			out.print("alert('ê³„ì •ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();
 			
 			return null;
 		}
-		// ÆäÀÌÁö ÀÌµ¿
+		// í˜ì´ì§€ ì´ë™
 		session.invalidate();
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print("<script>");
-		out.print("alert('Á¤»óÀûÀ¸·Î Å»ÅğµÇ¾ú½À´Ï´Ù. Ã³À½È­¸éÀ¸·Î µÇµ¹¾Æ°©´Ï´Ù.');");
+		out.print("alert('ì •ìƒì ìœ¼ë¡œ íƒˆí‡´ë˜ì—ˆìŠµë‹ˆë‹¤. ì²˜ìŒí™”ë©´ìœ¼ë¡œ ë˜ëŒì•„ê°‘ë‹ˆë‹¤.');");
 		out.print("location.href='./Main.me';");
 		out.print("</script>");
 		out.close();

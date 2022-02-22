@@ -23,7 +23,7 @@ public class MemberReportAction implements Action {
 			PrintWriter out = response.getWriter();
 			
 			out.print("<script>");
-			out.print("alert('·Î±×ÀÎÇÏ¼¼¿ä');");
+			out.print("alert('ë¡œê·¸ì¸í•˜ì„¸ìš”');");
 			out.print("window.close();");
 			out.print("</script>");
 			out.close();

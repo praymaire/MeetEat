@@ -18,9 +18,9 @@ public class MemberUpdateProAction implements Action {
 	public ActionForward execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println(" M : MemberUpdateProAction_execute() È£Ãâ");
+		System.out.println(" M : MemberUpdateProAction_execute() í˜¸ì¶œ");
 		
-		// ¼¼¼Ç Ã¼Å©
+		// ì„¸ì…˜ ì²´í¬
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
@@ -29,22 +29,22 @@ public class MemberUpdateProAction implements Action {
 			forward.setPath("./MemberLogin.me");
 			forward.setRedirect(true);
 			return forward;
-			// ÀÌ ¸Ş¼Òµå°¡ ³¡ÀÌ ³ª°í ControllerÀÇ forward¿¡ ÀúÀåµÈ´Ù.
+			// ì´ ë©”ì†Œë“œê°€ ëì´ ë‚˜ê³  Controllerì˜ forwardì— ì €ì¥ëœë‹¤.
 		}
 		
-		// ÇÑ±Û Ã³¸®
+		// í•œê¸€ ì²˜ë¦¬
 		request.setCharacterEncoding("UTF-8");
 				
-		// ÆÄÀÏ Ã³¸®
-		// ¼­¹ö¿¡¼­ ÀúÀåÇÒ localhost µÚ¿¡ ºÙ´Â À§Ä¡
+		// íŒŒì¼ ì²˜ë¦¬
+		// ì„œë²„ì—ì„œ ì €ì¥í•  localhost ë’¤ì— ë¶™ëŠ” ìœ„ì¹˜
 		String path = "/upload/member/";
 		String realPath = request.getServletContext().getRealPath(path);
-		System.out.println(" M : ÇÁ·ÎÇÊ »çÁø ÀúÀå °æ·Î - "+realPath);
+		System.out.println(" M : í”„ë¡œí•„ ì‚¬ì§„ ì €ì¥ ê²½ë¡œ - "+realPath);
 		
-		// ÀúÀå ¿ë·® Á¦ÇÑ
+		// ì €ì¥ ìš©ëŸ‰ ì œí•œ
 		int maxSize = 10 * 1024 * 1024;
 		
-		// ½ÇÁ¦ ÆÄÀÏ ¾÷·Îµå Ã³¸®
+		// ì‹¤ì œ íŒŒì¼ ì—…ë¡œë“œ ì²˜ë¦¬
 		MultipartRequest multi = null;
 		
 		try {
@@ -53,7 +53,7 @@ public class MemberUpdateProAction implements Action {
 			response.setContentType("text/html; charset=UTF-8"); 
 			PrintWriter out = response.getWriter();	
 			out.print("<script>");
-			out.print("alert('ÀÌ¹ÌÁö Å©±â°¡ 10MB¸¦ ÃÊ°úÇÕ´Ï´Ù');");
+			out.print("alert('ì´ë¯¸ì§€ í¬ê¸°ê°€ 10MBë¥¼ ì´ˆê³¼í•©ë‹ˆë‹¤');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();
@@ -79,7 +79,7 @@ public class MemberUpdateProAction implements Action {
 				response.setContentType("text/html; charset=UTF-8"); 
 				PrintWriter out = response.getWriter();	
 				out.print("<script>");
-				out.print("alert('ÀÌ¹ÌÁö ÆÄÀÏ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù!');");
+				out.print("alert('ì´ë¯¸ì§€ íŒŒì¼ë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤!');");
 				out.print("history.back();");
 				out.print("</script>");
 				out.close();
@@ -88,7 +88,7 @@ public class MemberUpdateProAction implements Action {
 			}
 		}
 		
-		// ³Ñ¾î¿À´Â µ¥ÀÌÅÍ ¹Ş±â	
+		// ë„˜ì–´ì˜¤ëŠ” ë°ì´í„° ë°›ê¸°	
 		String profile_image = multi.getFilesystemName("profile_image");
 		String pw = multi.getParameter("pw");
 		String nickname = multi.getParameter("nickname");
@@ -107,7 +107,7 @@ public class MemberUpdateProAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('¸ğµç ³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.');");
+			out.print("alert('ëª¨ë“  ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();
@@ -119,7 +119,7 @@ public class MemberUpdateProAction implements Action {
 		}
 		
 		
-		// ÀÌÀü ÆäÀÌÁö¿¡¼­ Àü´ŞµÈ Á¤º¸ ÀúÀå(DTO)
+		// ì´ì „ í˜ì´ì§€ì—ì„œ ì „ë‹¬ëœ ì •ë³´ ì €ì¥(DTO)
 		MemberDTO mdto = new MemberDTO();
 		mdto.setProfile_image(path+profile_image);
 		mdto.setId(id);
@@ -131,27 +131,27 @@ public class MemberUpdateProAction implements Action {
 		
 		System.out.println(" M : "+mdto.toString());
 		
-		// DAO °´Ã¼ »ı¼º 
+		// DAO ê°ì²´ ìƒì„± 
 		MemberDAO mdao = new MemberDAO();
 		int result = mdao.updateMember(mdto);
-		System.out.println(" M : È¸¿øÁ¤º¸ ¼öÁ¤ ¿Ï·á");
+		System.out.println(" M : íšŒì›ì •ë³´ ìˆ˜ì • ì™„ë£Œ");
 		
-		if(result == 0) { // ºñ¹ø ¿À·ù
+		if(result == 0) { // ë¹„ë²ˆ ì˜¤ë¥˜
 			response.setContentType("text/html; charset=UTF-8"); 
 			PrintWriter out = response.getWriter();	
 			out.print("<script>");
-			out.print("alert('ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù');");
+			out.print("alert('ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();
 			
 			return null; 
 		} 
-		else if(result == -1) { // °èÁ¤ X
+		else if(result == -1) { // ê³„ì • X
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('°èÁ¤ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù');");
+			out.print("alert('ê³„ì •ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();
@@ -160,12 +160,12 @@ public class MemberUpdateProAction implements Action {
 		}
 		
 		// result == 1
-		// °èÁ¤ÀÚ
-		// ÆäÀÌÁö ÀÌµ¿
+		// ê³„ì •ì
+		// í˜ì´ì§€ ì´ë™
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print("<script>");
-		out.print("alert('È¸¿øÁ¤º¸ ¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù. Ã³À½ È­¸éÀ¸·Î µÇµ¹¾Æ°©´Ï´Ù.');");
+		out.print("alert('íšŒì›ì •ë³´ ìˆ˜ì •ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤. ì²˜ìŒ í™”ë©´ìœ¼ë¡œ ë˜ëŒì•„ê°‘ë‹ˆë‹¤.');");
 		out.print("location.href='./Main.me';");
 		out.print("</script>");
 		out.close();
@@ -174,3 +174,4 @@ public class MemberUpdateProAction implements Action {
 	}
 
 }
+

@@ -12,13 +12,13 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class MemberJoinAction implements Action{
-	// È¸¿ø°¡ÀÔ Ã³¸®
+	// íšŒì›ê°€ì… ì²˜ë¦¬
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(" M : MemberJoinAction_execute() È£Ãâ!");
+		System.out.println(" M : MemberJoinAction_execute() í˜¸ì¶œ!");
 		
-		// ÇÑ±Û Ã³¸®
+		// í•œê¸€ ì²˜ë¦¬
 		request.setCharacterEncoding("UTF-8");
 		
 		String id = request.getParameter("id");
@@ -40,7 +40,7 @@ public class MemberJoinAction implements Action{
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('¸ğµç ³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.');");
+			out.print("alert('ëª¨ë“  ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();
@@ -50,16 +50,16 @@ public class MemberJoinAction implements Action{
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('ºñ¹Ğ¹øÈ£°¡ ¼­·Î ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.');");
+			out.print("alert('ë¹„ë°€ë²ˆí˜¸ê°€ ì„œë¡œ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.');");
 			out.print("history.back();");
 			out.print("document.join.checkPw.focus();");
 			out.print("</script>");
 			out.close();
 			return null;
 		}
-		System.out.println(" M : MemberJoinAction - ¸ğµç Á¤º¸ Á¤»óÀûÀ¸·Î ÀÔ·Â¿Ï·áµÊ");
+		System.out.println(" M : MemberJoinAction - ëª¨ë“  ì •ë³´ ì •ìƒì ìœ¼ë¡œ ì…ë ¥ì™„ë£Œë¨");
 		
-		// DTO °´Ã¼ »ı¼º, Àü´ŞµÈ Á¤º¸¸¦ ÀúÀå
+		// DTO ê°ì²´ ìƒì„±, ì „ë‹¬ëœ ì •ë³´ë¥¼ ì €ì¥
 		MemberDTO mdto = new MemberDTO();
 		mdto.setId(id);
 		mdto.setPw(pw);
@@ -70,17 +70,17 @@ public class MemberJoinAction implements Action{
 		
 		System.out.println(" M : "+mdto.toString());
 		
-		// DAO °´Ã¼ »ı¼º
-		// Àü´ŞµÈ Á¤º¸¸¦ DB¿¡ ÀúÀå
+		// DAO ê°ì²´ ìƒì„±
+		// ì „ë‹¬ëœ ì •ë³´ë¥¼ DBì— ì €ì¥
 		MemberDAO mdao = new MemberDAO();
 		int result = mdao.insertMember(mdto);
-		System.out.println(" M : È¸¿øÁ¤º¸ ÀúÀå ¿Ï·á");
+		System.out.println(" M : íšŒì›ì •ë³´ ì €ì¥ ì™„ë£Œ");
 		
 		if(result == 1) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('È¸¿ø°¡ÀÔÀÌ ¼º°øÀûÀ¸·Î Ã³¸®µÇ¾ú½À´Ï´Ù. Ã³À½È­¸éÀ¸·Î µÇµ¹¾Æ°©´Ï´Ù.');");
+			out.print("alert('íšŒì›ê°€ì…ì´ ì„±ê³µì ìœ¼ë¡œ ì²˜ë¦¬ë˜ì—ˆìŠµë‹ˆë‹¤. ì²˜ìŒí™”ë©´ìœ¼ë¡œ ë˜ëŒì•„ê°‘ë‹ˆë‹¤.');");
 			out.print("location.href='./Main.me';");
 			out.print("</script>");
 			out.close();
@@ -89,7 +89,7 @@ public class MemberJoinAction implements Action{
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('ÀÌ¹Ì Á¸ÀçÇÏ´Â È¸¿øÀÔ´Ï´Ù. ÀÌÀüÈ­¸éÀ¸·Î µÇµ¹¾Æ°©´Ï´Ù.');");
+			out.print("alert('ì´ë¯¸ ì¡´ì¬í•˜ëŠ” íšŒì›ì…ë‹ˆë‹¤. ì´ì „í™”ë©´ìœ¼ë¡œ ë˜ëŒì•„ê°‘ë‹ˆë‹¤.');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();

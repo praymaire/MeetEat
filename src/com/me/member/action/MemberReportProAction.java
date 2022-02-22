@@ -15,7 +15,7 @@ public class MemberReportProAction implements Action {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		// ¼¼¼Ç Ã¼Å©
+		// ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
@@ -36,7 +36,7 @@ public class MemberReportProAction implements Action {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print("<script>");
-		out.print("alert('½Å°í°¡ ¼º°øÀûÀ¸·Î Ã³¸®µÇ¾ú½À´Ï´Ù');");
+		out.print("alert('ì‹ ê³ ê°€ ì„±ê³µì ìœ¼ë¡œ ì²˜ë¦¬ë˜ì—ˆìŠµë‹ˆë‹¤');");
 		out.print("window.close();");
 		out.print("</script>");
 		out.close();

@@ -28,7 +28,7 @@ public class BoardReadAction implements Action {
 		if(boardList == null) {
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print(" alert('Á¸ÀçÇÏÁö ¾Ê´Â ±ÛÀÔ´Ï´Ù')");
+			out.print(" alert('ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê¸€ì…ë‹ˆë‹¤')");
 			out.print("location.href='./Main.me'");
 			out.print("</script>");
 			out.close();

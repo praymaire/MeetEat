@@ -13,7 +13,7 @@ public class MemberFindIdProAction implements Action {
 	public ActionForward execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println(" M : MemberFindIdProAction.me_execute() ½ÇÇà");
+		System.out.println(" M : MemberFindIdProAction.me_execute() ì‹¤í–‰");
 		
 		request.setCharacterEncoding("UTF-8");
 		
@@ -29,7 +29,7 @@ public class MemberFindIdProAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('ÀÔ·ÂÇÏ½Å Á¤º¸·Î Ã£À» ¼ö ¾ø½À´Ï´Ù. Á¤È®ÇÑ ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.');");
+			out.print("alert('ì…ë ¥í•˜ì‹  ì •ë³´ë¡œ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤. ì •í™•í•œ ì´ë©”ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();

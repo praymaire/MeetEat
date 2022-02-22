@@ -13,14 +13,14 @@ public class MemberModifyoldPwAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		System.out.println(" M : MemberModifyoldPwAction_execute() È£Ãâ");
+		System.out.println(" M : MemberModifyoldPwAction_execute() í˜¸ì¶œ");
 				
-		// POST - ÇÑ±Û
+		// POST - í•œê¸€
 		request.setCharacterEncoding("UTF-8");
 		MemberDAO mdao = new MemberDAO();
 		int result = 0;
 		
-		// ¼¼¼Ç Ã¼Å©
+		// ì„¸ì…˜ ì²´í¬
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
@@ -31,7 +31,7 @@ public class MemberModifyoldPwAction implements Action {
 			return forward;
 		}
 		
-		// ÆÄ¶ó¹ÌÅÍ ÀúÀå
+		// íŒŒë¼ë¯¸í„° ì €ì¥
 		String oldPw = request.getParameter("oldPw");
 		String pw = request.getParameter("pw");
 		
@@ -47,7 +47,7 @@ public class MemberModifyoldPwAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('ºñ¹Ğ¹øÈ£°¡ Á¤»óÀûÀ¸·Î Ã³¸®µÇ¾ú½À´Ï´Ù. ·Î±×ÀÎÆäÀÌÁö·Î µ¹¾Æ°©´Ï´Ù');");
+			out.print("alert('ë¹„ë°€ë²ˆí˜¸ê°€ ì •ìƒì ìœ¼ë¡œ ì²˜ë¦¬ë˜ì—ˆìŠµë‹ˆë‹¤. ë¡œê·¸ì¸í˜ì´ì§€ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤');");
 			out.print("location.href='./MemberLogin.me';");
 			out.print("</script>");
 			out.close();
@@ -57,7 +57,7 @@ public class MemberModifyoldPwAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('ºñ¹Ğ¹øÈ£ ¿À·ùÀÔ´Ï´Ù. ÀÌÀü ÆäÀÌÁö·Î µ¹¾Æ°©´Ï´Ù.');");
+			out.print("alert('ë¹„ë°€ë²ˆí˜¸ ì˜¤ë¥˜ì…ë‹ˆë‹¤. ì´ì „ í˜ì´ì§€ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.');");
 			out.print("history.back();");
 			out.print("</script>");
 			out.close();
@@ -67,7 +67,7 @@ public class MemberModifyoldPwAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('Á¢±ÙÇÒ ¼ö ¾ø´Â »ç¿ëÀÚÀÔ´Ï´Ù. ¸ŞÀÎ ÆäÀÌÁö·Î µ¹¾Æ°©´Ï´Ù.');");
+			out.print("alert('ì ‘ê·¼í•  ìˆ˜ ì—†ëŠ” ì‚¬ìš©ìì…ë‹ˆë‹¤. ë©”ì¸ í˜ì´ì§€ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.');");
 			out.print("location.href='./Main.me';");
 			out.print("</script>");
 			out.close();

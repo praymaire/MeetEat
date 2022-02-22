@@ -55,6 +55,8 @@ public class BoardWriteAction implements Action{
 	    String where_name = multi.getParameter("where_name");
 	    String upload_image = multi.getFilesystemName("upload_image");
 	    String content = multi.getParameter("content");
+	    String latitude = multi.getParameter("latitude");
+	    String longitude = multi.getParameter("longitude");
 		
 		// 세션 에서 가져오기
 
@@ -70,11 +72,13 @@ public class BoardWriteAction implements Action{
 		dto.setWrite_time(new Timestamp(System.currentTimeMillis()));
 		
 		dto.setWhen_name(when_name); // 언제
-		dto.setfood_category(food_category); // 음식
+		dto.setFood_category(food_category); // 음식
 		dto.setWhere_name(where_name); // 어디서
 		dto.setUpload_image(path + upload_image); //첨부파일
 		dto.setId(id);
 		dto.setContent(content); // 본문
+		dto.setLatitude(latitude);//
+		dto.setLongitude(longitude);//
 		
 		System.out.println(" BoardAction : "+dto);
 		

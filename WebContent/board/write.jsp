@@ -11,6 +11,21 @@
 	}
 %>  
 
+<% //세션제어
+String latitude =(String)session.getAttribute("latitude");
+String longitude =(String)session.getAttribute("longitude");
+
+if(latitude == null) { %>
+<script>
+	alert('위치정보가 없습니다!');
+	location.href='./roadname.do'; 
+</script>
+<%
+}
+%>  
+
+
+
 <div class="container">   
   <form action="BoardWriteAction.mb" method="post" enctype="multipart/form-data">
   <fieldset>
@@ -59,6 +74,11 @@
     <div class="form-group">
       <label for="content" class="form-label mt-4">추가 내용</label>
       <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+    </div>
+    
+    <div class="form-group">
+    <input type="hidden" name="latitude" id="latitude" value="<%=latitude%>">
+    <input type="hidden" name="longitude" id="longitude" value="<%=longitude%>">
     </div>    
 
     <div class="my-3 float-sm-end">

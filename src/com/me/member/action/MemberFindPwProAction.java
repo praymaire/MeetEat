@@ -13,7 +13,7 @@ public class MemberFindPwProAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println(" M : MemberFindPwProAction_execute() ½ÇÇà");
+		System.out.println(" M : MemberFindPwProAction_execute() ì‹¤í–‰");
 		
 		request.setCharacterEncoding("UTF-8");
 		
@@ -28,7 +28,7 @@ public class MemberFindPwProAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('ÀÌ¸ŞÀÏÀÌ Æ²¸³´Ï´Ù.');");
+			out.print("alert('ì´ë©”ì¼ì´ í‹€ë¦½ë‹ˆë‹¤.');");
 			out.print("history.go(-1);");
 			out.print("</script>");
 			out.close();
@@ -39,14 +39,14 @@ public class MemberFindPwProAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('Á¸ÀçÇÏÁö ¾Ê´Â °èÁ¤ÀÔ´Ï´Ù.');");
+			out.print("alert('ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê³„ì •ì…ë‹ˆë‹¤.');");
 			out.print("history.go(-2);");
 			out.print("</script>");
 			out.close();
 			
 			return null;
 		}
-		// result = 1ÀÏ ¶§ ¼¼¼Ç¿¡ id ÀúÀå
+		// result = 1ì¼ ë•Œ ì„¸ì…˜ì— id ì €ì¥
 		HttpSession session = request.getSession();
 		session.setAttribute("id", id);
 		
@@ -58,7 +58,7 @@ public class MemberFindPwProAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('ÀÓ½Ã ºñ¹Ğ¹øÈ£°¡ ÀúÀåµÇ¾ú½À´Ï´Ù. ºñ¹Ğ¹øÈ£¸¦ ´Ù½Ã ¼³Á¤ÇØÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.');");
+			out.print("alert('ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ê°€ ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤. ë¹„ë°€ë²ˆí˜¸ë¥¼ ë‹¤ì‹œ ì„¤ì •í•´ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤.');");
 			out.print("location.href='./MemberModifytempPw.me';");
 			out.print("</script>");
 			out.close();
@@ -69,7 +69,7 @@ public class MemberFindPwProAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('Á¸ÀçÇÏÁö ¾Ê´Â °èÁ¤, ¶Ç´Â ÀÌ¸ŞÀÏÀÔ´Ï´Ù.');");
+			out.print("alert('ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê³„ì •, ë˜ëŠ” ì´ë©”ì¼ì…ë‹ˆë‹¤.');");
 			out.print("history.go(-2);");
 			out.print("</script>");
 			out.close();

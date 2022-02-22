@@ -62,7 +62,7 @@ public class BoardDAO { // BoardDAO ����
 			
 			System.out.println("�� ��ȣ :"+tbno);
 	
-			sql = "insert into board(bno,id,write_time,when_name,where_name,food_category,content,upload_image) " + "values(?,?,?,?,?,?,?,?)";
+			sql = "insert into board(bno,id,write_time,when_name,where_name,food_category,content,upload_image,latitude,longitude) " + "values(?,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 
 //			bno
@@ -76,11 +76,13 @@ public class BoardDAO { // BoardDAO ����
 //			where_name
 			pstmt.setString(5, dto.getWhere_name());
 //			food_category
-			pstmt.setString(6, dto.getfood_category());
+			pstmt.setString(6, dto.getFood_category());
 //			content
 			pstmt.setString(7, dto.getContent());
 //			upload_image
 			pstmt.setString(8, dto.getUpload_image());
+			pstmt.setString(9, dto.getLatitude());
+			pstmt.setString(10, dto.getLongitude());
 			// sql ����
 			
 			pstmt.executeUpdate();
@@ -173,7 +175,7 @@ public class BoardDAO { // BoardDAO ����
 				dto.setWrite_time(rs.getTimestamp("write_time"));
 				dto.setWhen_name(rs.getString("when_name"));
 				dto.setWhere_name(rs.getString("where_name"));
-				dto.setfood_category(rs.getString("food_category"));
+				dto.setFood_category(rs.getString("food_category"));
 				dto.setUpload_image(rs.getString("upload_image"));
 				dto.setContent(rs.getString("content"));
 				
@@ -214,7 +216,7 @@ public class BoardDAO { // BoardDAO ����
 				dto.setWrite_time(rs.getTimestamp("write_time"));
 				dto.setWhen_name(rs.getString("when_name"));
 				dto.setWhere_name(rs.getString("where_name"));
-				dto.setfood_category(rs.getString("food_category"));
+				dto.setFood_category(rs.getString("food_category"));
 				dto.setUpload_image(rs.getString("upload_image"));
 				dto.setContent(rs.getString("content"));
 				
@@ -267,7 +269,7 @@ public class BoardDAO { // BoardDAO ����
 				dto.setWrite_time(rs.getTimestamp("write_time"));
 				dto.setWhen_name(rs.getString("when_name"));
 				dto.setWhere_name(rs.getString("where_name"));
-				dto.setfood_category(rs.getString("food_category"));
+				dto.setFood_category(rs.getString("food_category"));
 				dto.setUpload_image(rs.getString("upload_image"));
 				dto.setContent(rs.getString("content"));
 				
@@ -306,7 +308,7 @@ public class BoardDAO { // BoardDAO ����
 			dto.setWrite_time(rs.getTimestamp("write_time"));
 			dto.setWhen_name(rs.getString("when_name"));
 			dto.setWhere_name(rs.getString("where_name"));
-			dto.setfood_category(rs.getString("food_category"));
+			dto.setFood_category(rs.getString("food_category"));
 			dto.setUpload_image(rs.getString("upload_image"));
 			dto.setContent(rs.getString("content"));
 			
@@ -358,7 +360,7 @@ public class BoardDAO { // BoardDAO ����
 			pstmt = con.prepareStatement(sql);
 			
 			//food_category=?
-			pstmt.setString(1, dto.getfood_category());
+			pstmt.setString(1, dto.getFood_category());
 			//when_name=?
 			pstmt.setString(2, dto.getWhen_name());
 			//where_name=?
@@ -368,7 +370,7 @@ public class BoardDAO { // BoardDAO ����
 			//content=? 
 			pstmt.setString(5, dto.getContent());
 			//where bno=?
-			pstmt.setInt(6, dto.getbno());
+			pstmt.setInt(6, dto.getBno());
 			
 			pstmt.executeUpdate();
 
@@ -405,7 +407,7 @@ public ArrayList getMainList(){
 				dto.setWrite_time(rs.getTimestamp("write_time"));
 				dto.setWhen_name(rs.getString("when_name"));
 				dto.setWhere_name(rs.getString("where_name"));
-				dto.setfood_category(rs.getString("food_category"));
+				dto.setFood_category(rs.getString("food_category"));
 				dto.setUpload_image(rs.getString("upload_image"));
 				
 				BoardList.add(dto);

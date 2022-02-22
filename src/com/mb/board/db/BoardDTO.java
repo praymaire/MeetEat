@@ -4,18 +4,18 @@ import java.sql.Timestamp;
 
 public class BoardDTO {
 
-	private String id; // member id ¿Í µ¿ÀÏ
-	private int bno; // ±Û¹øÈ£  
-	private int count; // Á¶È¸¼ö   
-	private Timestamp write_time; // ÀÛ¼º½Ã°£   
-	private String when_name; // ½Ã°£		
-	private String where_name; // °¡°Ô/ÀÎ¿ø¼ö
-	private String food_category; // À½½Ä Ä«Å×°í¸®
-	private String upload_image; // ¾÷·Îµå ÀÌ¹ÌÁö
-	private int x; //À§µµ x  
-	private int y; //°æµµ y 
-	private String content; // ÄÜÅÙÃ÷
-	
+	private String id; // member id ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private int bno; // ï¿½Û¹ï¿½È£  
+	private int count; // ï¿½ï¿½È¸ï¿½ï¿½   
+	private Timestamp write_time; // ï¿½Û¼ï¿½ï¿½Ã°ï¿½   
+	private String when_name; // ï¿½Ã°ï¿½		
+	private String where_name; // ï¿½ï¿½ï¿½ï¿½/ï¿½Î¿ï¿½ï¿½ï¿½
+	private String food_category; // ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½×°ï¿½
+	private String upload_image; // ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+	private String latitude; //ï¿½ï¿½ï¿½ï¿½ x  
+	private String longitude; //ï¿½æµµ y 
+	private String content; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
 	
 	public String getId() {
 		return id;
@@ -23,18 +23,21 @@ public class BoardDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getbno() {
+	public int getBno() {
 		return bno;
 	}
 	public void setBno(int bno) {
 		this.bno = bno;
 	}
+
 	public int getCount() {
 		return count;
 	}
+
 	public void setCount(int count) {
 		this.count = count;
 	}
+
 	public Timestamp getWrite_time() {
 		return write_time;
 	}
@@ -50,46 +53,66 @@ public class BoardDTO {
 	public String getWhere_name() {
 		return where_name;
 	}
+
 	public void setWhere_name(String where_name) {
 		this.where_name = where_name;
 	}
-	public String getfood_category() {
+
+	public String getFood_category() {
 		return food_category;
 	}
-	public void setfood_category(String food_category) {
+
+	public void setFood_category(String food_category) {
 		this.food_category = food_category;
 	}
+
 	public String getUpload_image() {
 		return upload_image;
 	}
+
 	public void setUpload_image(String upload_image) {
 		this.upload_image = upload_image;
 	}
-	public int getX() {
-		return x;
+
+	public String getLatitude() {
+		return latitude;
 	}
-	public void setX(int x) {
-		this.x = x;
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
 	}
-	public int getY() {
-		return y;
+
+	public String getLongitude() {
+		return longitude;
 	}
-	public void setY(int y) {
-		this.y = y;
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+
+
+
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "BoardDTO [id=" + id + ", bno=" + bno + ", count=" + count + ", write_time=" + write_time
 				+ ", when_name=" + when_name + ", where_name=" + where_name + ", food_category=" + food_category
-				+ ", upload_image=" + upload_image + ", x=" + x + ", y=" + y + ", content=" + content + "]";
+				+ ", upload_image=" + upload_image + ", latitude=" + latitude + ", longitude=" + longitude
+				+ ", content=" + content + "]";
 	}
-	
 
 
 	

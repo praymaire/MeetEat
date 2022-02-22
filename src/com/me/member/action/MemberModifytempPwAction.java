@@ -13,12 +13,12 @@ public class MemberModifytempPwAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println(" M : MemberModifytempPwAction_execute() È£Ãâ");
+		System.out.println(" M : MemberModifytempPwAction_execute() í˜¸ì¶œ");
 		
-		// POST - ÇÑ±Û
+		// POST - í•œê¸€
 		request.setCharacterEncoding("UTF-8");
 		
-		// ¼¼¼Ç Ã¼Å©
+		// ì„¸ì…˜ ì²´í¬
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
@@ -29,15 +29,15 @@ public class MemberModifytempPwAction implements Action {
 			return forward;
 		}
 		
-		// ÆÄ¶ó¹ÌÅÍ ÀúÀå
+		// íŒŒë¼ë¯¸í„° ì €ì¥
 		String oldPw = request.getParameter("oldPw");
 		String pw = request.getParameter("pw");
 		
-		// DB ÀúÀå
+		// DB ì €ì¥
 		MemberDAO mdao = new MemberDAO();
 		int result = mdao.modifyPw(id, oldPw, pw);
 		
-		// °á°ú¿¡ µû¸¥ ÀÌµ¿
+		// ê²°ê³¼ì— ë”°ë¥¸ ì´ë™
 		if(result == 1) {
 			
 			session.invalidate();
@@ -45,7 +45,7 @@ public class MemberModifytempPwAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('ºñ¹Ğ¹øÈ£°¡ Á¤»óÀûÀ¸·Î Ã³¸®µÇ¾ú½À´Ï´Ù.');");
+			out.print("alert('ë¹„ë°€ë²ˆí˜¸ê°€ ì •ìƒì ìœ¼ë¡œ ì²˜ë¦¬ë˜ì—ˆìŠµë‹ˆë‹¤.');");
 			out.print("location.href='./MemberLogin.me';");
 			out.print("</script>");
 			out.close();
@@ -55,7 +55,7 @@ public class MemberModifytempPwAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('Á¢±ÙÇÒ ¼ö ¾ø´Â »ç¿ëÀÚÀÔ´Ï´Ù. Ã³À½ ÆäÀÌÁö·Î µÇµ¹¾Æ°©´Ï´Ù.');");
+			out.print("alert('ì ‘ê·¼í•  ìˆ˜ ì—†ëŠ” ì‚¬ìš©ìì…ë‹ˆë‹¤. ì²˜ìŒ í˜ì´ì§€ë¡œ ë˜ëŒì•„ê°‘ë‹ˆë‹¤.');");
 			out.print("location.href='./Main.me';");
 			out.print("</script>");
 			out.close();

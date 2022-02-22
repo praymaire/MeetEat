@@ -19,12 +19,12 @@ public class BoardModifyProAction implements Action {
 				
 		request.setCharacterEncoding("UTF-8");
 	    
-	    System.out.println("¿©±â±îÁö 1" + request.getParameter("bno"));
+	    System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1" + request.getParameter("bno"));
 	    int bno = Integer.parseInt(request.getParameter("bno"));
 	    
 	    String path = "/upload/board/";
 	    String realPath = request.getServletContext().getRealPath(path);
-	    System.out.println(" B : ÀÌ¹ÌÁö ÀúÀå°æ·Î - " + realPath);
+	    System.out.println("B : ì´ë¯¸ì§€ ì €ì¥ê²½ë¡œ - " + realPath);
 	    
 	    int maxSize = 10485760;
 	    
@@ -38,7 +38,7 @@ public class BoardModifyProAction implements Action {
 	      response.setContentType("text/html; charset=UTF-8");
 	      PrintWriter out = response.getWriter();
 	      out.print("<script>");
-	      out.print("alert('ÀÌ¹ÌÁö Å©±â°¡ 10MB¸¦ ÃÊ°úÇÕ´Ï´Ù');");
+	      out.print("alert('ì´ë¯¸ì§€ í¬ê¸°ê°€ 10MBë¥¼ ì´ˆê³¼í•©ë‹ˆë‹¤');");
 	      out.print("history.back();");
 	      out.print("</script>");
 	      out.close();
@@ -67,7 +67,7 @@ public class BoardModifyProAction implements Action {
 	        response.setContentType("text/html; charset=UTF-8");
 	        PrintWriter out = response.getWriter();
 	        out.print("<script>");
-	        out.print("alert('ÀÌ¹ÌÁö ÆÄÀÏ¸¸ ¾÷·Îµå °¡´ÉÇÕ´Ï´Ù!');");
+	        out.print("alert('ì´ë¯¸ì§€ íŒŒì¼ë§Œ ì—…ë¡œë“œ ê°€ëŠ¥í•©ë‹ˆë‹¤!');");
 	        out.print("history.back();");
 	        out.print("</script>");
 	        out.close();
@@ -87,7 +87,7 @@ public class BoardModifyProAction implements Action {
 	    BoardDTO dto = new BoardDTO();
 	    
 	    dto.setWhen_name(when_name);
-	    dto.setfood_category(food_category);
+	    dto.setFood_category(food_category);
 	    dto.setWhere_name(where_name);
 	    dto.setUpload_image(path + upload_image);
 	    dto.setId(id);
@@ -99,7 +99,7 @@ public class BoardModifyProAction implements Action {
 	    BoardDAO dao = new BoardDAO();
 	    dao.ModifyBoard(dto);
 	    
-	    System.out.println(" B : ±Û Á¤º¸ ¼öÁ¤ ¿Ï·á! ");
+	    System.out.println(" B : ê¸€ ì •ë³´ ìˆ˜ì • ì™„ë£Œ! ");
 	    
 	    ActionForward forward = new ActionForward();
 	    forward.setPath("./list.mb");
