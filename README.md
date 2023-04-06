@@ -16,13 +16,23 @@
 ## 1. 위치 조회(자동, 수동)
 > 자동으로 현재 위치를 수집합니다. 위치수집에 실패하면 수동검색 페이지로 이동합니다.
 
+![자동 위치수집](https://user-images.githubusercontent.com/98367972/230476345-cbcbfab4-4670-4f4c-afcb-d94cb67024b0.png)
+
 > 수동의 경우, 도로명 주소창으로 위치를 탐색합니다.
+
+![위치정보 수집(수동)](https://user-images.githubusercontent.com/98367972/230476470-373a1952-d084-4d42-8cde-86d7c6613106.png)
 
 ## 2. 사용자 위치 마커
 > 지도에서 내 위치와 주변 100m 이내의 사용자들의 위치를 마커로 표시하고, 거리와 도보시간을 계산합니다.
 
+![사용자 위치 마커](https://user-images.githubusercontent.com/98367972/230476501-5ccbf81c-3096-41bb-a1a9-895704e3eed7.png)
+
 ## 3. 위치 기반 게시글 조회
 > 내 주변 100m 이내 사용자들의 게시글만 조회됩니다.
 
+![게시글 필터링](https://user-images.githubusercontent.com/98367972/230476491-64321e6e-2a65-4755-9a6e-d33591a73f08.png)
+
 ## 4. 채팅 기능
 > 근거리 사용자간 배달공유를 위한, 오픈소스 Web Socket을 활용한 실시간 채팅기능 입니다.
+
+![채팅 원본](https://user-images.githubusercontent.com/98367972/230476535-f238e579-ee2c-4c89-9d22-dc5f486fab7c.png)
