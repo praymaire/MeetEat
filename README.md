@@ -80,7 +80,7 @@ model2 구조로 개발했으며, 저는 위치조회와 필터링 기능을 담
 
 
 ## Geocoding / Reverse Geocoding
-> 현재 위경도를 session에 저장해 브라우저 종료 전까지 데이터를 유지, DB에 저장된 데이터의 필터링을 위해 sql 구문에 위경도 계산식을 사용했습니다.
+> 현재 위경도를 session에 저장해 브라우저 종료 전까지 데이터를 유지, DB에 저장된 위경도 데이터의 필터링을 위해 sql 구문에 위경도 계산식을 사용했습니다.
 
 * 공식을 SELECT count(*), SELECT * 로 변경하면 현재 위치에서 100m이내의 회원 수와 직선 거리를 구할 수 있습니다.
 
@@ -93,7 +93,7 @@ FROM (
 WHERE DATA.distance < 0.1; (100m 기준)
 ```
 
-MySql에서 적용한 화면입니다. 
+MySql에서 적용한 화면입니다. 테스트를 위해 반경 1km 이내 회원들의 위경도와 거리를 조회했습니다.
 
 ![지오코딩](https://user-images.githubusercontent.com/98367972/230740041-909a5809-4f53-47d5-909f-8dced0a6f1c8.png)
 
