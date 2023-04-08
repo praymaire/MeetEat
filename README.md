@@ -45,6 +45,8 @@
 
 # Project Structure
 
+model2 구조로 개발했으며, 저는 위치조회와 필터링 기능을 담당했습니다.
+
 > 개발언어 
 
 * Java
@@ -73,12 +75,27 @@
 * AqueryTool
 
 > ERD
+
 ![ERD](https://user-images.githubusercontent.com/98367972/230483670-cac0db92-a709-4a94-92db-27f40b3e3f62.png)
 
 
+## Geocoding / Reverse Geocoding
+> 현재 위경도를 session에 저장해 브라우저 종료 전까지 데이터를 유지, DB에 저장된 데이터의 필터링을 위해 sql 구문에 위경도 계산식을 사용했습니다.
+
+```sh
+SELECT latitude, longitude
+FROM (
+      SELECT latitude, longitude, ( 6371 * acos( cos( radians( 35.8551246 ) ) * cos( radians( latitude) ) * cos( radians( longitude ) - radians(128.5321680) ) + sin( radians(35.8551246) ) * sin( radians(latitude) ) ) ) AS distance
+      FROM 테이블
+     ) DATA
+WHERE DATA.distance < 0.1; (100m 기준)
+```
+
+* mySql에 적용한 화면입니다. 
 
 
+공식을 SELECT count(*), SELECT * 로 변경하면 현재 위치에서 100m이내의 회원수와 직선거리를 구할 수 있습니다.  
 
 
-
+* 역지오 코딩을 사용해 session에 저장된 위경도를 다시 한글주소로 변경했습니다. 자동, 수동에 상관없이 도로명 주소를 확인 할 수 있습니다.(daum api 사용)
 
