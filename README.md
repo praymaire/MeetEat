@@ -99,6 +99,6 @@ MySql에서 적용한 화면입니다. 테스트를 위해 반경 1km 이내 회
 
 
 
- * 역지오 코딩을 사용해 session에 저장된 위경도를 다시 한글 주소로 변경했습니다. (daum api 사용)
+ * 역지오 코딩을 사용해 session에 저장된 위경도를 다시 한글 주소로 변경했습니다. 
 
 ![역지오](https://user-images.githubusercontent.com/98367972/230740045-7aaaa389-5b44-45c5-9784-0d39f7f11619.png)
